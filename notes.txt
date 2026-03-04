@@ -1,0 +1,44 @@
+Image URL for Turma 1: https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/tOuJQoAKjzjxNWpe.webp
+
+Changes needed:
+1. Section "proximos-cursos": Transform into Turma 1 (with photo) + Turma 2 (waiting list with Google Sheets)
+2. Instagram: @brilliant_ia → @brilliant.ia.br (lines 495, 504)
+3. Workshop title: "AI na Prática" → "IA na Prática" (line 307, also footer line 487)
+4. Workshop list item: "Ferramentas escolhidas para o seu perfil" → "Ferramentas escolhidas para o perfil da turma" (line 311)
+5. Also update the fourth list item: "ChatGPT, Midjourney, HeyGen, Gamma e mais" → "Ferramentas com IA, Agentes e Assistentes" (line 313)
+
+Wait - let me re-read the requirements:
+- "AI na Prática" → "IA na Prática" ✓
+- "Ferramentas escolhidas para o seu perfil" → "Ferramentas escolhidas para o perfil da turma" ✓
+- "Hands-on: você pratica na hora" (MANTER) ✓
+- "Ferramentas com IA, Agentes e Assistentes" (MANTER) - this means keep as is? But current text is "ChatGPT, Midjourney, HeyGen, Gamma e mais"
+- "Estratégias de prompt que funcionam de verdade" (MANTER) ✓
+- "Material de apoio para levar pra casa" (MANTER) ✓
+
+Actually looking again, the user says to KEEP "Ferramentas com IA, Agentes e Assistentes" - but the current text is "ChatGPT, Midjourney, HeyGen, Gamma e mais". So this IS a change - replace with "Ferramentas com IA, Agentes e Assistentes".
+
+Current workshop list:
+1. Duração de 4 horas, presencial ou online
+2. Ferramentas escolhidas para o seu perfil → "Ferramentas escolhidas para o perfil da turma"
+3. Hands-on: você pratica na hora (keep)
+4. ChatGPT, Midjourney, HeyGen, Gamma e mais → "Ferramentas com IA, Agentes e Assistentes"
+5. Estratégias de prompt que funcionam de verdade (keep)
+6. Material de apoio para levar pra casa (keep)
+
+Wait, the user listed 5 items but the original has 6. Let me re-read:
+The user's list of workshop items:
+- "Ferramentas escolhidas para o perfil da turma" (change)
+- "Hands-on: você pratica na hora" (keep)
+- "Ferramentas com IA, Agentes e Assistentes" (keep/new)
+- "Estratégias de prompt que funcionam de verdade" (keep)
+- "Material de apoio para levar pra casa" (keep)
+
+The user didn't mention "Duração de 4 horas, presencial ou online" - should I keep it? The instruction says "NÃO altere nada além do solicitado", so I should keep it.
+
+Final workshop list should be:
+1. Duração de 4 horas, presencial ou online (keep - not mentioned)
+2. Ferramentas escolhidas para o perfil da turma (CHANGED)
+3. Hands-on: você pratica na hora (keep)
+4. Ferramentas com IA, Agentes e Assistentes (CHANGED from "ChatGPT, Midjourney, HeyGen, Gamma e mais")
+5. Estratégias de prompt que funcionam de verdade (keep)
+6. Material de apoio para levar pra casa (keep)

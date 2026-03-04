@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Espera — Workshop IA na Prática | BrillIAnt</title>
+<meta name="description" content="Garanta sua vaga com prioridade no próximo workshop presencial IA na Prática em Recife. Aprenda a usar IA de verdade no seu dia a dia profissional.">
+<meta property="og:title" content="Workshop IA na Prática — Lista de Espera | BrillIAnt">
+<meta property="og:description" content="Workshop presencial em Recife. Aprenda ferramentas de IA, agentes e assistentes com prática na hora.">
+<meta property="og:type" content="website">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --border: #222222;
+    --text: #f5f5f5;
+    --muted: #999999;
+    --cyan: #00e5c8;
+    --cyan-dark: #00c9a7;
+    --purple: #8b5cf6;
+    --orange: #f59e0b;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Arial', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== BACKGROUND GRID ===== */
+  .page-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,229,200,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,200,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .page-glow-top {
+    position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(0,229,200,0.06) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    max-width: 1000px; margin: 0 auto; padding: 0 24px;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== HEADER / LOGO ===== */
+  header {
+    padding: 24px 0;
+    text-align: center;
+    position: relative; z-index: 2;
+  }
+
+  .logo {
+    font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--text);
+  }
+  .logo span { color: var(--cyan); }
+  .slogan {
+    color: var(--muted); font-size: 0.85rem; margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    text-align: center;
+    padding: 60px 0 40px;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,229,200,0.08); border: 1px solid rgba(0,229,200,0.2);
+    color: var(--cyan); padding: 8px 20px; border-radius: 100px;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.5px;
+    margin-bottom: 28px;
+  }
+  .hero-badge .pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800; line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    color: var(--muted); font-size: 1.1rem;
+    max-width: 600px; margin: 0 auto 36px;
+    line-height: 1.7;
+  }
+
+  /* ===== INFO PILLS ===== */
+  .info-pills {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 12px; margin-bottom: 48px;
+  }
+  .pill {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 10px 18px; border-radius: 12px;
+    font-size: 0.88rem; color: var(--text);
+  }
+  .pill-icon { font-size: 1.1rem; }
+
+  /* ===== PRICE SECTION ===== */
+  .price-section {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .price-card {
+    display: inline-block;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px 48px;
+    position: relative; overflow: hidden;
+  }
+  .price-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+  }
+  .price-label {
+    font-size: 0.78rem; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 8px; font-weight: 600;
+  }
+  .price-promo-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.25);
+    color: var(--orange); padding: 4px 14px; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
+    margin-bottom: 16px; text-transform: uppercase;
+  }
+  .price-value {
+    font-size: 2.8rem; font-weight: 800;
+    color: var(--cyan); letter-spacing: -1px;
+  }
+  .price-value small { font-size: 1.2rem; font-weight: 400; }
+  .price-installment {
+    color: var(--muted); font-size: 0.92rem;
+    margin-top: 6px;
+  }
+
+  /* ===== WHAT YOU LEARN ===== */
+  .learn-section {
+    margin-bottom: 56px;
+  }
+  .learn-section h2 {
+    text-align: center; font-size: 1.6rem; font-weight: 700;
+    margin-bottom: 36px; letter-spacing: -0.5px;
+  }
+  .learn-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .learn-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 28px;
+    display: flex; align-items: flex-start; gap: 16px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .learn-card:hover {
+    border-color: rgba(0,229,200,0.3);
+    transform: translateY(-2px);
+  }
+  .learn-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .learn-card:nth-child(1) .learn-icon { background: rgba(0,229,200,0.1); }
+  .learn-card:nth-child(2) .learn-icon { background: rgba(139,92,246,0.1); }
+  .learn-card:nth-child(3) .learn-icon { background: rgba(245,158,11,0.1); }
+  .learn-card:nth-child(4) .learn-icon { background: rgba(59,130,246,0.1); }
+  .learn-text strong {
+    display: block; font-size: 0.95rem; margin-bottom: 4px;
+    color: var(--text);
+  }
+  .learn-text span {
+    font-size: 0.82rem; color: var(--muted); line-height: 1.5;
+  }
+
+  /* ===== SPEAKER ===== */
+  .speaker-section {
+    margin-bottom: 56px;
+  }
+  .speaker-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+    display: flex; gap: 36px; align-items: center;
+  }
+  .speaker-photo-wrap {
+    position: relative; flex-shrink: 0;
+  }
+  .speaker-photo-wrap::before {
+    content: ''; position: absolute;
+    inset: -3px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--cyan), var(--purple));
+    z-index: 0;
+  }
+  .speaker-photo {
+    position: relative; z-index: 1;
+    width: 140px; height: 140px;
+    border-radius: 50%; object-fit: cover; object-position: top center;
+    display: block;
+  }
+  .speaker-info h3 {
+    font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;
+  }
+  .speaker-info p {
+    color: var(--muted); font-size: 0.9rem; line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .speaker-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .speaker-tag {
+    background: rgba(0,229,200,0.08); border: 1px solid rgba(0,229,200,0.2);
+    color: var(--cyan); padding: 4px 12px; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3px;
+  }
+
+  /* ===== FORM SECTION ===== */
+  .form-section {
+    margin-bottom: 80px;
+  }
+  .form-section h2 {
+    text-align: center; font-size: 1.6rem; font-weight: 700;
+    margin-bottom: 8px; letter-spacing: -0.5px;
+  }
+  .form-sub {
+    text-align: center; color: var(--muted); font-size: 0.92rem;
+    margin-bottom: 36px;
+  }
+
+  .form-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px;
+    max-width: 520px; margin: 0 auto;
+    position: relative; overflow: hidden;
+  }
+  .form-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+  }
+
+  .form-card input {
+    width: 100%; padding: 14px 18px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; color: var(--text);
+    font-size: 0.92rem; font-family: inherit;
+    margin-bottom: 14px;
+    transition: border-color 0.3s;
+    outline: none;
+  }
+  .form-card input::placeholder { color: #555; }
+  .form-card input:focus { border-color: var(--cyan); }
+
+  .btn-submit {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--cyan-dark), var(--cyan));
+    color: var(--bg); font-size: 1rem; font-weight: 700;
+    border: none; border-radius: 12px; cursor: pointer;
+    font-family: inherit; letter-spacing: 0.3px;
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+  .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,200,0.25);
+  }
+  .btn-submit:disabled {
+    opacity: 0.6; cursor: not-allowed; transform: none;
+    box-shadow: none;
+  }
+
+  .form-note {
+    text-align: center; color: var(--muted);
+    font-size: 0.75rem; margin-top: 14px;
+  }
+
+  .form-msg {
+    text-align: center; padding: 14px;
+    border-radius: 12px; margin-top: 16px;
+    font-size: 0.88rem; font-weight: 500;
+  }
+  .form-msg.success {
+    background: rgba(0,229,200,0.08); border: 1px solid rgba(0,229,200,0.2);
+    color: var(--cyan);
+  }
+  .form-msg.error {
+    background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2);
+    color: #ef4444;
+  }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof {
+    text-align: center; margin-bottom: 56px;
+  }
+  .social-proof-stats {
+    display: flex; justify-content: center; gap: 48px;
+    flex-wrap: wrap;
+  }
+  .sp-item {
+    text-align: center;
+  }
+  .sp-number {
+    font-size: 2rem; font-weight: 800; color: var(--cyan);
+    letter-spacing: -1px;
+  }
+  .sp-label {
+    font-size: 0.8rem; color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.78rem;
+    position: relative; z-index: 1;
+  }
+  footer a {
+    color: var(--cyan); text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .hero-sub { font-size: 0.95rem; }
+    .learn-grid { grid-template-columns: 1fr; }
+    .speaker-card { flex-direction: column; text-align: center; padding: 28px; }
+    .speaker-tags { justify-content: center; }
+    .speaker-photo { width: 110px; height: 110px; }
+    .price-card { padding: 28px 32px; }
+    .price-value { font-size: 2.2rem; }
+    .form-card { padding: 28px; }
+    .social-proof-stats { gap: 32px; }
+    .info-pills { gap: 8px; }
+    .pill { font-size: 0.8rem; padding: 8px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-bg"></div>
+<div class="page-glow-top"></div>
+
+<header>
+  <div class="container">
+    <div class="logo">brill<span>IA</span>nt</div>
+    <div class="slogan">Coloque a IA para trabalhar por você</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge fade-up">
+      <span class="pulse"></span>
+      Vagas limitadas — Próxima turma em breve
+    </div>
+    <h1 class="fade-up">Domine a <span class="highlight">Inteligência Artificial</span><br>na prática, em 4 horas</h1>
+    <p class="hero-sub fade-up">Workshop presencial e intensivo para profissionais que querem usar IA de verdade no dia a dia — sem enrolação, com prática na hora.</p>
+
+    <div class="info-pills fade-up">
+      <div class="pill"><span class="pill-icon">📍</span> Presencial em Recife</div>
+      <div class="pill"><span class="pill-icon">📅</span> Quarta-feira</div>
+      <div class="pill"><span class="pill-icon">⏰</span> 9h às 13h</div>
+      <div class="pill"><span class="pill-icon">👥</span> Turmas reduzidas</div>
+    </div>
+  </div>
+</section>
+
+<section class="social-proof fade-up">
+  <div class="container">
+    <div class="social-proof-stats">
+      <div class="sp-item">
+        <div class="sp-number">4h</div>
+        <div class="sp-label">de conteúdo prático</div>
+      </div>
+      <div class="sp-item">
+        <div class="sp-number">100%</div>
+        <div class="sp-label">hands-on</div>
+      </div>
+      <div class="sp-item">
+        <div class="sp-number">5★</div>
+        <div class="sp-label">avaliação dos alunos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="learn-section">
+  <div class="container">
+    <h2 class="fade-up">O que você vai aprender</h2>
+    <div class="learn-grid">
+      <div class="learn-card fade-up">
+        <div class="learn-icon">🤖</div>
+        <div class="learn-text">
+          <strong>Ferramentas com IA, Agentes e Assistentes</strong>
+          <span>Conheça e domine as ferramentas mais poderosas do mercado para automatizar tarefas e ganhar produtividade.</span>
+        </div>
+      </div>
+      <div class="learn-card fade-up">
+        <div class="learn-icon">💬</div>
+        <div class="learn-text">
+          <strong>Estratégias de prompt que funcionam de verdade</strong>
+          <span>Aprenda técnicas avançadas de prompt engineering para extrair o máximo das IAs generativas.</span>
+        </div>
+      </div>
+      <div class="learn-card fade-up">
+        <div class="learn-icon">🛠️</div>
+        <div class="learn-text">
+          <strong>Hands-on: você pratica na hora</strong>
+          <span>Nada de só teoria. Você vai usar as ferramentas durante o workshop com orientação ao vivo.</span>
+        </div>
+      </div>
+      <div class="learn-card fade-up">
+        <div class="learn-icon">📦</div>
+        <div class="learn-text">
+          <strong>Material de apoio para levar pra casa</strong>
+          <span>Templates, guias e referências para continuar aplicando tudo o que aprendeu no seu dia a dia.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="price-section fade-up">
+  <div class="container">
+    <div class="price-card">
+      <div class="price-promo-badge">Valor promocional — Primeiras turmas</div>
+      <div class="price-label">Investimento</div>
+      <div class="price-value"><small>R$</small> 849<small>,90</small></div>
+      <div class="price-installment">à vista ou <strong>10x de R$ 89,24</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="speaker-section">
+  <div class="container">
+    <div class="speaker-card fade-up">
+      <div class="speaker-photo-wrap">
+        <img src="../barbara.jpg" alt="Barbara Coelho — Palestrante BrillIAnt" class="speaker-photo">
+      </div>
+      <div class="speaker-info">
+        <h3>Barbara Coelho</h3>
+        <p>Com mais de 15 anos de experiência em gestão empresarial e liderança de projetos em grandes corporações, Barbara é referência em inovação e transformação digital. Com MBA em Gestão com Inteligência Artificial, fundou a BrillIAnt para desmistificar a IA para o mercado.</p>
+        <div class="speaker-tags">
+          <span class="speaker-tag">+15 anos em gestão</span>
+          <span class="speaker-tag">MBA em IA</span>
+          <span class="speaker-tag">Transformação Digital</span>
+          <span class="speaker-tag">Fundadora da BrillIAnt</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section" id="formulario">
+  <div class="container">
+    <h2 class="fade-up">Garanta sua vaga com prioridade</h2>
+    <p class="form-sub fade-up">Inscreva-se na lista de espera e seja avisado(a) assim que a próxima turma abrir.</p>
+
+    <div class="form-card fade-up">
+      <form id="waitlistForm" onsubmit="submitForm(event)">
+        <input type="text" name="nome" placeholder="Seu nome completo" required>
+        <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+        <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
+        <button type="submit" class="btn-submit" id="submitBtn">Entrar na lista de espera →</button>
+      </form>
+      <p class="form-note">Seus dados estão seguros. Sem spam, prometemos.</p>
+      <div id="formMsg" class="form-msg" style="display:none;"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>BrillIAnt &copy; 2026 — Consultoria de Inteligência Artificial</p>
+    <p style="margin-top:6px;">
+      <a href="https://instagram.com/brilliant.ia.br" target="_blank">@brilliant.ia.br</a>
+      &nbsp;·&nbsp;
+      <a href="https://brilliant.ia.br">brilliant.ia.br</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Form submission
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyednpxl737trUreMgdpb1a1U4Tgbrt28s_4bE2qEHZidXoQAwJh-GJKASOGFQW8geS/exec';
+
+  async function submitForm(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+    const msgEl = document.getElementById('formMsg');
+    const nome = form.nome.value.trim();
+    const email = form.email.value.trim();
+    const telefone = form.telefone.value.trim();
+
+    if (!nome || !email || !telefone) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+    msgEl.style.display = 'none';
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome, email, whatsapp: telefone })
+      });
+
+      msgEl.className = 'form-msg success';
+      msgEl.textContent = 'Inscrição realizada com sucesso! Você será avisado(a) quando a próxima turma abrir.';
+      msgEl.style.display = 'block';
+      form.reset();
+      btn.textContent = 'Inscrito(a) ✓';
+    } catch (err) {
+      msgEl.className = 'form-msg error';
+      msgEl.textContent = 'Ops! Algo deu errado. Tente novamente ou entre em contato pelo WhatsApp.';
+      msgEl.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Entrar na lista de espera →';
+    }
+  }
+</script>
+
+</body>
+</html>

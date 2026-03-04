@@ -1,0 +1,5 @@
+Preview observations:
+- Turma 1 card: Shows "Turma 1 — Realizada" badge, photo of the group at Vicalli Café, date/time/location info, and tool tags. Looks great!
+- Turma 2 card: Shows "Turma 2 — Em breve" badge in purple, title "Turma 2 — Março 2026", description text, date/time info, and waitlist form with name/email/phone fields and purple "Entrar na lista de espera" button. Looks great!
+- Both cards are side by side in a 2-column grid layout
+- The purple theme for Turma 2 differentiates it nicely from Turma 1

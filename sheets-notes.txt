@@ -1,0 +1,18 @@
+For the Google Sheets integration, I'll use the Google Apps Script approach:
+1. The form will POST to a Google Apps Script web app URL
+2. The script will write data to a Google Sheet
+
+For now, I'll add the JavaScript to handle the form submission via fetch() to a Google Apps Script URL.
+The user will need to:
+1. Create a Google Sheet with headers: Date, Nome, Email, Telefone
+2. Add the Apps Script code
+3. Deploy as web app
+4. Replace the placeholder URL in the HTML
+
+I'll use a placeholder URL and provide instructions.
+
+Actually, a better approach: I'll write the JS to submit via fetch to a Google Apps Script URL, 
+and use a GOOGLE_SHEETS_SCRIPT_URL placeholder that the user can replace.
+
+Or even better - I can create the Google Sheet for the user since we have Google Drive integration!
+Let me create the sheet and the Apps Script.

@@ -1,0 +1,21 @@
+Landing page preview - 2026-03-04
+
+Parte 1 (topo):
+- Logo BrillIAnt com slogan "Coloque a IA para trabalhar por você"
+- Badge verde "Vagas limitadas — Próxima turma em breve" com animação pulse
+- Headline: "Domine a Inteligência Artificial na prática, em 4 horas" (IA em gradiente verde/roxo)
+- Subtítulo descritivo
+- 4 pills: Presencial em Recife, Quarta-feira, 9h às 13h, Turmas reduzidas
+- Social proof: 4h conteúdo prático, 100% hands-on, 5★ avaliação
+- 4 cards "O que você vai aprender" em grid 2x2 com ícones coloridos
+
+Parte 2 (meio/baixo):
+- Card de preço: badge "VALOR PROMOCIONAL — PRIMEIRAS TURMAS" em laranja
+- R$ 849,90 em verde/teal, 10x de R$ 89,24
+- Card da palestrante: foto circular com borda gradiente verde/roxo, bio, tags
+- Formulário: 3 campos (nome, email, WhatsApp) com botão verde "Entrar na lista de espera →"
+- Nota "Seus dados estão seguros. Sem spam, prometemos."
+- Footer com Instagram e link do site
+
+Visual: tema escuro, identidade BrillIAnt, animações fade-up, responsivo
+Tudo OK!
