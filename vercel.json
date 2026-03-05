@@ -3,6 +3,8 @@
     { "source": "/feedback", "destination": "/feedback/index.html" },
     { "source": "/feedback/", "destination": "/feedback/index.html" },
     { "source": "/lista-de-espera", "destination": "/lista-de-espera/index.html" },
-    { "source": "/lista-de-espera/", "destination": "/lista-de-espera/index.html" }
+    { "source": "/lista-de-espera/", "destination": "/lista-de-espera/index.html" },
+    { "source": "/apresentacao_comercial", "destination": "/apresentacao_comercial/index.html" },
+    { "source": "/apresentacao_comercial/", "destination": "/apresentacao_comercial/index.html" }
   ]
 }

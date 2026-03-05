@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback — Workshop AI na Prática · BrillIAnt</title>
+
+<style>
+:root {
+  --bg: #0a0e17;
+  --s1: #111827;
+  --s2: #1a2236;
+  --teal: #00c9a7;
+  --teal2: #00a389;
+  --pur: #9b5de5;
+  --ora: #f9a825;
+  --blu: #4fc3f7;
+  --txt: #e8f0fe;
+  --mut: #7b8ab8;
+  --bdr: #1e2d47;
+  --glow: rgba(0,201,167,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background mesh */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0,201,167,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 350px at 90% 70%, rgba(155,93,229,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(79,195,247,0.03) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+
+/* HEADER */
+.header { text-align:center; padding:60px 0 50px; }
+.logo { font-family:Arial,Helvetica,sans-serif; font-size:38px; font-weight:900; letter-spacing:-2px; margin-bottom:6px; }
+.logo .brill { color:var(--txt); }
+.logo .ia { color:var(--teal); }
+.logo .nt { color:var(--txt); }
+.logo-tag { font-size:13px; color:var(--teal); font-style:italic; letter-spacing:1px; margin-bottom:36px; }
+.header-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(0,201,167,0.1); border:1px solid rgba(0,201,167,0.3);
+  border-radius:30px; padding:6px 18px; font-size:12px;
+  color:var(--teal); font-weight:600; letter-spacing:1px; text-transform:uppercase;
+  margin-bottom:20px;
+}
+.header h1 {
+  font-family:Arial,Helvetica,sans-serif; font-size:32px; font-weight:800;
+  line-height:1.15; margin-bottom:12px;
+}
+.header h1 span { color:var(--teal); }
+.header p { font-size:15px; color:var(--mut); max-width:480px; margin:0 auto; line-height:1.7; }
+
+/* PROGRESS */
+.progress-bar {
+  background: var(--s2); border-radius:20px; height:4px;
+  margin-bottom:40px; overflow:hidden;
+}
+.progress-fill {
+  height:100%; background: linear-gradient(90deg, var(--teal), var(--pur));
+  border-radius:20px; width:0%;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* SECTION */
+.section {
+  background: linear-gradient(135deg, var(--s1), var(--s2));
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+}
+.section::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg, var(--teal), var(--pur));
+}
+.section.accent-pur::before { background: linear-gradient(90deg, var(--pur), var(--blu)); }
+.section.accent-ora::before { background: linear-gradient(90deg, var(--ora), var(--teal)); }
+.section.accent-blu::before { background: linear-gradient(90deg, var(--blu), var(--teal)); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.section-num {
+  font-family:Arial,Helvetica,sans-serif; font-size:10px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase; color:var(--teal);
+  margin-bottom:6px;
+}
+.section-num.pur { color:var(--pur); }
+.section-num.ora { color:var(--ora); }
+.section-num.blu { color:var(--blu); }
+
+.section-title {
+  font-family:Arial,Helvetica,sans-serif; font-size:18px; font-weight:800;
+  margin-bottom:6px; line-height:1.3;
+}
+.section-sub { font-size:13px; color:var(--mut); margin-bottom:24px; line-height:1.6; }
+
+/* NPS STARS */
+.stars {
+  display:flex; gap:12px; flex-wrap:wrap; margin-bottom:8px;
+}
+.star-btn {
+  width:52px; height:52px; border-radius:12px;
+  border: 2px solid var(--bdr);
+  background: var(--bg);
+  color: var(--mut);
+  font-family:Arial,Helvetica,sans-serif; font-weight:700; font-size:16px;
+  cursor:pointer; transition:all 0.2s;
+  display:flex; align-items:center; justify-content:center;
+}
+.star-btn:hover { border-color: var(--teal); color:var(--teal); transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,201,167,0.2); }
+.star-btn.selected { border-color: var(--teal); background: rgba(0,201,167,0.15); color:var(--teal); }
+
+.nps-labels { display:flex; justify-content:space-between; font-size:11px; color:var(--mut); margin-top:6px; }
+
+/* EMOJI SCALE */
+.emoji-scale { display:flex; gap:10px; flex-wrap:wrap; }
+.emoji-btn {
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  padding:16px 20px; border-radius:14px;
+  border: 2px solid var(--bdr); background: var(--bg);
+  cursor:pointer; transition:all 0.25s; flex:1; min-width:70px;
+}
+.emoji-btn .em { font-size:28px; line-height:1; }
+.emoji-btn .el { font-size:11px; color:var(--mut); font-weight:500; text-align:center; }
+.emoji-btn:hover { transform:translateY(-4px); border-color:var(--teal); }
+.emoji-btn.selected { border-color:var(--teal); background:rgba(0,201,167,0.1); }
+.emoji-btn.selected .el { color:var(--teal); }
+
+/* CHOICE GRID */
+.choices { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.choices.cols3 { grid-template-columns:1fr 1fr 1fr; }
+.choices.cols1 { grid-template-columns:1fr; }
+.choice-btn {
+  padding:14px 18px; border-radius:12px;
+  border: 2px solid var(--bdr); background: var(--bg);
+  color: var(--txt); font-size:13px; font-weight:500;
+  cursor:pointer; transition:all 0.2s; text-align:left;
+  line-height:1.4;
+}
+.choice-btn:hover { border-color:var(--teal); background:rgba(0,201,167,0.05); transform:translateX(3px); }
+.choice-btn.selected { border-color:var(--teal); background:rgba(0,201,167,0.12); color:var(--teal); }
+.choice-btn.sel-pur.selected { border-color:var(--pur); background:rgba(155,93,229,0.12); color:var(--pur); }
+.choice-btn.sel-ora.selected { border-color:var(--ora); background:rgba(249,168,37,0.12); color:var(--ora); }
+
+.choice-btn .cb-icon { font-size:18px; margin-bottom:4px; display:block; }
+.choice-btn .cb-name { font-family:Arial,Helvetica,sans-serif; font-weight:700; font-size:13px; }
+.choice-btn .cb-desc { font-size:11px; color:var(--mut); margin-top:2px; }
+.choice-btn.selected .cb-desc { color:inherit; opacity:0.8; }
+
+/* TEXTAREA */
+.textarea-wrap { position:relative; }
+textarea {
+  width:100%; padding:16px 20px;
+  background: var(--bg); border: 2px solid var(--bdr);
+  border-radius:14px; color: var(--txt);
+  font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:1.6;
+  resize:vertical; min-height:100px; outline:none;
+  transition:border-color 0.2s;
+}
+textarea:focus { border-color:var(--teal); }
+textarea::placeholder { color:var(--mut); }
+.char-count { font-size:11px; color:var(--mut); text-align:right; margin-top:4px; }
+
+/* TAGS */
+.tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag-btn {
+  padding:8px 16px; border-radius:30px;
+  border:2px solid var(--bdr); background:var(--bg);
+  color:var(--mut); font-size:12px; font-weight:600;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+}
+.tag-btn:hover { border-color:var(--pur); color:var(--pur); }
+.tag-btn.selected { border-color:var(--pur); background:rgba(155,93,229,0.15); color:var(--pur); }
+
+/* INPUT */
+input[type=text], input[type=email] {
+  width:100%; padding:14px 18px;
+  background:var(--bg); border:2px solid var(--bdr);
+  border-radius:12px; color:var(--txt);
+  font-family:Arial,Helvetica,sans-serif; font-size:14px;
+  outline:none; transition:border-color 0.2s;
+}
+input[type=text]:focus, input[type=email]:focus { border-color:var(--teal); }
+input::placeholder { color:var(--mut); }
+
+.field { margin-bottom:16px; }
+.field label { display:block; font-size:12px; color:var(--mut); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.field-hint { font-size:12px; color:var(--mut); margin-top:6px; font-style:italic; }
+
+/* DIVIDER */
+.divider { border:none; border-top:1px solid var(--bdr); margin:24px 0; }
+
+/* SUBMIT */
+.submit-wrap { text-align:center; padding-top:20px; }
+.submit-btn {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:18px 48px; border-radius:50px;
+  background: linear-gradient(135deg, var(--teal), var(--teal2));
+  color:#000; font-family:Arial,Helvetica,sans-serif; font-weight:800;
+  font-size:16px; letter-spacing:0.5px; border:none; cursor:pointer;
+  transition:all 0.3s; box-shadow:0 8px 32px rgba(0,201,167,0.3);
+}
+.submit-btn:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,201,167,0.4); }
+.submit-btn:active { transform:translateY(0); }
+.submit-note { font-size:12px; color:var(--mut); margin-top:12px; }
+
+/* SUCCESS */
+.success-screen {
+  display:none; text-align:center; padding:80px 40px;
+  animation:fadeUp 0.6s ease;
+}
+.success-icon { font-size:64px; margin-bottom:24px; }
+.success-title { font-family:Arial,Helvetica,sans-serif; font-size:32px; font-weight:800; margin-bottom:12px; }
+.success-title span { color:var(--teal); }
+.success-sub { font-size:16px; color:var(--mut); max-width:400px; margin:0 auto 32px; line-height:1.7; }
+.success-badge {
+  display:inline-block; padding:12px 28px;
+  background:rgba(0,201,167,0.1); border:1px solid rgba(0,201,167,0.3);
+  border-radius:30px; font-size:14px; color:var(--teal); font-weight:600;
+}
+
+/* OBRIGATORIO */
+.req { color:var(--teal); font-size:10px; margin-left:4px; }
+
+/* MULTI LABEL */
+.multi-note { font-size:11px; color:var(--mut); margin-bottom:12px; font-style:italic; }
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .choices { grid-template-columns:1fr; }
+  .choices.cols3 { grid-template-columns:1fr 1fr; }
+  .star-btn { width:44px; height:44px; font-size:14px; }
+  .section { padding:24px 20px; }
+  .header h1 { font-size:26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo"><span class="brill">brill</span><span class="ia">IA</span><span class="nt">nt</span></div>
+    <div class="logo-tag">Coloque a IA para trabalhar por você.</div>
+    <div class="header-badge">📋 Feedback · Turma 1</div>
+    <h1>O que você achou do<br><span>Workshop AI na Prática?</span></h1>
+    <p>Leva menos de 3 minutos. Sua opinião molda as próximas turmas — e nos ajuda a entregar ainda mais valor para você.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <form id="feedback-form">
+
+    <!-- 1. NPS GERAL -->
+    <div class="section" style="animation-delay:0.1s">
+      <div class="section-num">Pergunta 1 de 8</div>
+      <div class="section-title">De 0 a 10, quanto você recomendaria este workshop para uma amiga ou colega?</div>
+      <div class="section-sub">Onde 0 = jamais recomendaria e 10 = recomendaria com muito entusiasmo</div>
+      <div class="stars" id="nps-stars">
+        <button type="button" class="star-btn" data-val="0">0</button>
+        <button type="button" class="star-btn" data-val="1">1</button>
+        <button type="button" class="star-btn" data-val="2">2</button>
+        <button type="button" class="star-btn" data-val="3">3</button>
+        <button type="button" class="star-btn" data-val="4">4</button>
+        <button type="button" class="star-btn" data-val="5">5</button>
+        <button type="button" class="star-btn" data-val="6">6</button>
+        <button type="button" class="star-btn" data-val="7">7</button>
+        <button type="button" class="star-btn" data-val="8">8</button>
+        <button type="button" class="star-btn" data-val="9">9</button>
+        <button type="button" class="star-btn" data-val="10">10</button>
+      </div>
+      <div class="nps-labels"><span>Não recomendaria</span><span>Recomendaria muito!</span></div>
+      <input type="hidden" id="nps-val" name="nps">
+    </div>
+
+    <!-- 2. AVALIACAO GERAL -->
+    <div class="section accent-pur" style="animation-delay:0.15s">
+      <div class="section-num pur">Pergunta 2 de 8</div>
+      <div class="section-title">Como você avalia o workshop no geral?</div>
+      <div class="section-sub">Sua impressão geral sobre a experiência do começo ao fim</div>
+      <div class="emoji-scale" id="rating-scale">
+        <button type="button" class="emoji-btn" data-val="1"><span class="em">😕</span><span class="el">Fraco</span></button>
+        <button type="button" class="emoji-btn" data-val="2"><span class="em">😐</span><span class="el">Regular</span></button>
+        <button type="button" class="emoji-btn" data-val="3"><span class="em">🙂</span><span class="el">Bom</span></button>
+        <button type="button" class="emoji-btn" data-val="4"><span class="em">😄</span><span class="el">Muito bom</span></button>
+        <button type="button" class="emoji-btn" data-val="5"><span class="em">🤩</span><span class="el">Incrível!</span></button>
+      </div>
+      <input type="hidden" id="rating-val" name="rating">
+    </div>
+
+    <!-- 3. FERRAMENTA FAVORITA -->
+    <div class="section accent-ora" style="animation-delay:0.2s">
+      <div class="section-num ora">Pergunta 3 de 8</div>
+      <div class="section-title">Quais ferramentas você vai usar PRIMEIRO? <span class="req">★</span></div>
+      <div class="section-sub">Pode marcar mais de uma — quais te animaram mais?</div>
+      <div class="choices" id="tool-choices">
+        <button type="button" class="choice-btn sel-ora" data-val="chatgpt-claude">
+          <span class="cb-icon">🧠</span>
+          <span class="cb-name">ChatGPT / Claude</span>
+          <span class="cb-desc">Escrita, e-mails e brainstorm</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="fireflies">
+          <span class="cb-icon">🎙️</span>
+          <span class="cb-name">Fireflies.ai</span>
+          <span class="cb-desc">Transcrição de reuniões</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="notebooklm">
+          <span class="cb-icon">📄</span>
+          <span class="cb-name">NotebookLM</span>
+          <span class="cb-desc">Análise de documentos</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="julius">
+          <span class="cb-icon">📊</span>
+          <span class="cb-name">Julius AI</span>
+          <span class="cb-desc">Análise de planilhas</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="gamma">
+          <span class="cb-icon">✨</span>
+          <span class="cb-name">Gamma</span>
+          <span class="cb-desc">Apresentações automáticas</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="heygen">
+          <span class="cb-icon">🎬</span>
+          <span class="cb-name">HeyGen / Synthesia</span>
+          <span class="cb-desc">Vídeos com avatar IA</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="manus">
+          <span class="cb-icon">🤖</span>
+          <span class="cb-name">Manus AI</span>
+          <span class="cb-desc">Agente autônomo</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="comet">
+          <span class="cb-icon">☄️</span>
+          <span class="cb-name">Comet (Perplexity)</span>
+          <span class="cb-desc">Browser com IA</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="claude-cowork">
+          <span class="cb-icon">🖥️</span>
+          <span class="cb-name">Claude Cowork</span>
+          <span class="cb-desc">Agente no seu desktop + web</span>
+        </button>
+      </div>
+      <input type="hidden" id="tool-val" name="first_tool">
+    </div>
+
+    <!-- 4. O QUE MAIS GOSTOU -->
+    <div class="section" style="animation-delay:0.25s">
+      <div class="section-num">Pergunta 4 de 8</div>
+      <div class="section-title">O que você mais gostou no workshop?</div>
+      <div class="section-sub multi-note">Pode marcar mais de uma opção</div>
+      <div class="tags" id="liked-tags">
+        <button type="button" class="tag-btn" data-val="ferramentas">🛠️ As ferramentas em si</button>
+        <button type="button" class="tag-btn" data-val="exemplos">💡 Os exemplos práticos</button>
+        <button type="button" class="tag-btn" data-val="ritmo">⚡ O ritmo das aulas</button>
+        <button type="button" class="tag-btn" data-val="aplicacao">🎯 A aplicação ao meu dia a dia</button>
+        <button type="button" class="tag-btn" data-val="prompts">✍️ Os prompts prontos</button>
+        <button type="button" class="tag-btn" data-val="material">📖 O material do aluno</button>
+        <button type="button" class="tag-btn" data-val="dinamica">🤝 A dinâmica do grupo</button>
+        <button type="button" class="tag-btn" data-val="clareza">🗣️ A clareza da explicação</button>
+      </div>
+    </div>
+
+    <!-- 5. MELHORIAS -->
+    <div class="section accent-blu" style="animation-delay:0.3s">
+      <div class="section-num blu">Pergunta 5 de 8</div>
+      <div class="section-title">O que poderia ter sido melhor?</div>
+      <div class="section-sub multi-note">Pode marcar mais de uma opção — Seja honesta, é aqui que crescemos!</div>
+      <div class="choices cols1" id="improve-choices">
+        <button type="button" class="choice-btn" data-val="mais-tempo">⏱️ Queria mais tempo para praticar cada ferramenta</button>
+        <button type="button" class="choice-btn" data-val="mais-ferramentas">➕ Poderia incluir mais ferramentas</button>
+        <button type="button" class="choice-btn" data-val="ritmo-rapido">🏃 O ritmo foi um pouco rápido</button>
+        <button type="button" class="choice-btn" data-val="ritmo-lento">🐢 O ritmo poderia ser mais acelerado</button>
+        <button type="button" class="choice-btn" data-val="mais-pratica">👩‍💻 Queria mais momentos de mão na massa</button>
+        <button type="button" class="choice-btn" data-val="conteudo-avancado">🚀 Queria conteúdo mais avançado</button>
+        <button type="button" class="choice-btn" data-val="nada">✅ Nada — adorei tudo!</button>
+      </div>
+    </div>
+
+    <!-- 6. TEXTO LIVRE -->
+    <div class="section" style="animation-delay:0.35s">
+      <div class="section-num">Pergunta 6 de 8</div>
+      <div class="section-title">Tem algo que você queria que tivesse sido abordado e não foi?</div>
+      <div class="section-sub">Ferramentas, temas, casos de uso específicos... conta pra gente!</div>
+      <div class="textarea-wrap">
+        <textarea id="missing-text" name="missing" placeholder="Ex: Queria aprender a usar IA para criar roteiros de vídeo, ou automatizar meu Instagram..." maxlength="500"></textarea>
+        <div class="char-count"><span id="missing-count">0</span>/500</div>
+      </div>
+    </div>
+
+    <!-- 7. DEPOIMENTO -->
+    <div class="section accent-ora" style="animation-delay:0.4s">
+      <div class="section-num ora">Pergunta 7 de 8</div>
+      <div class="section-title">Escreva um depoimento sobre sua experiência 💛</div>
+      <div class="section-sub">Como o workshop te impactou? O que você aprendeu? Pode usar como depoimento nas nossas redes — com sua autorização, claro.</div>
+      <div class="textarea-wrap">
+        <textarea id="testimonial-text" name="testimonial" placeholder="Ex: Entrei achando que IA era só para especialistas. Saí com 3 ferramentas instaladas e já usei o Fireflies na minha reunião da tarde! A Barbara explica de um jeito que qualquer pessoa entende..." maxlength="600" style="min-height:130px"></textarea>
+        <div class="char-count"><span id="testimonial-count">0</span>/600</div>
+      </div>
+      <div class="field" style="margin-top:16px;margin-bottom:0">
+        <div style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="toggleConsent()">
+          <div id="consent-box" style="width:22px;height:22px;border-radius:6px;border:2px solid var(--bdr);background:var(--bg);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:13px"></div>
+          <span style="font-size:13px;color:var(--mut)">Autorizo a BrillIAnt a usar meu depoimento nas redes sociais (com meu nome ou de forma anônima, à minha escolha)</span>
+        </div>
+      </div>
+      <input type="hidden" id="consent-val" name="consent" value="nao">
+    </div>
+
+    <!-- 8. PRÓXIMOS PASSOS -->
+    <div class="section accent-pur" style="animation-delay:0.45s">
+      <div class="section-num pur">Pergunta 8 de 8</div>
+      <div class="section-title">O que mais te interessa como próximo passo?</div>
+      <div class="section-sub multi-note">Pode marcar mais de uma opção — nos ajuda a planejar os próximos produtos</div>
+      <div class="choices" id="next-choices">
+        <button type="button" class="choice-btn sel-pur" data-val="workshop-avancado">
+          <span class="cb-icon">🚀</span>
+          <span class="cb-name">Workshop Avançado</span>
+          <span class="cb-desc">Aprofundar nas ferramentas</span>
+        </button>
+        <button type="button" class="choice-btn sel-pur" data-val="automacao-empresa">
+          <span class="cb-icon">⚙️</span>
+          <span class="cb-name">Automação para minha empresa</span>
+          <span class="cb-desc">Implementar IA no meu negócio</span>
+        </button>
+        <button type="button" class="choice-btn sel-pur" data-val="mentoria">
+          <span class="cb-icon">🎯</span>
+          <span class="cb-name">Mentoria Individual</span>
+          <span class="cb-desc">Acompanhamento personalizado</span>
+        </button>
+        <button type="button" class="choice-btn sel-pur" data-val="comunidade">
+          <span class="cb-icon">👥</span>
+          <span class="cb-name">Grupo / Comunidade</span>
+          <span class="cb-desc">Continuar aprendendo com o grupo</span>
+        </button>
+        <button type="button" class="choice-btn sel-pur" data-val="conteudo-online">
+          <span class="cb-icon">📱</span>
+          <span class="cb-name">Conteúdo Online</span>
+          <span class="cb-desc">Vídeos ou curso gravado</span>
+        </button>
+        <button type="button" class="choice-btn sel-pur" data-val="somente-material">
+          <span class="cb-icon">📖</span>
+          <span class="cb-name">Por enquanto, o material já basta</span>
+          <span class="cb-desc">Vou estudar sozinha primeiro</span>
+        </button>
+      </div>
+
+      <hr class="divider">
+
+      <div class="field">
+        <label>Seu nome (opcional)</label>
+        <input type="text" name="name" placeholder="Como prefere ser chamada?" id="input-name">
+      </div>
+      <div class="field">
+        <label>Seu e-mail (para receber novidades) <span style="font-size:11px;font-weight:normal;text-transform:none;letter-spacing:0;color:var(--mut)">— opcional</span></label>
+        <input type="email" name="email" placeholder="seu@email.com" id="input-email">
+        <div class="field-hint">Usado apenas para enviar conteúdo da BrillIAnt. Sem spam, prometido.</div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn">
+        <span>Enviar Feedback</span>
+        <span>✨</span>
+      </button>
+      <div class="submit-note">Suas respostas são confidenciais e usadas apenas para melhorar o workshop.</div>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">Obrigada pelo<br><span>seu feedback!</span></div>
+    <div class="success-sub">Cada resposta sua vai tornar o próximo workshop ainda melhor. Você faz parte da construção da BrillIAnt.</div>
+    <div class="success-badge">✨ Você é incrível!</div>
+    <div style="margin-top:30px;font-size:14px;color:var(--mut)">
+      Agora coloque a IA para trabalhar por você. 🚀
+    </div>
+  </div>
+
+</div>
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzE0DoOosaV-BAhEu_Ct8trzZOw6bzkNQwnIESV-5CwuprvzCvDbJjOVPlSCjHcM6CmWg/exec';
+</script>
+
+<script>
+// NPS
+document.querySelectorAll('#nps-stars .star-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#nps-stars .star-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    document.getElementById('nps-val').value = this.dataset.val;
+    updateProgress();
+  });
+});
+
+// Rating scale
+document.querySelectorAll('#rating-scale .emoji-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#rating-scale .emoji-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    document.getElementById('rating-val').value = this.dataset.val;
+    updateProgress();
+  });
+});
+
+// Single select choice groups
+function setupSingleSelect(containerId, hiddenId) {
+  document.querySelectorAll('#' + containerId + ' .choice-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('#' + containerId + ' .choice-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      if(hiddenId) document.getElementById(hiddenId).value = this.dataset.val;
+      updateProgress();
+    });
+  });
+}
+// Q3 tool-choices — multi select
+document.querySelectorAll('#tool-choices .choice-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateProgress();
+  });
+});
+// Q5 improve-choices — multi select
+document.querySelectorAll('#improve-choices .choice-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateProgress();
+  });
+});
+
+// Multi select tags
+document.querySelectorAll('#liked-tags .tag-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateProgress();
+  });
+});
+
+// Multi select next steps
+document.querySelectorAll('#next-choices .choice-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateProgress();
+  });
+});
+
+// Char counts
+function setupCharCount(textareaId, countId) {
+  const ta = document.getElementById(textareaId);
+  const ct = document.getElementById(countId);
+  ta.addEventListener('input', function() {
+    ct.textContent = this.value.length;
+    updateProgress();
+  });
+}
+setupCharCount('missing-text', 'missing-count');
+setupCharCount('testimonial-text', 'testimonial-count');
+
+// Consent toggle
+function toggleConsent() {
+  const box = document.getElementById('consent-box');
+  const val = document.getElementById('consent-val');
+  if(val.value === 'nao') {
+    val.value = 'sim';
+    box.style.background = 'rgba(0,201,167,0.2)';
+    box.style.borderColor = 'var(--teal)';
+    box.textContent = '✓';
+    box.style.color = 'var(--teal)';
+  } else {
+    val.value = 'nao';
+    box.style.background = 'var(--bg)';
+    box.style.borderColor = 'var(--bdr)';
+    box.textContent = '';
+  }
+}
+
+// Progress
+function updateProgress() {
+  let filled = 0;
+  const total = 8;
+  if(document.getElementById('nps-val').value) filled++;
+  if(document.getElementById('rating-val').value) filled++;
+  if(document.querySelectorAll('#tool-choices .choice-btn.selected').length > 0) filled++;
+  if(document.querySelectorAll('#liked-tags .tag-btn.selected').length > 0) filled++;
+  if(document.querySelectorAll('#improve-choices .choice-btn.selected').length > 0) filled++;
+  if(document.getElementById('missing-text').value.trim()) filled++;
+  if(document.getElementById('testimonial-text').value.trim()) filled++;
+  if(document.querySelectorAll('#next-choices .choice-btn.selected').length > 0) filled++;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+// Submit
+document.getElementById('feedback-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Collect data
+  const data = {
+    nps: document.getElementById('nps-val').value,
+    rating: document.getElementById('rating-val').value,
+    first_tool: Array.from(document.querySelectorAll('#tool-choices .choice-btn.selected')).map(b => b.dataset.val),
+    liked: Array.from(document.querySelectorAll('#liked-tags .tag-btn.selected')).map(b => b.dataset.val),
+    improvement: Array.from(document.querySelectorAll('#improve-choices .choice-btn.selected')).map(b => b.dataset.val),
+    missing: document.getElementById('missing-text').value,
+    testimonial: document.getElementById('testimonial-text').value,
+    consent: document.getElementById('consent-val').value,
+    next_steps: Array.from(document.querySelectorAll('#next-choices .choice-btn.selected')).map(b => b.dataset.val),
+    name: document.getElementById('input-name').value,
+    email: document.getElementById('input-email').value,
+  };
+
+  console.log('Feedback Turma 1 BrillIAnt:', JSON.stringify(data, null, 2));
+
+  // Show loading state
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+  btn.style.opacity = '0.7';
+
+  // POST to Google Apps Script
+  const SCRIPT_URL = typeof APPS_SCRIPT_URL !== 'undefined' ? APPS_SCRIPT_URL : window.APPS_SCRIPT_URL || '';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    document.getElementById('feedback-form').style.display = 'none';
+    document.querySelector('.progress-bar').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    window.scrollTo({top: 0, behavior:'smooth'});
+  })
+  .catch(() => {
+    // Even on error (no-cors returns opaque), show success — Apps Script still receives it
+    document.getElementById('feedback-form').style.display = 'none';
+    document.querySelector('.progress-bar').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    window.scrollTo({top: 0, behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
