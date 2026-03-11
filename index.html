@@ -35,9 +35,10 @@
     backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0,229,200,0.1);
   }
+  /* ✅ CORRIGIDO: logo usa Outfit para respeitar grafia "brillIAnt" em caixa baixa */
   .logo {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.6rem; font-weight: 400; letter-spacing: 1px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.8rem; font-weight: 700; letter-spacing: 1px;
   }
   .logo span { color: var(--cyan); }
   nav ul { list-style: none; display: flex; gap: 36px; }
@@ -219,7 +220,6 @@
   .cta-box p { color: var(--muted); line-height: 1.7; margin-bottom: 36px; }
   .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
-  /* ===== MONTE SEU GRUPO ===== */
   #monte-grupo { background: var(--dark); }
   .monte-grupo-box {
     max-width: 700px; margin: 0 auto;
@@ -239,7 +239,7 @@
     gap: 16px; margin-bottom: 36px; text-align: left;
   }
   .monte-grupo-card {
-    background: var(--card); border: 1px solid var(--border);
+    background: var(--dark3); border: 1px solid rgba(255,255,255,0.07);
     border-radius: 12px; padding: 20px 16px;
   }
   .monte-grupo-card .card-icon { font-size: 1.6rem; margin-bottom: 10px; }
@@ -279,7 +279,6 @@
   .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .fade-up.visible { opacity: 1; transform: translateY(0); }
 
-  /* Seção Sobre a Palestrante */
   #palestrante { background: var(--dark); }
   .palestrante-grid {
     display: grid; grid-template-columns: 340px 1fr; gap: 72px;
@@ -555,7 +554,6 @@
   <h2>Próximas Turmas</h2>
   <p class="section-sub">Vagas limitadas para garantir uma experiência personalizada para cada participante.</p>
   <div class="turmas-grid">
-    <!-- TURMA 1 -->
     <div class="curso-card fade-up">
       <div class="curso-badge">✅ Turma 1 — Realizada</div>
       <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/tOuJQoAKjzjxNWpe.webp" alt="Foto da Turma 1 do Workshop IA na Prática" class="turma-photo">
@@ -574,10 +572,8 @@
             <div><strong>Vicalli Café</strong><span>Presencial</span></div>
           </div>
         </div>
-
       </div>
     </div>
-    <!-- TURMA 2 -->
     <div class="curso-card purple-border fade-up">
       <div class="curso-badge" style="background:rgba(139,92,246,0.12);color:var(--purple);border-color:rgba(139,92,246,0.25);">🔜 Turma 2 — Em breve</div>
       <div class="curso-info">
@@ -644,7 +640,7 @@
     <p>Seja para entrar em uma turma do workshop ou implementar IA na sua empresa, vamos conversar sobre o que faz sentido para você.</p>
     <div class="cta-btns">
       <a href="https://wa.me/5581991147008?text=Ol%C3%A1%2C%20Barbara!%20%F0%9F%91%8B%20Vim%20pelo%20site%20da%20BrillIAnt%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os.%20Pode%20me%20contar%20como%20funciona%3F" class="btn-primary">💬 Falar no WhatsApp</a>
-      <a href="mailto:balicoelho@gmail.com?subject=Quero%20saber%20mais%20sobre%20a%20BrillIAnt&body=Ol%C3%A1%2C%20Barbara!%0A%0AVim%20pelo%20site%20da%20BrillIAnt%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20seus%20servi%C3%A7os.%0A%0APoderia%20me%20passar%20mais%20informa%C3%A7%C3%B5es%20sobre%3A%0A%5B%20%5D%20Workshop%20AI%20na%20Pr%C3%A1tica%0A%5B%20%5D%20Automatiza%C3%A7%C3%A3o%20%26%20Implementa%C3%A7%C3%A3o%20de%20IA%0A%0AObrigado!" class="btn-ghost">✉️ Enviar e-mail</a>
+      <a href="/cdn-cgi/l/email-protection#6301020f0a000c060f0b0c23040e020a0f4d000c0e5c101601090600175e321606110c46515310020106114651530e020a10465153100c0111064651530246515321110a0f0f2a220d1745010c071a5e2c0f4620504622524651204651532102110102110242465322465322350a0e46515313060f0c465153100a1706465153070246515321110a0f0f2a220d1746515306465153040c101702110a02465153070646515310020106114651530e020a10465153100c0111064651530c1046515310061610465153100611150a4620504622540c104d465322465322330c0706110a024651530e064651531302101002114651530e020a104651530a0d050c110e024620504622544620504621560610465153100c011106465022465322465621465153465627465153340c1108100b0c13465153222a4651530d024651533311462050462252170a00024653224656214651534656274651532216170c0e02170a19024620504622544620504622500c4651534651554651532a0e130f060e060d17024620504622544620504622500c46515307064651532a224653224653222c01110a0402070c42" class="btn-ghost">✉️ Enviar e-mail</a>
     </div>
   </div>
 </section>
@@ -668,12 +664,13 @@
       <ul>
         <li><a href="https://instagram.com/brilliant.ia.br" target="_blank">Instagram @brilliant.ia.br</a></li>
         <li><a href="https://wa.me/5581991147008" target="_blank">WhatsApp</a></li>
-        <li><a href="mailto:balicoelho@gmail.com">balicoelho@gmail.com</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#4123202d28222e242d292e01262c20282d6f222e2c"><span class="__cf_email__" data-cfemail="c1a3a0ada8a2aea4ada9ae81a6aca0a8adefa2aeac">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
+  <!-- ✅ CORRIGIDO: ano 2025 → 2026 -->
   <div class="footer-bottom">
-    <span>© 2025 BrillIAnt. Todos os direitos reservados.</span>
+    <span>© 2026 BrillIAnt. Todos os direitos reservados.</span>
     <div class="footer-social">
       <a href="https://instagram.com/brilliant.ia.br" target="_blank">Instagram</a>
       <a href="https://wa.me/5581991147008" target="_blank">WhatsApp</a>
@@ -681,7 +678,7 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
@@ -689,7 +686,6 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Lista de espera - Google Sheets integration
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyednpxl737trUreMgdpb1a1U4Tgbrt28s_4bE2qEHZidXoQAwJh-GJKASOGFQW8geS/exec';
 
   function submitWaitlist(event) {
@@ -709,27 +705,4 @@
     };
 
     fetch(GOOGLE_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(() => {
-      msgEl.style.display = 'block';
-      msgEl.style.color = 'var(--cyan)';
-      msgEl.textContent = 'Pronto! Você está na lista de espera. Entraremos em contato em breve!';
-      form.reset();
-    })
-    .catch(err => {
-      msgEl.style.display = 'block';
-      msgEl.style.color = 'var(--orange)';
-      msgEl.textContent = 'Ops! Algo deu errado. Tente novamente ou entre em contato pelo WhatsApp.';
-    })
-    .finally(() => {
-      btn.textContent = originalText;
-      btn.disabled = false;
-    });
-  }
-</script>
-</body>
-</html>
+      me

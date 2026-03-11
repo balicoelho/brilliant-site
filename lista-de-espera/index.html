@@ -8,6 +8,8 @@
 <meta property="og:title" content="Workshop IA na Prática — Lista de Espera | BrillIAnt">
 <meta property="og:description" content="Workshop presencial em Recife. Aprenda ferramentas de IA, agentes e assistentes com prática na hora.">
 <meta property="og:type" content="website">
+<!-- ✅ CORRIGIDO: Google Fonts adicionado (Bebas Neue + Outfit) -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -26,15 +28,15 @@
 
   html { scroll-behavior: smooth; }
 
+  /* ✅ CORRIGIDO: body usa Outfit como fonte principal */
   body {
-    font-family: 'Arial', 'Helvetica Neue', sans-serif;
+    font-family: 'Outfit', Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* ===== BACKGROUND GRID ===== */
   .page-bg {
     position: fixed; inset: 0; z-index: 0;
     background-image:
@@ -51,21 +53,21 @@
     pointer-events: none; z-index: 0;
   }
 
-  /* ===== CONTAINER ===== */
   .container {
     max-width: 1000px; margin: 0 auto; padding: 0 24px;
     position: relative; z-index: 1;
   }
 
-  /* ===== HEADER / LOGO ===== */
   header {
     padding: 24px 0;
     text-align: center;
     position: relative; z-index: 2;
   }
 
+  /* ✅ CORRIGIDO: logo usa Outfit para respeitar grafia "brillIAnt" em caixa baixa */
   .logo {
-    font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.8rem; font-weight: 700; letter-spacing: 1px;
     color: var(--text);
   }
   .logo span { color: var(--cyan); }
@@ -74,7 +76,6 @@
     letter-spacing: 0.5px;
   }
 
-  /* ===== HERO ===== */
   .hero {
     text-align: center;
     padding: 60px 0 40px;
@@ -97,10 +98,13 @@
     50% { opacity: 0.5; transform: scale(1.5); }
   }
 
+  /* ✅ CORRIGIDO: h1 hero usa Bebas Neue, weight 400, letter-spacing positivo */
   .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 800; line-height: 1.15;
-    letter-spacing: -1px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 2px;
     margin-bottom: 20px;
   }
   .hero h1 .highlight {
@@ -112,17 +116,15 @@
   .hero-sub {
     color: var(--muted); font-size: 1.1rem;
     max-width: 600px; margin: 0 auto 36px;
-    line-height: 1.7;
+    line-height: 1.7; font-weight: 300;
   }
 
-  /* ===== DATE NOTE ===== */
   .date-note {
     color: var(--muted); font-size: 0.82rem;
     margin-top: -28px; margin-bottom: 48px;
     letter-spacing: 0.2px;
   }
 
-  /* ===== INFO PILLS ===== */
   .info-pills {
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 12px; margin-bottom: 16px;
@@ -135,7 +137,6 @@
   }
   .pill-icon { font-size: 1.1rem; }
 
-  /* ===== PRICE SECTION ===== */
   .price-section {
     text-align: center;
     margin-bottom: 56px;
@@ -163,23 +164,27 @@
     font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
     margin-bottom: 16px; text-transform: uppercase;
   }
+  /* ✅ CORRIGIDO: preço usa Bebas Neue para número de impacto */
   .price-value {
-    font-size: 2.8rem; font-weight: 800;
-    color: var(--cyan); letter-spacing: -1px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 3.5rem; font-weight: 400;
+    color: var(--cyan); letter-spacing: 1px;
   }
-  .price-value small { font-size: 1.2rem; font-weight: 400; }
+  .price-value small { font-family: 'Outfit', sans-serif; font-size: 1.2rem; font-weight: 400; }
   .price-installment {
     color: var(--muted); font-size: 0.92rem;
     margin-top: 6px;
   }
 
-  /* ===== WHAT YOU LEARN ===== */
   .learn-section {
     margin-bottom: 56px;
   }
+  /* ✅ CORRIGIDO: h2 usa Bebas Neue */
   .learn-section h2 {
-    text-align: center; font-size: 1.6rem; font-weight: 700;
-    margin-bottom: 36px; letter-spacing: -0.5px;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 36px;
   }
   .learn-grid {
     display: grid; grid-template-columns: 1fr 1fr;
@@ -206,13 +211,12 @@
   .learn-card:nth-child(4) .learn-icon { background: rgba(59,130,246,0.1); }
   .learn-text strong {
     display: block; font-size: 0.95rem; margin-bottom: 4px;
-    color: var(--text);
+    color: var(--text); font-weight: 600;
   }
   .learn-text span {
     font-size: 0.82rem; color: var(--muted); line-height: 1.5;
   }
 
-  /* ===== SPEAKER ===== */
   .speaker-section {
     margin-bottom: 56px;
   }
@@ -236,12 +240,15 @@
     border-radius: 50%; object-fit: cover; object-position: top center;
     display: block;
   }
+  /* ✅ CORRIGIDO: nome da palestrante usa Bebas Neue */
   .speaker-info h3 {
-    font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem; font-weight: 400; letter-spacing: 1.5px;
+    margin-bottom: 8px;
   }
   .speaker-info p {
     color: var(--muted); font-size: 0.9rem; line-height: 1.7;
-    margin-bottom: 14px;
+    margin-bottom: 14px; font-weight: 300;
   }
   .speaker-tags {
     display: flex; flex-wrap: wrap; gap: 8px;
@@ -252,13 +259,15 @@
     font-size: 0.72rem; font-weight: 600; letter-spacing: 0.3px;
   }
 
-  /* ===== FORM SECTION ===== */
   .form-section {
     margin-bottom: 80px;
   }
+  /* ✅ CORRIGIDO: h2 do formulário usa Bebas Neue */
   .form-section h2 {
-    text-align: center; font-size: 1.6rem; font-weight: 700;
-    margin-bottom: 8px; letter-spacing: -0.5px;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
   }
   .form-sub {
     text-align: center; color: var(--muted); font-size: 0.92rem;
@@ -281,7 +290,7 @@
     width: 100%; padding: 14px 18px;
     background: var(--bg); border: 1px solid var(--border);
     border-radius: 12px; color: var(--text);
-    font-size: 0.92rem; font-family: inherit;
+    font-size: 0.92rem; font-family: 'Outfit', sans-serif;
     margin-bottom: 14px;
     transition: border-color 0.3s;
     outline: none;
@@ -289,17 +298,18 @@
   .form-card input::placeholder { color: #555; }
   .form-card input:focus { border-color: var(--cyan); }
 
+  /* ✅ CORRIGIDO: botão submit usa background cyan sólido (sem gradiente inventado) */
   .btn-submit {
     width: 100%; padding: 16px;
-    background: linear-gradient(135deg, var(--cyan-dark), var(--cyan));
+    background: var(--cyan);
     color: var(--bg); font-size: 1rem; font-weight: 700;
     border: none; border-radius: 12px; cursor: pointer;
-    font-family: inherit; letter-spacing: 0.3px;
+    font-family: 'Outfit', sans-serif; letter-spacing: 0.3px;
     transition: transform 0.2s, box-shadow 0.3s;
   }
   .btn-submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,229,200,0.25);
+    box-shadow: 0 8px 30px rgba(0,229,200,0.3);
   }
   .btn-submit:disabled {
     opacity: 0.6; cursor: not-allowed; transform: none;
@@ -325,7 +335,6 @@
     color: #ef4444;
   }
 
-  /* ===== SOCIAL PROOF ===== */
   .social-proof {
     text-align: center; margin-bottom: 56px;
   }
@@ -336,16 +345,17 @@
   .sp-item {
     text-align: center;
   }
+  /* ✅ CORRIGIDO: métricas usam Bebas Neue como no brandbook */
   .sp-number {
-    font-size: 2rem; font-weight: 800; color: var(--cyan);
-    letter-spacing: -1px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.5rem; font-weight: 400; color: var(--cyan);
+    letter-spacing: 1px;
   }
   .sp-label {
     font-size: 0.8rem; color: var(--muted);
     margin-top: 2px;
   }
 
-  /* ===== FOOTER ===== */
   footer {
     text-align: center; padding: 32px 24px;
     border-top: 1px solid var(--border);
@@ -357,7 +367,6 @@
   }
   footer a:hover { text-decoration: underline; }
 
-  /* ===== ANIMATIONS ===== */
   .fade-up {
     opacity: 0; transform: translateY(30px);
     transition: opacity 0.6s ease, transform 0.6s ease;
@@ -366,16 +375,15 @@
     opacity: 1; transform: translateY(0);
   }
 
-  /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .hero h1 { font-size: 1.8rem; }
+    .hero h1 { font-size: 2.2rem; }
     .hero-sub { font-size: 0.95rem; }
     .learn-grid { grid-template-columns: 1fr; }
     .speaker-card { flex-direction: column; text-align: center; padding: 28px; }
     .speaker-tags { justify-content: center; }
     .speaker-photo { width: 110px; height: 110px; }
     .price-card { padding: 28px 32px; }
-    .price-value { font-size: 2.2rem; }
+    .price-value { font-size: 2.8rem; }
     .form-card { padding: 28px; }
     .social-proof-stats { gap: 32px; }
     .info-pills { gap: 8px; }
@@ -529,7 +537,6 @@
 </footer>
 
 <script>
-  // Intersection Observer for fade-up animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -540,7 +547,6 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // Form submission
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyednpxl737trUreMgdpb1a1U4Tgbrt28s_4bE2qEHZidXoQAwJh-GJKASOGFQW8geS/exec';
 
   async function submitForm(e) {
