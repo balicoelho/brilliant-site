@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Workshop IA na Prática — BrillIAnt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,9 +15,9 @@
     }
 
     html, body {
-      background: #0a0f1e;
-      color: #fff;
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0D1117;
+      color: #E2E8F0;
+      font-family: 'Outfit', Arial, sans-serif;
       height: 100%;
       overflow: hidden;
     }
@@ -37,7 +40,7 @@
       max-width: min(100vw, calc(100vh * 16 / 9));
       aspect-ratio: 16 / 9;
       overflow: hidden;
-      box-shadow: 0 0 60px rgba(0, 255, 150, 0.15);
+      box-shadow: 0 0 60px rgba(0, 229, 200, 0.15);
     }
 
     #slide-img {
@@ -77,11 +80,11 @@
     }
 
     .nav-btn {
-      background: rgba(0, 255, 150, 0.12);
-      border: 1px solid rgba(0, 255, 150, 0.4);
-      color: #00ff96;
+      background: rgba(0, 229, 200, 0.12);
+      border: 1px solid rgba(0, 229, 200, 0.4);
+      color: #00E5C8;
       padding: 8px 22px;
-      border-radius: 6px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 14px;
       font-weight: 600;
@@ -92,7 +95,7 @@
     }
 
     .nav-btn:hover {
-      background: rgba(0, 255, 150, 0.25);
+      background: rgba(0, 229, 200, 0.25);
       transform: scale(1.03);
     }
 
@@ -113,7 +116,7 @@
 
     #progress-bar {
       height: 100%;
-      background: linear-gradient(90deg, #00ff96, #00c8a0);
+      background: linear-gradient(90deg, #00E5C8, #8B5CF6);
       border-radius: 2px;
       transition: width 0.3s ease;
     }
@@ -148,12 +151,12 @@
     }
 
     .dot.active {
-      background: #00ff96;
+      background: #00E5C8;
       transform: scale(1.4);
     }
 
     .dot:hover {
-      background: rgba(0, 255, 150, 0.6);
+      background: rgba(0, 229, 200, 0.6);
     }
 
     /* ── CTA Link visível ── */
@@ -162,7 +165,7 @@
       text-align: center;
       margin-top: 10px;
       font-size: 13px;
-      color: #00ff96;
+      color: #00E5C8;
       text-decoration: none;
       letter-spacing: 0.03em;
       opacity: 0.85;
@@ -188,11 +191,11 @@
       position: fixed;
       top: 12px;
       right: 14px;
-      background: rgba(0,255,150,0.1);
-      border: 1px solid rgba(0,255,150,0.3);
-      color: #00ff96;
+      background: rgba(0,229,200,0.1);
+      border: 1px solid rgba(0,229,200,0.3);
+      color: #00E5C8;
       padding: 5px 10px;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       font-size: 12px;
       z-index: 100;
@@ -200,7 +203,7 @@
     }
 
     #fs-btn:hover {
-      background: rgba(0,255,150,0.22);
+      background: rgba(0,229,200,0.22);
     }
 
     /* ── Responsive: small screens ── */
