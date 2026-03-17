@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conhecendo Melhor os Alunos — IA na Prática · BrillIAnt</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0e17;
+  --s1: #111827;
+  --s2: #1a2236;
+  --teal: #00e5c8;
+  --teal2: #00c9a7;
+  --pur: #9b5de5;
+  --ora: #f9a825;
+  --blu: #4fc3f7;
+  --txt: #e8f0fe;
+  --mut: #7b8ab8;
+  --bdr: #1e2d47;
+  --glow: rgba(0,229,200,0.15);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Outfit', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(0,229,200,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 350px at 90% 70%, rgba(155,93,229,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 50% 50%, rgba(79,195,247,0.03) 0%, transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+.page { position:relative; z-index:1; max-width:720px; margin:0 auto; padding:40px 24px 80px; }
+
+/* HEADER */
+.header { text-align:center; padding:60px 0 50px; }
+
+.logo {
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.logo .brill { color:var(--txt); }
+.logo .ia { color:var(--teal); }
+.logo .nt { color:var(--txt); }
+.logo-tag { font-size:15px; color:var(--teal); font-style:italic; letter-spacing:1px; margin-bottom:36px; }
+.header-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background: rgba(0,229,200,0.1); border:1px solid rgba(0,229,200,0.3);
+  border-radius:30px; padding:6px 18px; font-size:12px;
+  color:var(--teal); font-weight:600; letter-spacing:1px; text-transform:uppercase;
+  margin-bottom:20px;
+}
+
+.header h1 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.header h1 span { color:var(--teal); }
+.header p { font-size:15px; color:var(--mut); max-width:480px; margin:0 auto; line-height:1.7; }
+
+/* PROGRESS */
+.progress-bar {
+  background: var(--s2); border-radius:20px; height:4px;
+  margin-bottom:40px; overflow:hidden;
+}
+.progress-fill {
+  height:100%; background: linear-gradient(90deg, var(--teal), var(--pur));
+  border-radius:20px; width:0%;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* SECTION HEADER */
+.section-header {
+  background: linear-gradient(135deg, var(--s1), var(--s2));
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.4s ease both;
+}
+.section-header::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg, var(--teal), var(--pur));
+}
+.section-header h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.section-header p {
+  font-size: 13px;
+  color: var(--mut);
+  line-height: 1.6;
+}
+
+/* SECTION */
+.section {
+  background: linear-gradient(135deg, var(--s1), var(--s2));
+  border: 1px solid var(--bdr);
+  border-radius: 20px;
+  padding: 32px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.5s ease both;
+}
+.section::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background: linear-gradient(90deg, var(--teal), var(--pur));
+}
+.section.accent-pur::before { background: linear-gradient(90deg, var(--pur), var(--blu)); }
+.section.accent-ora::before { background: linear-gradient(90deg, var(--ora), var(--teal)); }
+.section.accent-blu::before { background: linear-gradient(90deg, var(--blu), var(--teal)); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.section-num {
+  font-family: 'Outfit', sans-serif;
+  font-size:10px; font-weight:700;
+  letter-spacing:3px; text-transform:uppercase; color:var(--teal);
+  margin-bottom:6px;
+}
+.section-num.pur { color:var(--pur); }
+.section-num.ora { color:var(--ora); }
+.section-num.blu { color:var(--blu); }
+
+.section-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.section-sub { font-size:13px; color:var(--mut); margin-bottom:20px; line-height:1.6; }
+
+/* INPUT */
+input[type=text], input[type=email], input[type=tel] {
+  width:100%; padding:14px 18px;
+  background:var(--bg); border:2px solid var(--bdr);
+  border-radius:12px; color:var(--txt);
+  font-family: 'Outfit', sans-serif; font-size:14px;
+  outline:none; transition:border-color 0.2s;
+}
+input[type=text]:focus, input[type=email]:focus, input[type=tel]:focus { border-color:var(--teal); }
+input::placeholder { color:var(--mut); }
+
+.field { margin-bottom:16px; }
+.field:last-child { margin-bottom:0; }
+.field label { display:block; font-size:12px; color:var(--mut); font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+.req { color:var(--teal); margin-left:3px; }
+
+/* CHOICE GRID */
+.choices { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.choices.cols1 { grid-template-columns:1fr; }
+
+.choice-btn {
+  padding:14px 18px; border-radius:12px;
+  border: 2px solid var(--bdr); background: var(--bg);
+  color: var(--txt); font-size:13px; font-weight:500;
+  cursor:pointer; transition:all 0.2s; text-align:left;
+  line-height:1.4; font-family: 'Outfit', sans-serif;
+  width:100%;
+}
+.choice-btn:hover { border-color:var(--teal); background:rgba(0,229,200,0.05); }
+.choice-btn.selected { border-color:var(--teal); background:rgba(0,229,200,0.12); color:var(--teal); }
+.choice-btn.sel-pur.selected { border-color:var(--pur); background:rgba(155,93,229,0.12); color:var(--pur); }
+.choice-btn.sel-ora.selected { border-color:var(--ora); background:rgba(249,168,37,0.12); color:var(--ora); }
+.choice-btn.sel-single:hover { border-color:var(--blu); background:rgba(79,195,247,0.05); }
+.choice-btn.sel-single.selected { border-color:var(--blu); background:rgba(79,195,247,0.12); color:var(--blu); }
+
+/* TAGS */
+.tags { display:flex; flex-wrap:wrap; gap:8px; }
+.tag-btn {
+  padding:8px 16px; border-radius:30px;
+  border:2px solid var(--bdr); background:var(--bg);
+  color:var(--mut); font-size:12px; font-weight:600;
+  cursor:pointer; transition:all 0.2s; white-space:nowrap;
+  font-family: 'Outfit', sans-serif;
+}
+.tag-btn:hover { border-color:var(--pur); color:var(--pur); }
+.tag-btn.selected { border-color:var(--pur); background:rgba(155,93,229,0.15); color:var(--pur); }
+
+/* TEXTAREA */
+textarea {
+  width:100%; padding:16px 20px;
+  background: var(--bg); border: 2px solid var(--bdr);
+  border-radius:14px; color: var(--txt);
+  font-family: 'Outfit', sans-serif; font-size:14px; line-height:1.6;
+  resize:vertical; min-height:100px; outline:none;
+  transition:border-color 0.2s;
+}
+textarea:focus { border-color:var(--teal); }
+textarea::placeholder { color:var(--mut); }
+.char-count { font-size:11px; color:var(--mut); text-align:right; margin-top:4px; }
+
+/* GRID MATRIX */
+.matrix-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin-top:4px; }
+.matrix-table { width:100%; border-collapse:separate; border-spacing:0; min-width:420px; }
+.matrix-table th {
+  font-size:11px; color:var(--mut); font-weight:600; text-align:center;
+  padding:8px 6px; letter-spacing:0.5px;
+  background: var(--s2); border-bottom:1px solid var(--bdr);
+}
+.matrix-table th:first-child { text-align:left; min-width:160px; }
+.matrix-table tr.matrix-row:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.matrix-table td {
+  padding:10px 6px; vertical-align:middle; border-bottom:1px solid rgba(30,45,71,0.5);
+}
+.matrix-table td:first-child { font-size:13px; color:var(--txt); padding-left:2px; line-height:1.4; }
+.matrix-table td.radio-cell { text-align:center; }
+
+.matrix-radio {
+  appearance:none; -webkit-appearance:none;
+  width:20px; height:20px; border-radius:50%;
+  border:2px solid var(--bdr); background:var(--bg);
+  cursor:pointer; transition:all 0.2s; vertical-align:middle;
+  position:relative; display:inline-block;
+}
+.matrix-radio:hover { border-color:var(--teal); }
+.matrix-radio:checked { border-color:var(--teal); background:var(--teal); }
+.matrix-radio:checked::after {
+  content:''; position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:8px; height:8px; border-radius:50%; background:#0a0e17;
+}
+
+/* OTHER INPUT */
+.other-input-wrap { display:none; margin-top:10px; }
+.other-input-wrap input {
+  background:var(--bg); border:2px solid var(--pur);
+  border-radius:10px; color:var(--txt);
+  font-family:'Outfit',sans-serif; font-size:13px;
+  padding:10px 14px; width:100%; outline:none;
+}
+.other-input-wrap.visible { display:block; }
+
+/* DIVIDER */
+.divider { border:none; border-top:1px solid var(--bdr); margin:24px 0; }
+
+/* SUBMIT */
+.submit-wrap { text-align:center; padding-top:20px; }
+.submit-btn {
+  display:inline-flex; align-items:center; gap:12px;
+  padding:18px 48px; border-radius:50px;
+  background: var(--teal);
+  color: #0a0e17;
+  font-family: 'Outfit', sans-serif; font-weight:700;
+  font-size:16px; letter-spacing:0.5px; border:none; cursor:pointer;
+  transition:all 0.3s; box-shadow:0 8px 32px rgba(0,229,200,0.3);
+}
+.submit-btn:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,229,200,0.4); }
+.submit-btn:active { transform:translateY(0); }
+.submit-btn:disabled { opacity:0.7; cursor:not-allowed; transform:none; }
+.submit-note { font-size:12px; color:var(--mut); margin-top:12px; }
+
+/* SUCCESS */
+.success-screen {
+  display:none; text-align:center; padding:80px 40px;
+  animation:fadeUp 0.6s ease;
+}
+.success-icon { font-size:64px; margin-bottom:24px; }
+.success-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom:12px;
+}
+.success-title span { color:var(--teal); }
+.success-sub { font-size:16px; color:var(--mut); max-width:400px; margin:0 auto 32px; line-height:1.7; }
+.success-badge {
+  display:inline-block; padding:12px 28px;
+  background:rgba(0,229,200,0.1); border:1px solid rgba(0,229,200,0.3);
+  border-radius:30px; font-size:14px; color:var(--teal); font-weight:600;
+}
+
+/* MULTI NOTE */
+.multi-note { font-size:11px; color:var(--mut); margin-bottom:12px; font-style:italic; }
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .choices { grid-template-columns:1fr; }
+  .section { padding:24px 20px; }
+  .header h1 { font-size:1.8rem; }
+  .matrix-table th, .matrix-table td { font-size:11px; padding:8px 4px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo"><span class="brill">brill</span><span class="ia">IA</span><span class="nt">nt</span></div>
+    <div class="logo-tag">Coloque a IA para trabalhar por você.</div>
+    <div class="header-badge">📋 Formulário de Alunos</div>
+    <h1>IA na Prática:<br><span>Multiplique sua Produtividade</span></h1>
+    <p>Nos ajude a personalizar o workshop para você. Leva menos de 5 minutos e faz toda a diferença no seu aprendizado.</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <form id="main-form">
+
+    <!-- BLOCO: DADOS PESSOAIS -->
+    <div class="section-header" style="animation-delay:0.05s">
+      <h2>Conhecendo Melhor os Alunos</h2>
+      <p>Informações básicas para personalizar sua experiência no workshop.</p>
+    </div>
+
+    <!-- 1. NOME -->
+    <div class="section" style="animation-delay:0.1s">
+      <div class="section-num">Pergunta 1 de 9</div>
+      <div class="section-title">Nome completo <span class="req">★</span></div>
+      <div class="field">
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+      </div>
+    </div>
+
+    <!-- 2. EMAIL -->
+    <div class="section accent-pur" style="animation-delay:0.15s">
+      <div class="section-num pur">Pergunta 2 de 9</div>
+      <div class="section-title">E-mail <span class="req">★</span></div>
+      <div class="field">
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+      </div>
+    </div>
+
+    <!-- 3. CONTATO -->
+    <div class="section" style="animation-delay:0.2s">
+      <div class="section-num">Pergunta 3 de 9</div>
+      <div class="section-title">Número de contato <span class="req">★</span></div>
+      <div class="field">
+        <input type="tel" id="contato" name="contato" placeholder="(00) 00000-0000" required>
+      </div>
+    </div>
+
+    <!-- 4. PROFISSÃO -->
+    <div class="section accent-ora" style="animation-delay:0.25s">
+      <div class="section-num ora">Pergunta 4 de 9</div>
+      <div class="section-title">Qual é a sua profissão ou área de atuação atual? <span class="req">★</span></div>
+      <div class="field">
+        <input type="text" id="profissao" name="profissao" placeholder="Ex: Marketing, Gestão, Educação, RH..." required>
+      </div>
+    </div>
+
+    <!-- 5. NÍVEL DE CONHECIMENTO IA -->
+    <div class="section accent-blu" style="animation-delay:0.3s">
+      <div class="section-num blu">Pergunta 5 de 9</div>
+      <div class="section-title">Qual é o seu nível de conhecimento atual sobre Inteligência Artificial? <span class="req">★</span></div>
+      <div class="section-sub">Seja honesta — isso nos ajuda a calibrar o ritmo do workshop para você.</div>
+      <div class="choices cols1" id="nivel-choices">
+        <button type="button" class="choice-btn sel-single" data-val="iniciante">
+          🌱 <strong>Iniciante</strong> — Nunca usei IA ou tenho conhecimento mínimo
+        </button>
+        <button type="button" class="choice-btn sel-single" data-val="basico">
+          🌿 <strong>Básico</strong> — Tenho conhecimento básico e já usei algumas ferramentas de IA
+        </button>
+        <button type="button" class="choice-btn sel-single" data-val="intermediario">
+          🌳 <strong>Intermediário</strong> — Tenho conhecimento sólido e uso IA regularmente
+        </button>
+        <button type="button" class="choice-btn sel-single" data-val="avancado">
+          🚀 <strong>Avançado</strong> — Tenho conhecimento profundo e trabalho com IA regularmente
+        </button>
+      </div>
+      <input type="hidden" id="nivel-val" name="nivel_conhecimento">
+    </div>
+
+    <!-- 6. NÍVEL POR FERRAMENTA - MATRIX -->
+    <div class="section" style="animation-delay:0.35s">
+      <div class="section-num">Pergunta 6 de 9</div>
+      <div class="section-title">Qual é o seu nível de conhecimento em cada ferramenta abaixo? <span class="req">★</span></div>
+      <div class="section-sub">Marque uma opção para cada linha.</div>
+      <div class="matrix-wrap">
+        <table class="matrix-table" id="ferramentas-matrix">
+          <thead>
+            <tr>
+              <th>Ferramenta</th>
+              <th>Não conheço</th>
+              <th>Conheço pouco</th>
+              <th>Conheço bem</th>
+              <th>Domino totalmente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="matrix-row">
+              <td>Manus AI</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_manus" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_manus" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_manus" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_manus" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Navegador Comet</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_comet" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_comet" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_comet" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_comet" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>NotebookLM</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_notebooklm" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_notebooklm" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_notebooklm" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_notebooklm" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Criação de Imagens (Canva, Ideogram, Leonardo AI)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Edição e Geração de Vídeos (CapCut, HeyGen, Synthesia)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Análise de Dados (Julius AI, Claude)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Criação de Apresentações (Gamma)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Escrita e Criação de Conteúdo (ChatGPT, Claude, Gemini)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Automação e Workflows (n8n, Zapier, Make.com)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Edição de Áudio (ElevenLabs)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Transcrição de Reunião (Fireflies, Tactiq)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Assistente de IA (Gems, GPT, Claude Projects)</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>ChatGPT</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_chatgpt" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_chatgpt" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_chatgpt" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_chatgpt" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Gemini</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gemini" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gemini" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gemini" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gemini" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Claude</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="domino"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Genspark AI</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="nao_conheco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="conheco_pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="conheco_bem"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="domino"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 7. FUNCIONALIDADES DE INTERESSE -->
+    <div class="section accent-pur" style="animation-delay:0.4s">
+      <div class="section-num pur">Pergunta 7 de 9</div>
+      <div class="section-title">Quais funcionalidades você tem mais interesse e gostaria de aprender mais? <span class="req">★</span></div>
+      <div class="multi-note">Pode marcar mais de uma opção</div>
+      <div class="tags" id="interesse-tags">
+        <button type="button" class="tag-btn" data-val="brainstorm">🧠 Brainstorm e Geração de Ideias</button>
+        <button type="button" class="tag-btn" data-val="escrita">✍️ Escrita e Criação de Conteúdo</button>
+        <button type="button" class="tag-btn" data-val="dados">📊 Análise de Dados e Relatórios</button>
+        <button type="button" class="tag-btn" data-val="videos">🎬 Produção de Vídeos e Mídia</button>
+        <button type="button" class="tag-btn" data-val="automacoes">⚙️ Automações e Integrações</button>
+        <button type="button" class="tag-btn" data-val="transcricao">🎙️ Geração de resumo e transcrição de reunião</button>
+        <button type="button" class="tag-btn" data-val="agentes">🤖 Agentes de IA</button>
+        <button type="button" class="tag-btn" data-val="assistentes">💬 Assistentes de IA</button>
+        <button type="button" class="tag-btn" data-val="avatar">🎭 Criação de Avatar para produção de Vídeo/Imagem</button>
+        <button type="button" class="tag-btn" data-val="apresentacoes">🖥️ Criação de Apresentação e Treinamentos</button>
+      </div>
+      <div class="other-input-wrap" id="interesse-other-wrap">
+        <input type="text" id="interesse-other-text" placeholder="Outro interesse...">
+      </div>
+      <button type="button" class="tag-btn" id="interesse-other-btn" style="margin-top:10px" data-val="outro">➕ Outro</button>
+    </div>
+
+    <!-- 8. ONDE PERDE TEMPO - MATRIX -->
+    <div class="section accent-ora" style="animation-delay:0.45s">
+      <div class="section-num ora">Pergunta 8 de 9</div>
+      <div class="section-title">Em quais atividades você perde mais tempo semanalmente? <span class="req">★</span></div>
+      <div class="section-sub">Isso nos ajuda a mostrar onde a IA pode fazer mais diferença na sua rotina.</div>
+      <div class="matrix-wrap">
+        <table class="matrix-table" id="tempo-matrix">
+          <thead>
+            <tr>
+              <th>Atividade</th>
+              <th>Nunca</th>
+              <th>Perco pouco tempo</th>
+              <th>Perco tempo</th>
+              <th>Perco muito tempo</th>
+              <th>Socorro, só faço isso!</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="matrix-row">
+              <td>Buscando informações</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_info" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_info" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_info" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_info" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_info" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Escrita e Criação de Conteúdo</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_escrita" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_escrita" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_escrita" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_escrita" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_escrita" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Responder e-mails</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_emails" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_emails" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_emails" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_emails" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_emails" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Criação de Imagens</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_imagens" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_imagens" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_imagens" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_imagens" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_imagens" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Edição e Geração de Vídeos</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_videos" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_videos" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_videos" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_videos" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_videos" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Análise de Dados</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_dados" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_dados" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_dados" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_dados" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_dados" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Criação de Apresentações</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_apresentacoes" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_apresentacoes" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_apresentacoes" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_apresentacoes" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_apresentacoes" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Tarefas repetitivas</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_repetitivas" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_repetitivas" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_repetitivas" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_repetitivas" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_repetitivas" value="socorro"></td>
+            </tr>
+            <tr class="matrix-row">
+              <td>Reuniões</td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_reunioes" value="nunca"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_reunioes" value="pouco"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_reunioes" value="medio"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_reunioes" value="muito"></td>
+              <td class="radio-cell"><input type="radio" class="matrix-radio" name="t_reunioes" value="socorro"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. OUTRAS ATIVIDADES -->
+    <div class="section" style="animation-delay:0.5s">
+      <div class="section-num">Pergunta 9 de 9</div>
+      <div class="section-title">Existem outras atividades que você gostaria de otimizar com IA e que NÃO foram mencionadas?</div>
+      <div class="section-sub">Se sim, liste-as aqui. Nos ajuda a adaptar o conteúdo para a sua realidade!</div>
+      <div class="textarea-wrap">
+        <textarea id="outras-atividades" name="outras_atividades" placeholder="Ex: Quero automatizar o atendimento ao cliente, organizar minha agenda, criar scripts de vendas..." maxlength="500" required></textarea>
+        <div class="char-count"><span id="outras-count">0</span>/500</div>
+      </div>
+    </div>
+
+    <!-- 10. O QUE NÃO PODE FALTAR -->
+    <div class="section accent-pur" style="animation-delay:0.55s">
+      <div class="section-num pur">Bônus</div>
+      <div class="section-title">Para que este curso seja realmente útil, o que não pode faltar?</div>
+      <div class="section-sub">Conteúdos, exemplos práticos, formato das aulas ou materiais de apoio. Descreva com o máximo de detalhes!</div>
+      <div class="textarea-wrap">
+        <textarea id="nao-pode-faltar" name="nao_pode_faltar" placeholder="Ex: Quero ver exemplos reais do meu setor, preciso de um glossário de termos de IA, gostaria de exercícios para praticar sozinha..." maxlength="600" style="min-height:120px" required></textarea>
+        <div class="char-count"><span id="nao-pode-count">0</span>/600</div>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-wrap">
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span>Enviar Respostas</span>
+        <span>🚀</span>
+      </button>
+      <div class="submit-note">Suas respostas serão salvas em planilha e nos ajudam a criar o melhor workshop para você.</div>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">Obrigada pelo<br><span>seu cadastro!</span></div>
+    <div class="success-sub">Suas respostas foram registradas. Agora já sabemos como personalizar o workshop para você!</div>
+    <div class="success-badge">✨ Nos vemos no workshop!</div>
+    <div style="margin-top:30px;font-size:14px;color:var(--mut)">
+      Prepare-se para colocar a IA para trabalhar por você. 🚀
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== APPS SCRIPT URL (substituir depois de criar) =====
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrm5JMf7GMH70uSRTdORYaUr1BDer2I5_CmL0mKLAY4F-uytTalX7xkDyVgbRVZXdI/exec';
+
+// ===== NÍVEL ÚNICO (single choice) =====
+document.querySelectorAll('#nivel-choices .choice-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#nivel-choices .choice-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    document.getElementById('nivel-val').value = this.dataset.val;
+    updateProgress();
+  });
+});
+
+// ===== TAGS MULTI =====
+document.querySelectorAll('#interesse-tags .tag-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.classList.toggle('selected');
+    updateProgress();
+  });
+});
+
+// ===== OUTRO - INTERESSE =====
+const outroBtn = document.getElementById('interesse-other-btn');
+const outroWrap = document.getElementById('interesse-other-wrap');
+outroBtn.addEventListener('click', function() {
+  this.classList.toggle('selected');
+  outroWrap.classList.toggle('visible');
+});
+
+// ===== CHAR COUNTS =====
+function setupCharCount(textareaId, countId) {
+  const ta = document.getElementById(textareaId);
+  const ct = document.getElementById(countId);
+  if(!ta || !ct) return;
+  ta.addEventListener('input', function() {
+    ct.textContent = this.value.length;
+    updateProgress();
+  });
+}
+setupCharCount('outras-atividades', 'outras-count');
+setupCharCount('nao-pode-faltar', 'nao-pode-count');
+
+// ===== MATRIX RADIO PROGRESS =====
+document.querySelectorAll('.matrix-radio').forEach(r => {
+  r.addEventListener('change', updateProgress);
+});
+
+// ===== PROGRESS BAR =====
+function updateProgress() {
+  let filled = 0;
+  const total = 10;
+  if(document.getElementById('nome').value.trim()) filled++;
+  if(document.getElementById('email').value.trim()) filled++;
+  if(document.getElementById('contato').value.trim()) filled++;
+  if(document.getElementById('profissao').value.trim()) filled++;
+  if(document.getElementById('nivel-val').value) filled++;
+
+  // matrix ferramentas: TODAS as linhas respondidas
+  const ferramentasTotal = ['f_manus','f_comet','f_notebooklm','f_imagens','f_videos','f_dados','f_gamma','f_escrita','f_automacao','f_audio','f_transcricao','f_assistente','f_chatgpt','f_gemini','f_claude','f_genspark'];
+  const ferramentasOk = ferramentasTotal.every(n => document.querySelector(`input[name="${n}"]:checked`));
+  if(ferramentasOk) filled++;
+
+  // interesses: pelo menos 1
+  const interessesOk = (document.querySelectorAll('#interesse-tags .tag-btn.selected').length > 0) ||
+    (document.getElementById('interesse-other-btn').classList.contains('selected') && document.getElementById('interesse-other-text').value.trim());
+  if(interessesOk) filled++;
+
+  // matrix tempo: TODAS as linhas respondidas
+  const tempoTotal = ['t_info','t_escrita','t_emails','t_imagens','t_videos','t_dados','t_apresentacoes','t_repetitivas','t_reunioes'];
+  const tempoOk = tempoTotal.every(n => document.querySelector(`input[name="${n}"]:checked`));
+  if(tempoOk) filled++;
+
+  // textos finais: ambos obrigatórios
+  if(document.getElementById('outras-atividades').value.trim()) filled++;
+  if(document.getElementById('nao-pode-faltar').value.trim()) filled++;
+
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+// ===== INPUT EVENTS =====
+['nome','email','contato','profissao'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updateProgress);
+});
+
+// ===== SUBMIT =====
+document.getElementById('main-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Coletar dados da matrix ferramentas
+  const ferramentaNames = ['manus','comet','notebooklm','imagens','videos','dados','gamma','escrita','automacao','audio','transcricao','assistente','chatgpt','gemini','claude','genspark'];
+  const ferramentasData = {};
+  ferramentaNames.forEach(name => {
+    const checked = document.querySelector(`input[name="f_${name}"]:checked`);
+    ferramentasData[`ferramenta_${name}`] = checked ? checked.value : '';
+  });
+
+  // Coletar dados da matrix tempo
+  const tempoNames = ['info','escrita','emails','imagens','videos','dados','apresentacoes','repetitivas','reunioes'];
+  const tempoData = {};
+  tempoNames.forEach(name => {
+    const checked = document.querySelector(`input[name="t_${name}"]:checked`);
+    tempoData[`tempo_${name}`] = checked ? checked.value : '';
+  });
+
+  // Interesse tags + outro
+  const interesses = Array.from(document.querySelectorAll('#interesse-tags .tag-btn.selected')).map(b => b.dataset.val);
+  if(document.getElementById('interesse-other-btn').classList.contains('selected')) {
+    const outroText = document.getElementById('interesse-other-text').value.trim();
+    if(outroText) interesses.push('outro: ' + outroText);
+    else interesses.push('outro');
+  }
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    nome: document.getElementById('nome').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    contato: document.getElementById('contato').value.trim(),
+    profissao: document.getElementById('profissao').value.trim(),
+    nivel_conhecimento: document.getElementById('nivel-val').value,
+    ...ferramentasData,
+    interesses: interesses.join(', '),
+    ...tempoData,
+    outras_atividades: document.getElementById('outras-atividades').value.trim(),
+    nao_pode_faltar: document.getElementById('nao-pode-faltar').value.trim(),
+  };
+
+  const btn = document.getElementById('submit-btn');
+  btn.innerHTML = '<span>Enviando...</span><span>⏳</span>';
+  btn.disabled = true;
+
+  // ===== validação obrigatória =====
+  const erros = [];
+
+  if(!data.nome) erros.push('• Nome completo');
+  if(!data.email) erros.push('• E-mail');
+  if(!data.contato) erros.push('• Número de contato');
+  if(!data.profissao) erros.push('• Profissão / área');
+  if(!data.nivel_conhecimento) erros.push('• Nível de conhecimento em IA');
+
+  // ferramentas: todas as linhas
+  const ferramentasCampos = [
+    'ferramenta_manus','ferramenta_comet','ferramenta_notebooklm','ferramenta_imagens','ferramenta_videos','ferramenta_dados','ferramenta_gamma','ferramenta_escrita','ferramenta_automacao','ferramenta_audio','ferramenta_transcricao','ferramenta_assistente','ferramenta_chatgpt','ferramenta_gemini','ferramenta_claude','ferramenta_genspark'
+  ];
+  const ferramentasOk = ferramentasCampos.every(k => (data[k] || '').trim());
+  if(!ferramentasOk) erros.push('• Nível de conhecimento em cada ferramenta (todas as linhas)');
+
+  if(!data.interesses) erros.push('• Funcionalidades de interesse (marque pelo menos 1 ou escreva em “Outro”)');
+
+  // tempo: todas as linhas
+  const tempoCampos = ['tempo_info','tempo_escrita','tempo_emails','tempo_imagens','tempo_videos','tempo_dados','tempo_apresentacoes','tempo_repetitivas','tempo_reunioes'];
+  const tempoOk = tempoCampos.every(k => (data[k] || '').trim());
+  if(!tempoOk) erros.push('• Atividades em que você perde tempo (todas as linhas)');
+
+  if(!data.outras_atividades) erros.push('• Outras atividades/tarefas que você gostaria de otimizar');
+  if(!data.nao_pode_faltar) erros.push('• O que não pode faltar no curso');
+
+  if(erros.length) {
+    alert('Faltou responder algumas perguntas obrigatórias:\n\n' + erros.join('\n'));
+    btn.innerHTML = '<span>Enviar Respostas</span><span>🚀</span>';
+    btn.disabled = false;
+    return;
+  }
+
+  // Enviar para Apps Script
+  fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(showSuccess)
+  .catch(showSuccess);
+});
+
+function showSuccess() {
+  document.getElementById('main-form').style.display = 'none';
+  document.querySelector('.progress-bar').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+  window.scrollTo({top: 0, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
