@@ -334,13 +334,29 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- BLOCO: DADOS PESSOAIS -->
     <div class="section-header" style="animation-delay:0.05s">
-      <h2>Conhecendo Melhor os Alunos</h2>
-      <p>Informações básicas para personalizar sua experiência no workshop.</p>
+      <h2>Inscrição — Workshop IA na Prática</h2>
+      <p><strong>Investimento:</strong> R$ 849,90 (Pix à vista) ou cartão (em breve).</p>
+      <p style="margin-top:8px"><strong>Pagamento via Pix:</strong> após enviar o formulário, faça o Pix usando a chave CNPJ abaixo. Sua vaga é confirmada por ordem de pagamento.</p>
+      <p style="margin-top:8px"><strong>Chave Pix (CNPJ):</strong> <span style="color:var(--teal);font-weight:700">53620572000130</span></p>
+      <p style="margin-top:8px"><strong>Reembolso/Política:</strong> até 7 dias antes: reembolso integral. Até 48h antes: crédito para próxima turma. Menos de 48h: sem reembolso (pode transferir a vaga).</p>
     </div>
 
-    <!-- 1. NOME -->
+    <!-- 1. TURMA/DATA -->
+    <div class="section" style="animation-delay:0.08s">
+      <div class="section-num">Pergunta 1 de 10</div>
+      <div class="section-title">Qual turma/data você quer participar? <span class="req">★</span></div>
+      <div class="section-sub">Por enquanto, temos apenas uma data disponível.</div>
+      <div class="choices cols1" id="turma-choices">
+        <button type="button" class="choice-btn sel-single" data-val="turma-25">
+          📅 <strong>Turma — dia 25</strong> (Workshop IA na Prática)
+        </button>
+      </div>
+      <input type="hidden" id="turma-val" name="turma_id" required>
+    </div>
+
+    <!-- 2. NOME -->
     <div class="section" style="animation-delay:0.1s">
-      <div class="section-num">Pergunta 1 de 9</div>
+      <div class="section-num">Pergunta 2 de 10</div>
       <div class="section-title">Nome completo <span class="req">★</span></div>
       <div class="field">
         <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
@@ -349,7 +365,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 2. EMAIL -->
     <div class="section accent-pur" style="animation-delay:0.15s">
-      <div class="section-num pur">Pergunta 2 de 9</div>
+      <div class="section-num pur">Pergunta 3 de 10</div>
       <div class="section-title">E-mail <span class="req">★</span></div>
       <div class="field">
         <input type="email" id="email" name="email" placeholder="seu@email.com" required>
@@ -358,7 +374,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 3. CONTATO -->
     <div class="section" style="animation-delay:0.2s">
-      <div class="section-num">Pergunta 3 de 9</div>
+      <div class="section-num">Pergunta 4 de 10</div>
       <div class="section-title">Número de contato <span class="req">★</span></div>
       <div class="field">
         <input type="tel" id="contato" name="contato" placeholder="(00) 00000-0000" required>
@@ -367,7 +383,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 4. PROFISSÃO -->
     <div class="section accent-ora" style="animation-delay:0.25s">
-      <div class="section-num ora">Pergunta 4 de 9</div>
+      <div class="section-num ora">Pergunta 5 de 10</div>
       <div class="section-title">Qual é a sua profissão ou área de atuação atual? <span class="req">★</span></div>
       <div class="field">
         <input type="text" id="profissao" name="profissao" placeholder="Ex: Marketing, Gestão, Educação, RH..." required>
@@ -376,7 +392,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 5. NÍVEL DE CONHECIMENTO IA -->
     <div class="section accent-blu" style="animation-delay:0.3s">
-      <div class="section-num blu">Pergunta 5 de 9</div>
+      <div class="section-num blu">Pergunta 6 de 10</div>
       <div class="section-title">Qual é o seu nível de conhecimento atual sobre Inteligência Artificial? <span class="req">★</span></div>
       <div class="section-sub">Seja honesta — isso nos ajuda a calibrar o ritmo do workshop para você.</div>
       <div class="choices cols1" id="nivel-choices">
@@ -398,7 +414,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 6. NÍVEL POR FERRAMENTA - MATRIX -->
     <div class="section" style="animation-delay:0.35s">
-      <div class="section-num">Pergunta 6 de 9</div>
+      <div class="section-num">Pergunta 7 de 10</div>
       <div class="section-title">Qual é o seu nível de conhecimento em cada ferramenta abaixo? <span class="req">★</span></div>
       <div class="section-sub">Marque uma opção para cada linha.</div>
       <div class="matrix-wrap">
@@ -532,7 +548,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 7. FUNCIONALIDADES DE INTERESSE -->
     <div class="section accent-pur" style="animation-delay:0.4s">
-      <div class="section-num pur">Pergunta 7 de 9</div>
+      <div class="section-num pur">Pergunta 8 de 10</div>
       <div class="section-title">Quais funcionalidades você tem mais interesse e gostaria de aprender mais? <span class="req">★</span></div>
       <div class="multi-note">Pode marcar mais de uma opção</div>
       <div class="tags" id="interesse-tags">
@@ -555,7 +571,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 8. ONDE PERDE TEMPO - MATRIX -->
     <div class="section accent-ora" style="animation-delay:0.45s">
-      <div class="section-num ora">Pergunta 8 de 9</div>
+      <div class="section-num ora">Pergunta 9 de 10</div>
       <div class="section-title">Em quais atividades você perde mais tempo semanalmente? <span class="req">★</span></div>
       <div class="section-sub">Isso nos ajuda a mostrar onde a IA pode fazer mais diferença na sua rotina.</div>
       <div class="matrix-wrap">
@@ -650,7 +666,7 @@ textarea::placeholder { color:var(--mut); }
 
     <!-- 9. OUTRAS ATIVIDADES -->
     <div class="section" style="animation-delay:0.5s">
-      <div class="section-num">Pergunta 9 de 9</div>
+      <div class="section-num">Pergunta 10 de 10</div>
       <div class="section-title">Existem outras atividades que você gostaria de otimizar com IA e que NÃO foram mencionadas?</div>
       <div class="section-sub">Se sim, liste-as aqui. Nos ajuda a adaptar o conteúdo para a sua realidade!</div>
       <div class="textarea-wrap">
@@ -697,6 +713,16 @@ textarea::placeholder { color:var(--mut); }
 <script>
 // ===== APPS SCRIPT URL (substituir depois de criar) =====
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwrm5JMf7GMH70uSRTdORYaUr1BDer2I5_CmL0mKLAY4F-uytTalX7xkDyVgbRVZXdI/exec';
+
+// ===== TURMA/DATA (single choice) =====
+document.querySelectorAll('#turma-choices .choice-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('#turma-choices .choice-btn').forEach(b => b.classList.remove('selected'));
+    this.classList.add('selected');
+    document.getElementById('turma-val').value = this.dataset.val;
+    updateProgress();
+  });
+});
 
 // ===== NÍVEL ÚNICO (single choice) =====
 document.querySelectorAll('#nivel-choices .choice-btn').forEach(btn => {
@@ -745,7 +771,8 @@ document.querySelectorAll('.matrix-radio').forEach(r => {
 // ===== PROGRESS BAR =====
 function updateProgress() {
   let filled = 0;
-  const total = 10;
+  const total = 11;
+  if(document.getElementById('turma-val').value) filled++;
   if(document.getElementById('nome').value.trim()) filled++;
   if(document.getElementById('email').value.trim()) filled++;
   if(document.getElementById('contato').value.trim()) filled++;
@@ -810,6 +837,8 @@ document.getElementById('main-form').addEventListener('submit', function(e) {
 
   const data = {
     timestamp: new Date().toISOString(),
+    turma_id: document.getElementById('turma-val').value,
+    turma_label: document.querySelector('#turma-choices .choice-btn.selected') ? document.querySelector('#turma-choices .choice-btn.selected').textContent.replace(/\s+/g,' ').trim() : '',
     nome: document.getElementById('nome').value.trim(),
     email: document.getElementById('email').value.trim(),
     contato: document.getElementById('contato').value.trim(),
@@ -829,6 +858,7 @@ document.getElementById('main-form').addEventListener('submit', function(e) {
   // ===== validação obrigatória =====
   const erros = [];
 
+  if(!data.turma_id) erros.push('• Turma/Data');
   if(!data.nome) erros.push('• Nome completo');
   if(!data.email) erros.push('• E-mail');
   if(!data.contato) erros.push('• Número de contato');
