@@ -297,6 +297,15 @@
   }
   .form-card input::placeholder { color: #555; }
   .form-card input:focus { border-color: var(--cyan); }
+  .form-card select {
+    width: 100%; padding: 14px 16px; border-radius: 10px;
+    border: 1px solid #2a2a2a; background: #111; color: var(--text);
+    font-family: 'Outfit', sans-serif; font-size: 1rem;
+    margin-bottom: 14px; appearance: none; cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  .form-card select:focus { border-color: var(--cyan); outline: none; }
+  .form-card select option { background: #111; color: var(--text); }
 
   /* ✅ CORRIGIDO: botão submit usa background cyan sólido (sem gradiente inventado) */
   .btn-submit {
@@ -516,6 +525,14 @@
         <input type="text" name="nome" placeholder="Seu nome completo" required>
         <input type="email" name="email" placeholder="Seu melhor e-mail" required>
         <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
+        <select name="turma" required>
+          <option value="" disabled selected>Selecione a turma de interesse</option>
+          <option value="Turma Manhã — Sábado">Turma Manhã — Sábado</option>
+          <option value="Turma Manhã — Domingo">Turma Manhã — Domingo</option>
+          <option value="Turma Tarde — Sábado">Turma Tarde — Sábado</option>
+          <option value="Turma Tarde — Domingo">Turma Tarde — Domingo</option>
+          <option value="Indiferente — qualquer turma">Indiferente — qualquer turma</option>
+        </select>
         <button type="submit" class="btn-submit" id="submitBtn">Entrar na lista de espera →</button>
       </form>
       <p class="form-note">Seus dados estão seguros. Sem spam, prometemos.</p>
@@ -556,8 +573,9 @@
     const nome = form.nome.value.trim();
     const email = form.email.value.trim();
     const telefone = form.telefone.value.trim();
+    const turma = form.turma.value.trim();
 
-    if (!nome || !email || !telefone) return;
+    if (!nome || !email || !telefone || !turma) return;
 
     btn.disabled = true;
     btn.textContent = 'Enviando...';
@@ -568,7 +586,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, whatsapp: telefone })
+        body: JSON.stringify({ nome, email, whatsapp: telefone, turma })
       });
 
       msgEl.className = 'form-msg success';
