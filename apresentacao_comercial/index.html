@@ -809,6 +809,32 @@
           font-size: clamp(1.8rem, 4vw, 2.8rem);
         }
       }
+
+      /* Fix grids inline no mobile */
+      @media (max-width: 640px) {
+        .inline-grid-2 {
+          grid-template-columns: 1fr !important;
+        }
+        .inline-grid-4 {
+          grid-template-columns: 1fr 1fr !important;
+          gap: 8px !important;
+        }
+        /* Split slide 8: força coluna */
+        #s8.sl-split {
+          flex-direction: column !important;
+          height: auto !important;
+        }
+        #s8 .sl-img-panel {
+          max-height: 180px;
+          flex: none;
+          order: 1;
+        }
+        #s8 .sl-content {
+          order: 2;
+          border-right: none !important;
+          border-bottom: 1px solid var(--border);
+        }
+      }
     </style>
   </head>
   <body>
@@ -1114,8 +1140,8 @@
               display: grid;
               grid-template-columns: repeat(4, 1fr);
               gap: clamp(8px, 1vw, 14px);
-              width: 100%;
-              margin-bottom: clamp(8px, 1vw, 14px);
+              width: 100%;" class="inline-grid-4
+              margin-bottom: clamp(8px, 1vw, 14px);" class="inline-grid-4
             "
           >
             <div
@@ -1265,7 +1291,7 @@
               display: grid;
               grid-template-columns: repeat(4, 1fr);
               gap: clamp(8px, 1vw, 14px);
-              width: 100%;
+              width: 100%;" class="inline-grid-4
             "
           >
             <div
@@ -1438,7 +1464,7 @@
               display: grid;
               grid-template-columns: 1fr 1fr;
               gap: clamp(12px, 1.8vh, 24px);
-              flex: 1;
+              flex: 1;" class="inline-grid-2
             "
           >
             <!-- Item 1 -->
