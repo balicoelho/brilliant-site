@@ -577,51 +577,83 @@
          ============================================ */
       @media (max-width: 640px) {
         html, body {
-          overflow: auto;
-          height: auto;
+          overflow: hidden;
+          height: 100%;
+          height: 100dvh;
         }
 
         #pres {
-          height: auto;
-          min-height: 100dvh;
-          overflow-y: auto;
-          overflow-x: hidden;
-          padding-bottom: 80px;
+          height: 100dvh;
+          overflow: hidden;
           justify-content: flex-start;
+          padding-bottom: 0;
         }
 
-        /* Slide: altura automática, scroll vertical */
+        /* Slide: ocupa espaço disponível (tela - nav) */
         .slide {
           width: 100vw;
-          height: auto !important;
+          /* Deixa espaço para a nav fixa no bottom */
+          height: calc(100dvh - 64px) !important;
           min-height: auto;
-          max-height: none !important;
+          max-height: calc(100dvh - 64px) !important;
           border-radius: 0;
           border-left: none;
           border-right: none;
-          overflow: visible;
+          overflow-y: auto;
+          overflow-x: hidden;
           flex-shrink: 0;
+          -webkit-overflow-scrolling: touch;
         }
 
         .sl-content {
-          padding: 20px 16px 16px;
+          padding: 18px 16px 16px;
           overflow: visible;
           flex: none;
         }
 
-        /* Split layout: foto em cima, texto embaixo */
+        /* NAV: fixa no bottom, sempre visível */
+        .nav {
+          position: fixed !important;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 9999;
+          background: rgba(13, 17, 23, 0.97);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-top: 1px solid var(--border);
+          padding: 8px 12px;
+          margin-top: 0;
+          gap: 8px;
+          flex-wrap: wrap;
+          justify-content: center;
+          height: 54px;
+          box-sizing: border-box;
+        }
+        .nav-btn, .fs-btn {
+          width: 30px;
+          height: 30px;
+        }
+        .counter {
+          font-size: 0.72rem;
+          min-width: 30px;
+        }
+
+        /* Split layout: foto em cima, texto embaixo com scroll */
         .sl-split {
           flex-direction: column !important;
-          height: auto !important;
+          height: 100% !important;
+          overflow-y: auto;
         }
         .sl-split .sl-content {
           border-right: none;
           border-bottom: 1px solid var(--border);
           order: 2;
+          flex: none;
         }
         .sl-img-panel {
-          max-height: 200px;
-          min-height: 160px;
+          max-height: 180px;
+          min-height: 140px;
           flex: none;
           order: 1;
         }
@@ -635,12 +667,8 @@
           font-size: clamp(1.3rem, 5.5vw, 1.8rem);
           margin-bottom: 10px;
         }
-        h3 {
-          font-size: 0.95rem;
-        }
-        p {
-          font-size: 0.95rem;
-        }
+        h3 { font-size: 0.95rem; }
+        p { font-size: 0.95rem; }
 
         /* Capa */
         #s1 .sl-content h1 {
@@ -648,63 +676,39 @@
         }
 
         /* Tags */
-        .tag {
-          font-size: 0.84rem;
-          padding: 3px 9px;
-        }
+        .tag { font-size: 0.84rem; padding: 3px 9px; }
 
-        /* Grid 2 colunas → 1 coluna */
-        .grid-2 {
+        /* Grids → 1 coluna */
+        .grid-2, .grid-3 {
           grid-template-columns: 1fr !important;
           gap: 10px;
         }
-
-        /* Grid 3 colunas → 1 coluna */
-        .grid-3 {
-          grid-template-columns: 1fr !important;
-          gap: 10px;
-        }
-
-        /* Mitos: 1 coluna */
         .myth-grid {
           grid-template-columns: 1fr !important;
           gap: 7px;
         }
-        .myth-item {
-          font-size: 0.9rem;
-        }
+        .myth-item { font-size: 0.9rem; }
 
-        /* Speaker: foto em cima, info embaixo */
+        /* Speaker */
         .speaker {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 14px;
+          gap: 12px;
         }
-        .speaker-photo {
-          width: 80px;
-          height: 80px;
-        }
-        .speaker-info h3 {
-          font-size: 1.1rem;
-        }
-        .badge {
-          font-size: 0.78rem;
-        }
+        .speaker-photo { width: 72px; height: 72px; }
+        .speaker-info h3 { font-size: 1.05rem; }
+        .badge { font-size: 0.78rem; }
 
-        /* Preço: 1 coluna */
+        /* Preço */
         .price-wrapper {
           grid-template-columns: 1fr !important;
           gap: 10px;
         }
-        .price-box .price {
-          font-size: clamp(2rem, 9vw, 2.8rem);
-        }
-        .price-box ul li {
-          font-size: 0.88rem;
-        }
+        .price-box .price { font-size: clamp(2rem, 9vw, 2.8rem); }
+        .price-box ul li { font-size: 0.88rem; }
 
-        /* Tabela: scroll horizontal + cabeçalhos com padding */
+        /* Tabela */
         table {
           font-size: 0.82rem;
           display: block;
@@ -712,63 +716,19 @@
           -webkit-overflow-scrolling: touch;
           white-space: nowrap;
         }
-        thead th {
-          padding: 6px 10px;
-          white-space: nowrap;
-        }
-        tbody td {
-          padding: 6px 10px;
-          white-space: nowrap;
-        }
+        thead th { padding: 6px 10px; white-space: nowrap; }
+        tbody td { padding: 6px 10px; white-space: nowrap; }
 
         /* Slide final */
-        .slide-final h1 {
-          font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important;
-        }
-        .slide-final .site {
-          font-size: 1rem;
-        }
-        .slide-final .info {
-          font-size: 0.88rem;
-        }
+        .slide-final h1 { font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important; }
+        .slide-final .site { font-size: 1rem; }
+        .slide-final .info { font-size: 0.88rem; }
 
-        /* Nav compacta */
-        .nav {
-          gap: 6px;
-          flex-wrap: wrap;
-          justify-content: center;
-          padding: 8px 0;
-          margin-top: 8px;
-        }
-        .nav-btn, .fs-btn {
-          width: 30px;
-          height: 30px;
-        }
-        .counter {
-          font-size: 0.72rem;
-          min-width: 30px;
-        }
-
-        /* Botão CTA */
-        .btn {
-          font-size: 0.95rem;
-          padding: 10px 18px;
-        }
-
-        /* Blockquote não cortado */
-        blockquote {
-          font-size: 0.88rem;
-          overflow: visible;
-          white-space: normal;
-        }
-
-        /* Cards */
-        .card {
-          padding: 14px 12px;
-        }
-        .info-card {
-          padding: 9px 12px;
-        }
+        /* CTA */
+        .btn { font-size: 0.95rem; padding: 10px 18px; }
+        blockquote { font-size: 0.88rem; overflow: visible; white-space: normal; }
+        .card { padding: 12px 10px; }
+        .info-card { padding: 8px 12px; }
       }
 
       /* TABLET (641px - 900px) */
