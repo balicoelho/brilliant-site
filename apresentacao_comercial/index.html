@@ -36,6 +36,7 @@
         width: 100vw;
         height: 100vh;
         overflow: hidden;
+        overscroll-behavior: none;
       }
 
       /* ── PRESENTATION ── */
@@ -569,6 +570,163 @@
       :-webkit-full-screen .slide {
         height: calc(100vh - 70px);
         max-height: calc(100vh - 70px);
+      }
+
+      /* ============================================
+         RESPONSIVO — MOBILE (max-width: 640px)
+         ============================================ */
+      @media (max-width: 640px) {
+        html, body {
+          overflow: auto;
+        }
+
+        #pres {
+          height: auto;
+          min-height: 100vh;
+          overflow: auto;
+          padding-bottom: 80px;
+        }
+
+        /* Slide ocupa altura automática no mobile */
+        .slide {
+          width: 100vw;
+          height: auto;
+          min-height: calc(100vh - 70px);
+          max-height: none;
+          border-radius: 0;
+          border-left: none;
+          border-right: none;
+          overflow-y: auto;
+        }
+
+        .sl-content {
+          padding: 24px 20px 20px;
+          overflow: visible;
+        }
+
+        /* Layout split vira coluna no mobile */
+        .sl-split {
+          flex-direction: column !important;
+        }
+        .sl-split .sl-content {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .sl-img-panel {
+          max-height: 220px;
+          flex: none;
+        }
+
+        /* Tipografia ajustada */
+        h1 {
+          font-size: clamp(2rem, 8vw, 2.8rem);
+        }
+        h2 {
+          font-size: clamp(1.5rem, 6vw, 2rem);
+        }
+
+        /* Capa: título maior no mobile */
+        #s1 h1 {
+          font-size: clamp(2.4rem, 11vw, 3.8rem);
+        }
+
+        /* Tags em coluna */
+        .tag {
+          font-size: 0.88rem;
+          padding: 4px 10px;
+        }
+
+        /* Grid 2 e 3 col viram 1 coluna */
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        /* Mitos: 1 coluna */
+        .myth-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Speaker empilhado */
+        .speaker {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .speaker-photo {
+          width: 80px;
+          height: 80px;
+        }
+
+        /* Preço: 1 coluna */
+        .price-wrapper {
+          grid-template-columns: 1fr;
+        }
+        .price-box .price {
+          font-size: clamp(2.2rem, 10vw, 3rem);
+        }
+
+        /* Tabela de tempo — scroll horizontal */
+        table {
+          font-size: 0.85rem;
+          display: block;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        /* Slide final */
+        .slide-final h1 {
+          font-size: clamp(1.8rem, 7vw, 2.6rem);
+        }
+        .slide-final .site {
+          font-size: 1.1rem;
+        }
+
+        /* Nav compacta */
+        .nav {
+          gap: 8px;
+          flex-wrap: wrap;
+          justify-content: center;
+          padding: 6px 0;
+        }
+        .nav-btn, .fs-btn {
+          width: 30px;
+          height: 30px;
+        }
+
+        /* Botão CTA */
+        .btn {
+          font-size: 1rem;
+          padding: 10px 20px;
+        }
+      }
+
+      /* TABLET (641px - 900px) */
+      @media (min-width: 641px) and (max-width: 900px) {
+        .slide {
+          width: 98vw;
+        }
+        .sl-split {
+          flex-direction: column !important;
+        }
+        .sl-img-panel {
+          max-height: 240px;
+          flex: none;
+        }
+        .sl-split .sl-content {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .myth-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-wrapper {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
