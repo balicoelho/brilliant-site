@@ -3389,5 +3389,36 @@
       data-cf-beacon='{"rayId":"9de467f98ea923c0","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.9.1","token":"4edd5f8ec12a48cfa682ab8261b80a79"}'
       crossorigin="anonymous"
     ></script>
-  </body>
+  
+  <script>
+    // Corrige grids inline no mobile
+    function fixMobileGrids() {
+      if (window.innerWidth > 640) return;
+      document.querySelectorAll('[style*="grid-template-columns"]').forEach(function(el) {
+        var s = el.style.gridTemplateColumns;
+        // Normaliza: repeat(4,1fr) → 1fr, repeat(3,1fr) → 1fr, 1fr 1fr → 1fr
+        if (s && (s.includes('repeat(') || s.split('1fr').length > 2)) {
+          el.style.gridTemplateColumns = '1fr';
+        }
+      });
+      // Tabela: wrap thead th
+      document.querySelectorAll('thead th').forEach(function(th) {
+        th.style.whiteSpace = 'nowrap';
+        th.style.padding = '6px 10px';
+      });
+    }
+    document.addEventListener('DOMContentLoaded', fixMobileGrids);
+    window.addEventListener('resize', fixMobileGrids);
+    // Also run after each slide change
+    var origShowSlide = window.showSlide;
+    document.addEventListener('DOMContentLoaded', function() {
+      // Patch navigation buttons
+      document.querySelectorAll('.nav-btn, .dot').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          setTimeout(fixMobileGrids, 50);
+        });
+      });
+    });
+  </script>
+</body>
 </html>
