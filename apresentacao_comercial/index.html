@@ -572,233 +572,237 @@
         max-height: calc(100vh - 70px);
       }
 
+
       /* ============================================
-         RESPONSIVO — MOBILE (max-width: 640px)
+         MOBILE-FIRST: BASE (todos os tamanhos)
          ============================================ */
-      @media (max-width: 640px) {
-        html, body {
-          overflow: hidden;
-          height: 100%;
-          height: 100dvh;
-        }
 
-        #pres {
-          height: 100dvh;
-          overflow: hidden;
-          justify-content: flex-start;
-          padding-bottom: 0;
-        }
-
-        /* Slide: ocupa espaço disponível (tela - nav) */
-        .slide {
-          width: 100vw;
-          /* Deixa espaço para a nav fixa no bottom */
-          height: calc(100dvh - 64px) !important;
-          min-height: auto;
-          max-height: calc(100dvh - 64px) !important;
-          border-radius: 0;
-          border-left: none;
-          border-right: none;
-          overflow-y: auto;
-          overflow-x: hidden;
-          flex-shrink: 0;
-          -webkit-overflow-scrolling: touch;
-        }
-
-        .sl-content {
-          padding: 18px 16px 16px;
-          overflow: visible;
-          flex: none;
-        }
-
-        /* NAV: fixa no bottom, sempre visível */
-        .nav {
-          position: fixed !important;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 9999;
-          background: rgba(13, 17, 23, 0.97);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          border-top: 1px solid var(--border);
-          padding: 8px 12px;
-          margin-top: 0;
-          gap: 8px;
-          flex-wrap: wrap;
-          justify-content: center;
-          height: 54px;
-          box-sizing: border-box;
-        }
-        .nav-btn, .fs-btn {
-          width: 30px;
-          height: 30px;
-        }
-        .counter {
-          font-size: 0.72rem;
-          min-width: 30px;
-        }
-
-        /* Split layout: foto em cima, texto embaixo com scroll */
-        .sl-split {
-          flex-direction: column !important;
-          height: 100% !important;
-          overflow-y: auto;
-        }
-        .sl-split .sl-content {
-          border-right: none;
-          border-bottom: 1px solid var(--border);
-          order: 2;
-          flex: none;
-        }
-        .sl-img-panel {
-          max-height: 180px;
-          min-height: 140px;
-          flex: none;
-          order: 1;
-        }
-
-        /* Tipografia */
-        h1 {
-          font-size: clamp(1.7rem, 7vw, 2.4rem) !important;
-          line-height: 1.1;
-        }
-        h2 {
-          font-size: clamp(1.3rem, 5.5vw, 1.8rem);
-          margin-bottom: 10px;
-        }
-        h3 { font-size: 0.95rem; }
-        p { font-size: 0.95rem; }
-
-        /* Capa */
-        #s1 .sl-content h1 {
-          font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
-        }
-
-        /* Tags */
-        .tag { font-size: 0.84rem; padding: 3px 9px; }
-
-        /* Grids → 1 coluna */
-        .grid-2, .grid-3 {
-          grid-template-columns: 1fr !important;
-          gap: 10px;
-        }
-        .myth-grid {
-          grid-template-columns: 1fr !important;
-          gap: 7px;
-        }
-        .myth-item { font-size: 0.9rem; }
-
-        /* Speaker */
-        .speaker {
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          gap: 12px;
-        }
-        .speaker-photo { width: 72px; height: 72px; }
-        .speaker-info h3 { font-size: 1.05rem; }
-        .badge { font-size: 0.78rem; }
-
-        /* Preço */
-        .price-wrapper {
-          grid-template-columns: 1fr !important;
-          gap: 10px;
-        }
-        .price-box .price { font-size: clamp(2rem, 9vw, 2.8rem); }
-        .price-box ul li { font-size: 0.88rem; }
-
-        /* Tabela */
-        table {
-          font-size: 0.82rem;
-          display: block;
-          overflow-x: auto;
-          -webkit-overflow-scrolling: touch;
-          white-space: nowrap;
-        }
-        thead th { padding: 6px 10px; white-space: nowrap; }
-        tbody td { padding: 6px 10px; white-space: nowrap; }
-
-        /* Slide final */
-        .slide-final h1 { font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important; }
-        .slide-final .site { font-size: 1rem; }
-        .slide-final .info { font-size: 0.88rem; }
-
-        /* CTA */
-        .btn { font-size: 0.95rem; padding: 10px 18px; }
-        blockquote { font-size: 0.88rem; overflow: visible; white-space: normal; }
-        .card { padding: 12px 10px; }
-        .info-card { padding: 8px 12px; }
+      /* Layout base: slide + nav separados, nunca sobrepostos */
+      #pres {
+        display: flex;
+        flex-direction: column;
+        width: 100vw;
+        height: 100dvh;
+        overflow: hidden;
       }
 
-      /* TABLET (641px - 900px) */
-      @media (min-width: 641px) and (max-width: 900px) {
-        .slide {
-          width: 99vw;
-          height: auto;
-          min-height: calc(100vh - 70px);
-          max-height: none;
-        }
-        .sl-split {
-          flex-direction: column !important;
-        }
-        .sl-split .sl-content {
-          border-right: none;
-          border-bottom: 1px solid var(--border);
-          order: 2;
-        }
-        .sl-img-panel {
-          max-height: 260px;
+      /* Container do slide (área principal) */
+      #slide-area {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        touch-action: pan-y;
+      }
+
+      /* Slide ocupa toda a área disponível */
+      .slide {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        flex-shrink: 0;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: none;
+      }
+
+      /* Nav: sempre na base, nunca sobre o slide */
+      .nav {
+        flex-shrink: 0;
+        height: 54px;
+        background: rgba(13, 17, 23, 0.98);
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 12px;
+        position: static;
+        z-index: 10;
+      }
+      .nav-btn, .fs-btn {
+        width: 30px;
+        height: 30px;
+      }
+      .counter {
+        font-size: 0.78rem;
+        min-width: 36px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .sl-content {
+        padding: 18px 16px 16px;
+        overflow: visible;
+        flex: none;
+      }
+
+      /* Split vira coluna no mobile */
+      .sl-split {
+        flex-direction: column !important;
+      }
+      .sl-split .sl-content {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        order: 2;
+        flex: none;
+      }
+      .sl-img-panel {
+        max-height: 180px;
+        min-height: 130px;
+        flex: none;
+        order: 1;
+      }
+
+      /* Tipografia mobile */
+      h1 { font-size: clamp(1.7rem, 7vw, 2.4rem) !important; line-height: 1.1; }
+      h2 { font-size: clamp(1.3rem, 5.5vw, 1.8rem); margin-bottom: 10px; }
+      h3 { font-size: 0.95rem; }
+      p  { font-size: 0.95rem; }
+      #s1 .sl-content h1 { font-size: clamp(2.2rem, 10vw, 3.2rem) !important; }
+      .tag { font-size: 0.84rem; padding: 3px 9px; }
+
+      /* Grids → 1 coluna mobile */
+      .grid-2, .grid-3 { grid-template-columns: 1fr !important; gap: 10px; }
+      .myth-grid { grid-template-columns: 1fr !important; gap: 7px; }
+      .myth-item { font-size: 0.9rem; }
+
+      /* Speaker mobile */
+      .speaker { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+      .speaker-photo { width: 72px; height: 72px; }
+      .speaker-info h3 { font-size: 1.05rem; }
+      .badge { font-size: 0.78rem; }
+
+      /* Preço mobile */
+      .price-wrapper { grid-template-columns: 1fr !important; gap: 10px; }
+      .price-box .price { font-size: clamp(2rem, 9vw, 2.8rem); }
+      .price-box ul li { font-size: 0.88rem; }
+
+      /* Tabela mobile: scroll horizontal */
+      table { font-size: 0.82rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+      thead th { padding: 6px 10px; white-space: nowrap; }
+      tbody td { padding: 6px 10px; white-space: nowrap; }
+
+      .slide-final h1 { font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important; }
+      .slide-final .site { font-size: 1rem; }
+      .slide-final .info { font-size: 0.88rem; }
+      .btn { font-size: 0.95rem; padding: 10px 18px; }
+      blockquote { font-size: 0.88rem; overflow: visible; white-space: normal; }
+      .card { padding: 12px 10px; }
+      .info-card { padding: 8px 12px; }
+
+      /* ============================================
+         DESKTOP (min-width: 641px) — override para telas grandes
+         ============================================ */
+      @media (min-width: 641px) {
+        html, body { height: 100vh; overflow: hidden; }
+
+        #pres { justify-content: center; }
+
+        #slide-area {
           flex: none;
-          order: 1;
+          height: auto;
+          overflow: visible;
         }
-        .grid-2 {
-          grid-template-columns: 1fr 1fr;
+
+        .slide {
+          width: min(960px, 95vw);
+          height: calc(100vh - 70px);
+          max-height: calc(100vh - 70px);
+          overflow: hidden;
+          border-radius: 18px;
+          border: 1px solid var(--border);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
         }
-        .grid-3 {
-          grid-template-columns: 1fr 1fr !important;
-          gap: 10px;
+
+        .nav {
+          background: transparent;
+          border-top: none;
+          height: auto;
+          gap: 12px;
+          padding: 0;
+          margin-top: 10px;
+          position: static;
         }
-        .myth-grid {
-          grid-template-columns: 1fr 1fr;
+        .nav-btn, .fs-btn { width: 34px; height: 34px; }
+
+        .sl-content {
+          padding: clamp(20px, 3vh, 40px) clamp(24px, 4vw, 52px);
+          overflow: hidden;
+          flex: 1;
         }
-        .price-wrapper {
-          grid-template-columns: 1fr !important;
-        }
-        h1 {
-          font-size: clamp(1.8rem, 4vw, 2.8rem);
-        }
+
+        /* Split restaurado no desktop */
+        .sl-split { flex-direction: row !important; }
+        .sl-split .sl-content { border-right: 1px solid var(--border); border-bottom: none; order: 0; }
+        .sl-img-panel { flex: 1; max-height: none; min-height: auto; order: 0; }
+
+        /* Tipografia desktop */
+        h1 { font-size: clamp(2.34rem, 4.55vw, 3.9rem) !important; }
+        h2 { font-size: clamp(1.69rem, 3.25vw, 2.73rem); }
+        h3 { font-size: clamp(1.01rem, 1.23vw, 1.2rem); }
+        p  { font-size: clamp(1.01rem, 1.17vw, 1.17rem); }
+        #s1 .sl-content h1 { font-size: clamp(3rem, 7vw, 6rem) !important; }
+        .tag { font-size: clamp(0.88rem, 1.04vw, 0.99rem); padding: 3px 10px; }
+
+        /* Grids desktop restaurados */
+        .grid-2 { grid-template-columns: 1fr 1fr !important; gap: clamp(8px, 1vh, 12px); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr) !important; gap: clamp(7px, 0.9vh, 11px); }
+        .myth-grid { grid-template-columns: 1fr 1fr !important; gap: clamp(6px, 0.8vh, 9px); }
+        .myth-item { font-size: clamp(0.94rem, 1.08vw, 1.08rem); }
+
+        .speaker { flex-direction: row; text-align: left; }
+        .speaker-photo { width: clamp(70px, 8vw, 100px); height: clamp(70px, 8vw, 100px); }
+        .speaker-info h3 { font-size: clamp(1.3rem, 1.69vw, 1.49rem); }
+
+        .price-wrapper { grid-template-columns: 1fr 1fr !important; }
+        .price-box .price { font-size: clamp(2.6rem, 3.9vw, 3.64rem); }
+        .price-box ul li { font-size: clamp(0.91rem, 1.04vw, 1.01rem); }
+
+        table { font-size: clamp(0.96rem, 1.1vw, 1.1rem); display: table; white-space: normal; overflow-x: visible; }
+        thead th { padding: clamp(6px, 0.8vh, 9px) 11px; }
+        tbody td { padding: clamp(6px, 0.8vh, 9px) 11px; }
+
+        .slide-final h1 { font-size: clamp(2.08rem, 3.9vw, 3.38rem) !important; }
+        .slide-final .site { font-size: clamp(1.23rem, 1.56vw, 1.43rem); }
+        .slide-final .info { font-size: clamp(0.98rem, 1.1vw, 1.07rem); }
+        .btn { font-size: clamp(1.07rem, 1.23vw, 1.17rem); padding: 10px 24px; }
+        blockquote { font-size: clamp(0.98rem, 1.1vw, 1.12rem); }
+        .card { padding: clamp(10px, 1.3vh, 15px) clamp(10px, 1.2vw, 14px); }
+      }
+
+      /* TABLET intermediário (641px - 900px) */
+      @media (min-width: 641px) and (max-width: 900px) {
+        .slide { width: 99vw; }
+        .sl-split { flex-direction: column !important; }
+        .sl-split .sl-content { border-right: none; border-bottom: 1px solid var(--border); order: 2; }
+        .sl-img-panel { max-height: 220px; flex: none; order: 1; }
+        .grid-3 { grid-template-columns: 1fr 1fr !important; }
+        .myth-grid { grid-template-columns: 1fr !important; }
+        .price-wrapper { grid-template-columns: 1fr !important; }
       }
 
       /* Fix grids inline no mobile */
       @media (max-width: 640px) {
-        .inline-grid-2 {
-          grid-template-columns: 1fr !important;
-        }
-        .inline-grid-4 {
-          grid-template-columns: 1fr 1fr !important;
-          gap: 8px !important;
-        }
-        /* Split slide 8: força coluna */
-        #s8.sl-split {
-          flex-direction: column !important;
-          height: auto !important;
-        }
-        #s8 .sl-img-panel {
-          max-height: 180px;
-          flex: none;
-          order: 1;
-        }
-        #s8 .sl-content {
-          order: 2;
-          border-right: none !important;
-          border-bottom: 1px solid var(--border);
-        }
+        .inline-grid-2 { grid-template-columns: 1fr !important; }
+        .inline-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+        #s8.sl-split { flex-direction: column !important; }
+        #s8 .sl-img-panel { max-height: 160px; flex: none; order: 1; }
+        #s8 .sl-content { order: 2; border-right: none !important; border-bottom: 1px solid var(--border); }
       }
+
     </style>
   </head>
   <body>
     <div id="pres">
+      <div id="slide-area">
       <!-- SLIDE 1: CAPA com imagem IA -->
       <div class="slide active" id="s1">
         <div
@@ -3269,6 +3273,8 @@
         </div>
       </div>
 
+      </div><!-- /#slide-area -->
+
       <!-- NAV -->
       <div class="nav">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>
@@ -3355,6 +3361,29 @@
           );
         }
       }
+      // ── Touch swipe para trocar slides ──
+      (function() {
+        var area = document.getElementById('slide-area');
+        if (!area) return;
+        var startX = 0, startY = 0, moved = false;
+        area.addEventListener('touchstart', function(e) {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          moved = false;
+        }, {passive: true});
+        area.addEventListener('touchmove', function(e) {
+          moved = true;
+        }, {passive: true});
+        area.addEventListener('touchend', function(e) {
+          if (!moved) return;
+          var dx = e.changedTouches[0].clientX - startX;
+          var dy = e.changedTouches[0].clientY - startY;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+            changeSlide(dx < 0 ? 1 : -1);
+          }
+        }, {passive: true});
+      })();
+
       document.addEventListener("fullscreenchange", updateFSIcon);
       document.addEventListener("webkitfullscreenchange", updateFSIcon);
       function updateFSIcon() {
