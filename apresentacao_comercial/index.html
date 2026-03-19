@@ -578,154 +578,235 @@
       @media (max-width: 640px) {
         html, body {
           overflow: auto;
+          height: auto;
         }
 
         #pres {
           height: auto;
-          min-height: 100vh;
-          overflow: auto;
+          min-height: 100dvh;
+          overflow-y: auto;
+          overflow-x: hidden;
           padding-bottom: 80px;
+          justify-content: flex-start;
         }
 
-        /* Slide ocupa altura automática no mobile */
+        /* Slide: altura automática, scroll vertical */
         .slide {
           width: 100vw;
-          height: auto;
-          min-height: calc(100vh - 70px);
-          max-height: none;
+          height: auto !important;
+          min-height: auto;
+          max-height: none !important;
           border-radius: 0;
           border-left: none;
           border-right: none;
-          overflow-y: auto;
+          overflow: visible;
+          flex-shrink: 0;
         }
 
         .sl-content {
-          padding: 24px 20px 20px;
+          padding: 20px 16px 16px;
           overflow: visible;
+          flex: none;
         }
 
-        /* Layout split vira coluna no mobile */
+        /* Split layout: foto em cima, texto embaixo */
         .sl-split {
           flex-direction: column !important;
+          height: auto !important;
         }
         .sl-split .sl-content {
           border-right: none;
           border-bottom: 1px solid var(--border);
+          order: 2;
         }
         .sl-img-panel {
-          max-height: 220px;
+          max-height: 200px;
+          min-height: 160px;
           flex: none;
+          order: 1;
         }
 
-        /* Tipografia ajustada */
+        /* Tipografia */
         h1 {
-          font-size: clamp(2rem, 8vw, 2.8rem);
+          font-size: clamp(1.7rem, 7vw, 2.4rem) !important;
+          line-height: 1.1;
         }
         h2 {
-          font-size: clamp(1.5rem, 6vw, 2rem);
+          font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+          margin-bottom: 10px;
+        }
+        h3 {
+          font-size: 0.95rem;
+        }
+        p {
+          font-size: 0.95rem;
         }
 
-        /* Capa: título maior no mobile */
-        #s1 h1 {
-          font-size: clamp(2.4rem, 11vw, 3.8rem);
+        /* Capa */
+        #s1 .sl-content h1 {
+          font-size: clamp(2.2rem, 10vw, 3.2rem) !important;
         }
 
-        /* Tags em coluna */
+        /* Tags */
         .tag {
-          font-size: 0.88rem;
-          padding: 4px 10px;
+          font-size: 0.84rem;
+          padding: 3px 9px;
         }
 
-        /* Grid 2 e 3 col viram 1 coluna */
-        .grid-2,
+        /* Grid 2 colunas → 1 coluna */
+        .grid-2 {
+          grid-template-columns: 1fr !important;
+          gap: 10px;
+        }
+
+        /* Grid 3 colunas → 1 coluna */
         .grid-3 {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr !important;
           gap: 10px;
         }
 
         /* Mitos: 1 coluna */
         .myth-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr !important;
+          gap: 7px;
+        }
+        .myth-item {
+          font-size: 0.9rem;
         }
 
-        /* Speaker empilhado */
+        /* Speaker: foto em cima, info embaixo */
         .speaker {
           flex-direction: column;
           align-items: center;
           text-align: center;
+          gap: 14px;
         }
         .speaker-photo {
           width: 80px;
           height: 80px;
         }
+        .speaker-info h3 {
+          font-size: 1.1rem;
+        }
+        .badge {
+          font-size: 0.78rem;
+        }
 
         /* Preço: 1 coluna */
         .price-wrapper {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr !important;
+          gap: 10px;
         }
         .price-box .price {
-          font-size: clamp(2.2rem, 10vw, 3rem);
+          font-size: clamp(2rem, 9vw, 2.8rem);
+        }
+        .price-box ul li {
+          font-size: 0.88rem;
         }
 
-        /* Tabela de tempo — scroll horizontal */
+        /* Tabela: scroll horizontal + cabeçalhos com padding */
         table {
-          font-size: 0.85rem;
+          font-size: 0.82rem;
           display: block;
           overflow-x: auto;
           -webkit-overflow-scrolling: touch;
+          white-space: nowrap;
+        }
+        thead th {
+          padding: 6px 10px;
+          white-space: nowrap;
+        }
+        tbody td {
+          padding: 6px 10px;
+          white-space: nowrap;
         }
 
         /* Slide final */
         .slide-final h1 {
-          font-size: clamp(1.8rem, 7vw, 2.6rem);
+          font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important;
         }
         .slide-final .site {
-          font-size: 1.1rem;
+          font-size: 1rem;
+        }
+        .slide-final .info {
+          font-size: 0.88rem;
         }
 
         /* Nav compacta */
         .nav {
-          gap: 8px;
+          gap: 6px;
           flex-wrap: wrap;
           justify-content: center;
-          padding: 6px 0;
+          padding: 8px 0;
+          margin-top: 8px;
         }
         .nav-btn, .fs-btn {
           width: 30px;
           height: 30px;
         }
+        .counter {
+          font-size: 0.72rem;
+          min-width: 30px;
+        }
 
         /* Botão CTA */
         .btn {
-          font-size: 1rem;
-          padding: 10px 20px;
+          font-size: 0.95rem;
+          padding: 10px 18px;
+        }
+
+        /* Blockquote não cortado */
+        blockquote {
+          font-size: 0.88rem;
+          overflow: visible;
+          white-space: normal;
+        }
+
+        /* Cards */
+        .card {
+          padding: 14px 12px;
+        }
+        .info-card {
+          padding: 9px 12px;
         }
       }
 
       /* TABLET (641px - 900px) */
       @media (min-width: 641px) and (max-width: 900px) {
         .slide {
-          width: 98vw;
+          width: 99vw;
+          height: auto;
+          min-height: calc(100vh - 70px);
+          max-height: none;
         }
         .sl-split {
           flex-direction: column !important;
         }
-        .sl-img-panel {
-          max-height: 240px;
-          flex: none;
-        }
         .sl-split .sl-content {
           border-right: none;
           border-bottom: 1px solid var(--border);
+          order: 2;
         }
-        .grid-3 {
+        .sl-img-panel {
+          max-height: 260px;
+          flex: none;
+          order: 1;
+        }
+        .grid-2 {
           grid-template-columns: 1fr 1fr;
         }
+        .grid-3 {
+          grid-template-columns: 1fr 1fr !important;
+          gap: 10px;
+        }
         .myth-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr 1fr;
         }
         .price-wrapper {
-          grid-template-columns: 1fr;
+          grid-template-columns: 1fr !important;
+        }
+        h1 {
+          font-size: clamp(1.8rem, 4vw, 2.8rem);
         }
       }
     </style>
