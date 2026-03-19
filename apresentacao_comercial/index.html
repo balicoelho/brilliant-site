@@ -565,11 +565,27 @@
       :fullscreen #pres,
       :-webkit-full-screen #pres {
         background: var(--bg);
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+      }
+      :fullscreen #slide-area,
+      :-webkit-full-screen #slide-area {
+        flex: 1;
+        overflow: hidden;
       }
       :fullscreen .slide,
       :-webkit-full-screen .slide {
-        height: calc(100vh - 70px);
-        max-height: calc(100vh - 70px);
+        height: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+      }
+      :fullscreen .nav,
+      :-webkit-full-screen .nav {
+        flex-shrink: 0;
+        position: static;
+        background: rgba(13,17,23,0.95);
+        border-top: 1px solid var(--border);
       }
 
 
@@ -798,6 +814,81 @@
         #s8 .sl-content { order: 2; border-right: none !important; border-bottom: 1px solid var(--border); }
       }
 
+
+      /* ============================================
+         LANDSCAPE MOBILE (altura < 500px)
+         — ex: celular na horizontal
+         ============================================ */
+      @media (max-height: 500px) and (orientation: landscape) {
+        /* Nav mais compacta */
+        .nav {
+          height: 40px !important;
+          padding: 0 8px !important;
+          gap: 6px !important;
+        }
+        .nav-btn, .fs-btn {
+          width: 28px !important;
+          height: 28px !important;
+        }
+        .dots { gap: 3px; }
+        .dot { width: 4px; height: 4px; }
+        .dot.active { width: 10px; }
+
+        /* Slide ocupa o restante */
+        .slide {
+          height: calc(100dvh - 40px) !important;
+          max-height: calc(100dvh - 40px) !important;
+          overflow-y: auto;
+          overflow-x: hidden;
+        }
+
+        /* Tipografia menor */
+        h1 { font-size: clamp(1.2rem, 5vw, 1.8rem) !important; }
+        h2 { font-size: clamp(1rem, 4vw, 1.4rem) !important; margin-bottom: 6px; }
+        h3 { font-size: 0.85rem; }
+        p  { font-size: 0.82rem; line-height: 1.4; }
+        #s1 .sl-content h1 { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
+
+        .sl-content { padding: 10px 14px 8px; }
+        .tag { font-size: 0.75rem; padding: 2px 7px; }
+
+        /* Split: lado a lado no landscape */
+        .sl-split {
+          flex-direction: row !important;
+          height: 100%;
+          overflow: hidden;
+        }
+        .sl-split .sl-content {
+          border-right: 1px solid var(--border) !important;
+          border-bottom: none !important;
+          order: 0 !important;
+          flex: 1;
+          overflow-y: auto;
+        }
+        .sl-img-panel {
+          flex: 0 0 35%;
+          max-height: none !important;
+          order: 0 !important;
+        }
+
+        /* Grids 2 col no landscape */
+        .grid-2 { grid-template-columns: 1fr 1fr !important; gap: 6px; }
+        .grid-3 { grid-template-columns: 1fr 1fr !important; gap: 6px; }
+        .myth-grid { grid-template-columns: 1fr 1fr !important; gap: 5px; }
+        .inline-grid-2 { grid-template-columns: 1fr 1fr !important; }
+        .inline-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 5px !important; }
+
+        /* Speaker lado a lado no landscape */
+        .speaker { flex-direction: row; text-align: left; gap: 10px; }
+        .speaker-photo { width: 56px; height: 56px; }
+
+        .price-wrapper { grid-template-columns: 1fr 1fr !important; }
+        .price-box .price { font-size: 1.8rem; }
+
+        .btn { font-size: 0.85rem; padding: 8px 16px; margin-top: 8px; }
+        blockquote { font-size: 0.8rem; }
+        .card { padding: 8px; }
+      }
     </style>
   </head>
   <body>
@@ -3384,8 +3475,16 @@
         }, {passive: true});
       })();
 
-      document.addEventListener("fullscreenchange", updateFSIcon);
-      document.addEventListener("webkitfullscreenchange", updateFSIcon);
+      document.addEventListener("fullscreenchange", function() {
+        updateFSIcon();
+        // Após entrar/sair de fullscreen, fixMobileGrids e scroll reset
+        setTimeout(function() {
+          if (typeof fixMobileGrids === 'function') fixMobileGrids();
+          var activeSlide = document.querySelector('.slide.active');
+          if (activeSlide) activeSlide.scrollTop = 0;
+        }, 100);
+      });
+      document.addEventListener("webkitfullscreenchange", function() { updateFSIcon(); setTimeout(function(){ if(typeof fixMobileGrids==="function") fixMobileGrids(); }, 100); });
       function updateFSIcon() {
         const icon = document.getElementById("fsIcon");
         if (document.fullscreenElement || document.webkitFullscreenElement) {
