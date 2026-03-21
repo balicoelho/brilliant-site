@@ -26,574 +26,24 @@
         --text: #e6edf3;
         --muted: #9ba3af;
         --border: rgba(255, 255, 255, 0.09);
+        --nav-h: 48px;
       }
 
-      html,
-      body {
+      html, body {
         background: var(--bg);
         color: var(--text);
         font-family: "Outfit", system-ui, sans-serif;
-        width: 100vw;
-        height: 100vh;
+        width: 100%; height: 100%;
         overflow: hidden;
         overscroll-behavior: none;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
       }
 
-      /* ── PRESENTATION ── */
-      #pres {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
+      /* ============================
+         MOBILE PORTRAIT BASE
+         ============================ */
 
-      /* ── SLIDE wrapper ── */
-      .slide {
-        display: none;
-        width: min(960px, 95vw);
-        /* altura: viewport - nav(54px) - gap(16px) */
-        height: calc(100vh - 70px);
-        max-height: calc(100vh - 70px);
-        background: linear-gradient(135deg, #0d1117 0%, #18243a 100%);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-        animation: fi 0.3s ease;
-        position: relative;
-      }
-      .slide.active {
-        display: flex;
-        flex-direction: column;
-      }
-      @keyframes fi {
-        from {
-          opacity: 0;
-          transform: translateY(6px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* glows */
-      .slide::before {
-        content: "";
-        position: absolute;
-        top: -80px;
-        right: -80px;
-        width: 240px;
-        height: 240px;
-        background: radial-gradient(
-          circle,
-          rgba(124, 58, 237, 0.18) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-        z-index: 0;
-      }
-      .slide::after {
-        content: "";
-        position: absolute;
-        bottom: -60px;
-        left: -60px;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(
-          circle,
-          rgba(0, 229, 200, 0.08) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      /* ── CONTENT AREA ── */
-      .sl-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: clamp(20px, 3vh, 40px) clamp(24px, 4vw, 52px);
-        position: relative;
-        z-index: 1;
-        overflow: hidden; /* no scroll ever */
-      }
-
-      /* split layout (slides 1 e 2) */
-      .sl-split {
-        flex-direction: row !important;
-      }
-      .sl-split .sl-content {
-        flex: 1;
-        border-right: 1px solid var(--border);
-      }
-      .sl-img-panel {
-        flex: 1;
-        overflow: hidden;
-        position: relative;
-      }
-      .sl-img-panel img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.9;
-      }
-      .sl-img-panel::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to right,
-          rgba(13, 17, 23, 0.4) 0%,
-          transparent 60%
-        );
-      }
-
-      /* ── LOGO ── */
-      .logo {
-        font-family: "Outfit", sans-serif;
-        font-size: clamp(1.17rem, 1.82vw, 1.56rem);
-        font-weight: 700;
-        letter-spacing: 1px;
-        color: var(--text);
-        margin-bottom: clamp(10px, 1.5vh, 18px);
-      }
-      .logo span {
-        color: var(--cyan);
-      }
-
-      /* ── TYPOGRAPHY ── scales with vw/vh ── */
-      h1 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(2.34rem, 4.55vw, 3.9rem);
-        letter-spacing: 0.04em;
-        line-height: 1.05;
-      }
-      h2 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(1.69rem, 3.25vw, 2.73rem);
-        letter-spacing: 0.04em;
-        margin-bottom: clamp(8px, 1.2vh, 16px);
-      }
-      h3 {
-        font-size: clamp(1.01rem, 1.23vw, 1.2rem);
-        font-weight: 700;
-        color: var(--cyan);
-        margin-bottom: 3px;
-      }
-      p {
-        font-size: clamp(1.01rem, 1.17vw, 1.17rem);
-        line-height: 1.6;
-        color: var(--muted);
-      }
-      .accent {
-        color: var(--cyan);
-      }
-      .divider {
-        width: 44px;
-        height: 3px;
-        background: var(--cyan);
-        border-radius: 2px;
-        margin: clamp(8px, 1vh, 14px) 0;
-      }
-      blockquote {
-        border-left: 3px solid var(--cyan);
-        padding-left: 11px;
-        color: var(--muted);
-        font-style: italic;
-        font-size: clamp(0.98rem, 1.1vw, 1.12rem);
-        margin-top: clamp(8px, 1vh, 14px);
-      }
-
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        background: rgba(0, 229, 200, 0.1);
-        color: var(--cyan);
-        border: 1px solid rgba(0, 229, 200, 0.26);
-        border-radius: 999px;
-        padding: 3px 10px;
-        font-size: clamp(0.88rem, 1.04vw, 0.99rem);
-        font-weight: 600;
-        margin: 0 3px 5px 0;
-      }
-      .tag svg {
-        width: 11px;
-        height: 11px;
-        flex-shrink: 0;
-      }
-
-      /* ── GRIDS ── */
-      .grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(8px, 1vh, 12px);
-        margin-top: clamp(6px, 1vh, 12px);
-      }
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: clamp(7px, 0.9vh, 11px);
-        margin-top: clamp(6px, 1vh, 12px);
-      }
-      .card {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        border-radius: 11px;
-        padding: clamp(10px, 1.3vh, 15px) clamp(10px, 1.2vw, 14px);
-      }
-      .card svg {
-        width: clamp(20px, 1.8vw, 26px);
-        height: clamp(20px, 1.8vw, 26px);
-        margin-bottom: 6px;
-      }
-      .card h3 {
-        font-size: clamp(0.95rem, 1.1vw, 1.13rem);
-      }
-      .card p {
-        font-size: clamp(0.88rem, 1.01vw, 1.01rem);
-        margin-top: 3px;
-      }
-
-      /* ── MITOS ── */
-      .myth-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(6px, 0.8vh, 9px);
-        margin-top: clamp(6px, 1vh, 12px);
-      }
-      .myth-item {
-        border: 1px solid var(--border);
-        border-radius: 9px;
-        padding: clamp(8px, 1vh, 11px) 12px;
-        font-size: clamp(0.94rem, 1.08vw, 1.08rem);
-        display: flex;
-        align-items: center;
-        gap: 7px;
-      }
-      .myth-item svg {
-        width: 14px;
-        height: 14px;
-        flex-shrink: 0;
-      }
-      .myth-item.myth {
-        color: var(--muted);
-        text-decoration: line-through;
-        opacity: 0.48;
-        background: rgba(255, 255, 255, 0.02);
-      }
-      .myth-item.truth {
-        color: var(--cyan);
-        border-color: rgba(0, 229, 200, 0.2);
-        background: rgba(0, 229, 200, 0.04);
-      }
-
-      /* ── TABLE ── */
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: clamp(8px, 1vh, 12px);
-        font-size: clamp(0.96rem, 1.1vw, 1.1rem);
-      }
-      thead th {
-        background: rgba(0, 229, 200, 0.09);
-        color: var(--cyan);
-        padding: clamp(6px, 0.8vh, 9px) 11px;
-        text-align: left;
-        font-weight: 600;
-      }
-      tbody tr:nth-child(even) td {
-        background: rgba(255, 255, 255, 0.022);
-      }
-      tbody td {
-        padding: clamp(6px, 0.8vh, 9px) 11px;
-        border-bottom: 1px solid var(--border);
-      }
-      .saving {
-        color: var(--cyan);
-        font-weight: 700;
-      }
-
-      /* ── SPEAKER ── */
-      .speaker {
-        display: flex;
-        gap: clamp(16px, 2vw, 24px);
-        align-items: flex-start;
-        margin-top: clamp(6px, 1vh, 10px);
-      }
-      .speaker-photo {
-        width: clamp(70px, 8vw, 100px);
-        height: clamp(70px, 8vw, 100px);
-        border-radius: 50%;
-        object-fit: cover;
-        border: 3px solid var(--cyan);
-        flex-shrink: 0;
-      }
-      .speaker-info h3 {
-        font-size: clamp(1.3rem, 1.69vw, 1.49rem);
-        color: var(--text);
-        margin-bottom: 2px;
-      }
-      .role {
-        color: var(--cyan);
-        font-size: clamp(0.91rem, 1.04vw, 1.01rem);
-        font-weight: 600;
-        margin-bottom: 7px;
-        display: block;
-      }
-      .badge {
-        display: inline-block;
-        background: rgba(124, 58, 237, 0.17);
-        color: #c4b5fd;
-        border: 1px solid rgba(124, 58, 237, 0.26);
-        border-radius: 6px;
-        padding: 2px 7px;
-        font-size: clamp(0.85rem, 0.98vw, 0.91rem);
-        font-weight: 600;
-        margin-right: 4px;
-        margin-top: 5px;
-      }
-
-      /* ── PRICING ── */
-      .price-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(10px, 1.2vw, 16px);
-        margin-top: clamp(6px, 1vh, 10px);
-      }
-      .price-box {
-        background: linear-gradient(135deg, var(--purple2), var(--purple));
-        border-radius: 13px;
-        padding: clamp(14px, 1.8vh, 20px) clamp(14px, 1.6vw, 22px);
-      }
-      .price-box .plabel {
-        font-size: clamp(0.81rem, 0.94vw, 0.91rem);
-        color: rgba(255, 255, 255, 0.6);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 2px;
-      }
-      .price-box .price {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(2.6rem, 3.9vw, 3.64rem);
-        color: #fff;
-        line-height: 1;
-      }
-      .price-box .install {
-        font-size: clamp(0.88rem, 0.99vw, 0.98rem);
-        color: rgba(255, 255, 255, 0.55);
-        margin: 2px 0 10px;
-      }
-      .price-box ul {
-        list-style: none;
-      }
-      .price-box ul li {
-        color: rgba(255, 255, 255, 0.8);
-        font-size: clamp(0.91rem, 1.04vw, 1.01rem);
-        padding: 2px 0;
-        display: flex;
-        align-items: center;
-        gap: 4px;
-      }
-      .price-box ul li svg {
-        width: 10px;
-        height: 10px;
-        flex-shrink: 0;
-      }
-      .price-info {
-        display: flex;
-        flex-direction: column;
-        gap: clamp(6px, 0.8vh, 9px);
-      }
-      .info-card {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid var(--border);
-        border-radius: 9px;
-        padding: clamp(7px, 0.9vh, 10px) 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .info-card svg {
-        width: 18px;
-        height: 18px;
-        flex-shrink: 0;
-        color: var(--cyan);
-      }
-      .info-card h3 {
-        font-size: clamp(0.99rem, 1.14vw, 1.07rem);
-        color: var(--text);
-        margin-bottom: 1px;
-      }
-      .info-card p {
-        font-size: clamp(0.88rem, 0.99vw, 0.96rem);
-        margin: 0;
-      }
-
-      /* ── CTA ── */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        background: var(--cyan);
-        color: #0d1117;
-        font-weight: 700;
-        font-size: clamp(1.07rem, 1.23vw, 1.17rem);
-        padding: 10px 24px;
-        border-radius: 999px;
-        text-decoration: none;
-        margin-top: clamp(10px, 1.3vh, 16px);
-        transition: opacity 0.2s;
-      }
-      .btn:hover {
-        opacity: 0.85;
-      }
-      .btn svg {
-        width: 14px;
-        height: 14px;
-      }
-
-      /* ── FINAL ── */
-      .slide-final .sl-content {
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-      .slide-final h1 {
-        font-size: clamp(2.08rem, 3.9vw, 3.38rem);
-      }
-      .slide-final .site {
-        font-size: clamp(1.23rem, 1.56vw, 1.43rem);
-        color: var(--cyan);
-        font-weight: 700;
-        margin: 7px 0;
-      }
-      .slide-final .info {
-        color: var(--muted);
-        font-size: clamp(0.98rem, 1.1vw, 1.07rem);
-        margin-top: 2px;
-      }
-      .hero-icon svg {
-        width: clamp(38px, 4vw, 48px);
-        height: clamp(38px, 4vw, 48px);
-        margin-bottom: 10px;
-      }
-
-      /* ── NAV ── */
-      .nav {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-top: 10px;
-        flex-shrink: 0;
-      }
-      .nav-btn {
-        background: rgba(255, 255, 255, 0.07);
-        border: 1px solid var(--border);
-        color: var(--text);
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background 0.2s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .nav-btn:hover {
-        background: rgba(255, 255, 255, 0.13);
-      }
-      .nav-btn:disabled {
-        opacity: 0.2;
-        cursor: default;
-      }
-      .counter {
-        color: var(--muted);
-        font-size: 0.78rem;
-        min-width: 36px;
-        text-align: center;
-      }
-      .dots {
-        display: flex;
-        gap: 4px;
-      }
-      .dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--border);
-        transition:
-          background 0.2s,
-          width 0.2s;
-        cursor: pointer;
-      }
-      .dot.active {
-        background: var(--cyan);
-        width: 13px;
-        border-radius: 3px;
-      }
-      .fs-btn {
-        background: rgba(255, 255, 255, 0.07);
-        border: 1px solid var(--border);
-        color: var(--muted);
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition:
-          color 0.2s,
-          background 0.2s;
-      }
-      .fs-btn:hover {
-        background: rgba(255, 255, 255, 0.13);
-        color: var(--cyan);
-      }
-      .fs-btn svg {
-        width: 15px;
-        height: 15px;
-      }
-
-      /* fullscreen */
-      :fullscreen #pres,
-      :-webkit-full-screen #pres {
-        background: var(--bg);
-        height: 100svh;
-        display: flex;
-        flex-direction: column;
-      }
-      :fullscreen #slide-area,
-      :-webkit-full-screen #slide-area {
-        flex: 1;
-        overflow: hidden;
-      }
-      :fullscreen .slide,
-      :-webkit-full-screen .slide {
-        height: 100%;
-        max-height: 100%;
-        overflow-y: auto;
-      }
-      :fullscreen .nav,
-      :-webkit-full-screen .nav {
-        flex-shrink: 0;
-        position: static;
-        background: rgba(13,17,23,0.95);
-        border-top: 1px solid var(--border);
-      }
-
-
-      /* ============================================
-         MOBILE-FIRST: BASE (todos os tamanhos)
-         ============================================ */
-
-      /* Layout base: slide + nav separados, nunca sobrepostos */
       #pres {
         display: flex;
         flex-direction: column;
@@ -602,185 +52,567 @@
         overflow: hidden;
       }
 
-      /* Container do slide (área principal) */
+      /* -- Slide area -- */
       #slide-area {
         flex: 1;
+        min-height: 0;
         overflow: hidden;
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        touch-action: pan-y;
+        touch-action: pan-y pinch-zoom;
       }
 
-      /* Slide ocupa toda a área disponível */
+      .slide-track {
+        display: flex;
+        width: 100%; height: 100%;
+        will-change: transform;
+        transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .slide-track.dragging { transition: none; }
+
+      /* -- Slide -- */
       .slide {
-        width: 100%;
-        height: 100%;
-        max-height: 100%;
-        border-radius: 0;
+        flex: 0 0 100%;
+        width: 100%; height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #0d1117 0%, #18243a 100%);
         overflow-y: auto;
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
-        flex-shrink: 0;
-        border-left: none;
-        border-right: none;
-        border-top: none;
-        border-bottom: none;
+        position: relative;
       }
 
-      /* Nav: sempre na base, nunca sobre o slide */
-      .nav {
-        flex-shrink: 0;
-        height: 54px;
-        background: rgba(13, 17, 23, 0.98);
-        border-top: 1px solid var(--border);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 0 12px;
-        position: static;
-        z-index: 10;
+      /* glows */
+      .slide::before {
+        content: ""; position: absolute; top: -80px; right: -80px;
+        width: 240px; height: 240px;
+        background: radial-gradient(circle, rgba(124,58,237,0.18) 0%, transparent 70%);
+        pointer-events: none; z-index: 0;
       }
-      .nav-btn, .fs-btn {
-        width: 30px;
-        height: 30px;
-      }
-      .counter {
-        font-size: 0.78rem;
-        min-width: 36px;
-        text-align: center;
-        color: var(--muted);
+      .slide::after {
+        content: ""; position: absolute; bottom: -60px; left: -60px;
+        width: 200px; height: 200px;
+        background: radial-gradient(circle, rgba(0,229,200,0.08) 0%, transparent 70%);
+        pointer-events: none; z-index: 0;
       }
 
+      /* -- Content -- */
       .sl-content {
-        padding: 18px 16px 16px;
-        overflow: visible;
-        flex: none;
+        padding: 16px 16px 20px;
+        position: relative; z-index: 1;
       }
 
-      /* Split vira coluna no mobile */
-      .sl-split {
-        flex-direction: column !important;
-      }
+      /* -- Split layout (mobile: stack) -- */
+      .sl-split { flex-direction: column !important; }
       .sl-split .sl-content {
         border-right: none;
         border-bottom: 1px solid var(--border);
         order: 2;
-        flex: none;
       }
       .sl-img-panel {
-        max-height: 180px;
-        min-height: 130px;
-        flex: none;
-        order: 1;
+        max-height: 180px; min-height: 120px;
+        flex: none; order: 1;
+        overflow: hidden; position: relative;
+      }
+      .sl-img-panel img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; }
+      .sl-img-panel::after {
+        content: ""; position: absolute; inset: 0;
+        background: linear-gradient(to right, rgba(13,17,23,0.4) 0%, transparent 60%);
       }
 
-      /* Tipografia mobile */
-      h1 { font-size: clamp(1.7rem, 7vw, 2.4rem) !important; line-height: 1.1; }
-      h2 { font-size: clamp(1.3rem, 5.5vw, 1.8rem); margin-bottom: 10px; }
-      h3 { font-size: 0.95rem; }
-      p  { font-size: 0.95rem; }
+      /* -- Logo -- */
+      .logo {
+        font-family: "Outfit", sans-serif;
+        font-size: 1.2rem; font-weight: 700;
+        letter-spacing: 1px; color: var(--text);
+        margin-bottom: 8px;
+      }
+      .logo span { color: var(--cyan); }
+
+      /* -- Typography (portrait mobile) -- */
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(1.7rem, 7vw, 2.4rem);
+        letter-spacing: 0.04em; line-height: 1.1;
+      }
+      h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(1.3rem, 5.5vw, 1.8rem);
+        letter-spacing: 0.04em; margin-bottom: 8px;
+      }
+      h3 { font-size: 0.92rem; font-weight: 700; color: var(--cyan); margin-bottom: 3px; }
+      p  { font-size: 0.92rem; line-height: 1.55; color: var(--muted); }
+
       #s1 .sl-content h1 { font-size: clamp(2.2rem, 10vw, 3.2rem) !important; }
-      .tag { font-size: 0.84rem; padding: 3px 9px; }
 
-      /* Grids → 1 coluna mobile */
-      .grid-2, .grid-3 { grid-template-columns: 1fr !important; gap: 10px; }
-      .myth-grid { grid-template-columns: 1fr !important; gap: 7px; }
-      .myth-item { font-size: 0.9rem; }
+      .accent { color: var(--cyan); }
+      .divider { width: 44px; height: 3px; background: var(--cyan); border-radius: 2px; margin: 8px 0; }
 
-      /* Speaker mobile */
-      .speaker { flex-direction: column; align-items: center; text-align: center; gap: 12px; }
-      .speaker-photo { width: 72px; height: 72px; }
-      .speaker-info h3 { font-size: 1.05rem; }
-      .badge { font-size: 0.78rem; }
+      blockquote {
+        border-left: 3px solid var(--cyan);
+        padding-left: 10px; color: var(--muted);
+        font-style: italic; font-size: 0.85rem;
+        margin-top: 8px;
+      }
 
-      /* Preço mobile */
-      .price-wrapper { grid-template-columns: 1fr !important; gap: 10px; }
-      .price-box .price { font-size: clamp(2rem, 9vw, 2.8rem); }
-      .price-box ul li { font-size: 0.88rem; }
+      .tag {
+        display: inline-flex; align-items: center; gap: 4px;
+        background: rgba(0,229,200,0.1); color: var(--cyan);
+        border: 1px solid rgba(0,229,200,0.26);
+        border-radius: 999px; padding: 3px 9px;
+        font-size: 0.82rem; font-weight: 600;
+        margin: 0 3px 5px 0;
+      }
+      .tag svg { width: 11px; height: 11px; flex-shrink: 0; }
 
-      /* Tabela mobile: scroll horizontal */
-      table { font-size: 0.82rem; display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
-      thead th { padding: 6px 10px; white-space: nowrap; }
-      tbody td { padding: 6px 10px; white-space: nowrap; }
+      /* -- Grids (portrait: 1 col) -- */
+      .grid-2, .grid-3 {
+        display: grid; grid-template-columns: 1fr;
+        gap: 8px; margin-top: 8px;
+      }
+      .card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--border);
+        border-radius: 10px; padding: 10px;
+      }
+      .card svg { width: 22px; height: 22px; margin-bottom: 4px; }
+      .card h3 { font-size: 0.9rem; }
+      .card p  { font-size: 0.85rem; margin-top: 2px; }
 
+      /* -- Myths -- */
+      .myth-grid {
+        display: grid; grid-template-columns: 1fr;
+        gap: 6px; margin-top: 8px;
+      }
+      .myth-item {
+        border: 1px solid var(--border); border-radius: 8px;
+        padding: 8px 10px; font-size: 0.88rem;
+        display: flex; align-items: center; gap: 6px;
+      }
+      .myth-item svg { width: 14px; height: 14px; flex-shrink: 0; }
+      .myth-item.myth {
+        color: var(--muted); text-decoration: line-through;
+        opacity: 0.48; background: rgba(255,255,255,0.02);
+      }
+      .myth-item.truth {
+        color: var(--cyan);
+        border-color: rgba(0,229,200,0.2);
+        background: rgba(0,229,200,0.04);
+      }
+
+      /* -- Table -- */
+      table {
+        width: 100%; border-collapse: collapse;
+        margin-top: 8px; font-size: 0.8rem;
+        display: block; overflow-x: auto;
+        -webkit-overflow-scrolling: touch; white-space: nowrap;
+      }
+      thead th {
+        background: rgba(0,229,200,0.09); color: var(--cyan);
+        padding: 5px 8px; text-align: left; font-weight: 600;
+      }
+      tbody tr:nth-child(even) td { background: rgba(255,255,255,0.022); }
+      tbody td { padding: 5px 8px; border-bottom: 1px solid var(--border); }
+      .saving { color: var(--cyan); font-weight: 700; }
+
+      /* -- Speaker -- */
+      .speaker {
+        display: flex; flex-direction: column;
+        align-items: center; text-align: center;
+        gap: 10px; margin-top: 8px;
+      }
+      .speaker-photo {
+        width: 68px; height: 68px; border-radius: 50%;
+        object-fit: cover; border: 3px solid var(--cyan); flex-shrink: 0;
+      }
+      .speaker-info h3 { font-size: 1rem; color: var(--text); margin-bottom: 2px; }
+      .role { color: var(--cyan); font-size: 0.88rem; font-weight: 600; margin-bottom: 5px; display: block; }
+      .badge {
+        display: inline-block; background: rgba(124,58,237,0.17);
+        color: #c4b5fd; border: 1px solid rgba(124,58,237,0.26);
+        border-radius: 6px; padding: 2px 6px; font-size: 0.75rem;
+        font-weight: 600; margin-right: 3px; margin-top: 4px;
+      }
+
+      /* -- Pricing -- */
+      .price-wrapper {
+        display: grid; grid-template-columns: 1fr;
+        gap: 10px; margin-top: 8px;
+      }
+      .price-box {
+        background: linear-gradient(135deg, var(--purple2), var(--purple));
+        border-radius: 12px; padding: 14px;
+      }
+      .price-box .plabel {
+        font-size: 0.78rem; color: rgba(255,255,255,0.6);
+        letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px;
+      }
+      .price-box .price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2rem, 9vw, 2.8rem); color: #fff; line-height: 1;
+      }
+      .price-box .install {
+        font-size: 0.85rem; color: rgba(255,255,255,0.55); margin: 2px 0 8px;
+      }
+      .price-box ul { list-style: none; }
+      .price-box ul li {
+        color: rgba(255,255,255,0.8); font-size: 0.85rem;
+        padding: 2px 0; display: flex; align-items: center; gap: 4px;
+      }
+      .price-box ul li svg { width: 10px; height: 10px; flex-shrink: 0; }
+
+      .price-info { display: flex; flex-direction: column; gap: 6px; }
+      .info-card {
+        background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+        border-radius: 8px; padding: 8px 10px;
+        display: flex; align-items: center; gap: 8px;
+      }
+      .info-card svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--cyan); }
+      .info-card h3 { font-size: 0.9rem; color: var(--text); margin-bottom: 1px; }
+      .info-card p  { font-size: 0.82rem; margin: 0; }
+
+      /* -- CTA -- */
+      .btn {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: var(--cyan); color: #0d1117;
+        font-weight: 700; font-size: 0.92rem;
+        padding: 9px 18px; border-radius: 999px;
+        text-decoration: none; margin-top: 10px;
+        transition: opacity 0.2s;
+      }
+      .btn:hover { opacity: 0.85; }
+      .btn svg { width: 14px; height: 14px; }
+
+      /* -- Final slide -- */
+      .slide-final .sl-content {
+        align-items: center; justify-content: center; text-align: center;
+      }
       .slide-final h1 { font-size: clamp(1.6rem, 6.5vw, 2.4rem) !important; }
-      .slide-final .site { font-size: 1rem; }
-      .slide-final .info { font-size: 0.88rem; }
-      .btn { font-size: 0.95rem; padding: 10px 18px; }
-      blockquote { font-size: 0.88rem; overflow: visible; white-space: normal; }
-      .card { padding: 12px 10px; }
-      .info-card { padding: 8px 12px; }
+      .slide-final .site { font-size: 1rem; color: var(--cyan); font-weight: 700; margin: 6px 0; }
+      .slide-final .info { color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+      .hero-icon svg { width: 38px; height: 38px; margin-bottom: 8px; }
 
-      /* ============================================
-         DESKTOP (min-width: 641px) — override para telas grandes
-         ============================================ */
-      @media (min-width: 641px) {
+      /* -- Nav -- */
+      .nav {
+        flex-shrink: 0; height: var(--nav-h);
+        background: rgba(13,17,23,0.98);
+        border-top: 1px solid var(--border);
+        display: flex; align-items: center; justify-content: center;
+        gap: 8px; padding: 0 12px;
+        z-index: 10;
+      }
+      .nav-btn {
+        background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+        color: var(--text); width: 30px; height: 30px;
+        border-radius: 50%; cursor: pointer;
+        transition: background 0.2s;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .nav-btn:hover { background: rgba(255,255,255,0.13); }
+      .nav-btn:disabled { opacity: 0.2; cursor: default; }
+      .counter { color: var(--muted); font-size: 0.75rem; min-width: 34px; text-align: center; }
+      .dots { display: flex; gap: 4px; }
+      .dot {
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--border);
+        transition: background 0.2s, width 0.2s; cursor: pointer;
+      }
+      .dot.active { background: var(--cyan); width: 13px; border-radius: 3px; }
+      .fs-btn {
+        background: rgba(255,255,255,0.07); border: 1px solid var(--border);
+        color: var(--muted); width: 30px; height: 30px;
+        border-radius: 50%; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: color 0.2s, background 0.2s;
+      }
+      .fs-btn:hover { background: rgba(255,255,255,0.13); color: var(--cyan); }
+      .fs-btn svg { width: 15px; height: 15px; }
+
+      /* -- Swipe hint -- */
+      .swipe-hint {
+        position: absolute; bottom: 10px; left: 50%;
+        transform: translateX(-50%);
+        display: flex; align-items: center; gap: 6px;
+        color: var(--muted); font-size: 0.72rem;
+        opacity: 0; animation: swipeHintFade 3s ease 1.5s forwards;
+        pointer-events: none; z-index: 5;
+      }
+      .swipe-hint svg { width: 16px; height: 16px; animation: swipeHintSlide 1.5s ease-in-out infinite; }
+      @keyframes swipeHintFade {
+        0% { opacity: 0; } 15% { opacity: 0.7; } 85% { opacity: 0.7; } 100% { opacity: 0; }
+      }
+      @keyframes swipeHintSlide {
+        0%, 100% { transform: translateX(0); } 50% { transform: translateX(-8px); }
+      }
+
+      /* Inline grid fixes for mobile */
+      .inline-grid-2 { grid-template-columns: 1fr !important; }
+      .inline-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+      #s8.sl-split { flex-direction: column !important; }
+      #s8 .sl-img-panel { max-height: 160px; flex: none; order: 1; }
+      #s8 .sl-content { order: 2; border-right: none !important; border-bottom: 1px solid var(--border); }
+
+
+      /* ============================
+         LANDSCAPE MOBILE
+         Triggered when height is small
+         ============================ */
+      @media (max-height: 500px) {
+        :root { --nav-h: 36px; }
+
+        /* Nav ultra-compact */
+        .nav { gap: 5px; padding: 0 8px; }
+        .nav-btn, .fs-btn { width: 26px; height: 26px; }
+        .nav-btn svg, .fs-btn svg { width: 12px; height: 12px; }
+        .dots { gap: 3px; }
+        .dot { width: 4px; height: 4px; }
+        .dot.active { width: 10px; }
+        .counter { font-size: 0.68rem; min-width: 30px; }
+
+        /* Slide: scroll enabled, compact padding */
+        .slide { overflow-y: auto; }
+        .sl-content { padding: 8px 14px 12px; }
+
+        /* Typography: smaller for landscape */
+        .logo { font-size: 0.9rem; margin-bottom: 4px; }
+        h1 { font-size: clamp(1.1rem, 4vw, 1.6rem) !important; line-height: 1.08; }
+        h2 { font-size: clamp(0.95rem, 3.5vw, 1.3rem) !important; margin-bottom: 4px; }
+        h3 { font-size: 0.78rem; margin-bottom: 2px; }
+        p  { font-size: 0.75rem; line-height: 1.4; }
+        #s1 .sl-content h1 { font-size: clamp(1.4rem, 5.5vw, 2.2rem) !important; }
+        .tag { font-size: 0.68rem; padding: 2px 6px; margin-bottom: 3px; }
+        .divider { width: 30px; height: 2px; margin: 4px 0; }
+        blockquote { font-size: 0.72rem; padding-left: 8px; margin-top: 4px; }
+
+        /* Split: side by side in landscape */
+        .sl-split { flex-direction: row !important; }
+        .sl-split .sl-content {
+          border-right: 1px solid var(--border) !important;
+          border-bottom: none !important;
+          order: 0 !important; flex: 1;
+          overflow-y: auto;
+        }
+        .sl-img-panel {
+          flex: 0 0 30% !important;
+          max-height: none !important; min-height: 0 !important;
+          order: 0 !important;
+        }
+        #s8.sl-split { flex-direction: row !important; }
+        #s8 .sl-img-panel { max-height: none !important; flex: 0 0 30% !important; order: 0 !important; }
+        #s8 .sl-content { order: 0 !important; border-right: 1px solid var(--border) !important; border-bottom: none !important; }
+
+        /* Grids: 2 columns in landscape */
+        .grid-2 { grid-template-columns: 1fr 1fr !important; gap: 5px; margin-top: 5px; }
+        .grid-3 { grid-template-columns: 1fr 1fr 1fr !important; gap: 5px; margin-top: 5px; }
+        .myth-grid { grid-template-columns: 1fr 1fr !important; gap: 4px; margin-top: 5px; }
+        .inline-grid-2 { grid-template-columns: 1fr 1fr !important; }
+        .inline-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr !important; gap: 4px !important; }
+
+        .card { padding: 6px 8px; border-radius: 8px; }
+        .card svg { width: 16px; height: 16px; margin-bottom: 2px; }
+        .card h3 { font-size: 0.75rem; }
+        .card p  { font-size: 0.7rem; margin-top: 1px; }
+
+        .myth-item { padding: 5px 8px; font-size: 0.72rem; gap: 4px; }
+        .myth-item svg { width: 12px; height: 12px; }
+
+        /* Table: compact */
+        table { font-size: 0.72rem; margin-top: 5px; }
+        thead th { padding: 4px 6px; }
+        tbody td { padding: 4px 6px; }
+
+        /* Speaker: row layout */
+        .speaker { flex-direction: row; text-align: left; gap: 10px; margin-top: 5px; }
+        .speaker-photo { width: 48px; height: 48px; }
+        .speaker-info h3 { font-size: 0.85rem; }
+        .role { font-size: 0.75rem; margin-bottom: 3px; }
+        .badge { font-size: 0.65rem; padding: 1px 5px; }
+
+        /* Pricing: 2 cols */
+        .price-wrapper { grid-template-columns: 1fr 1fr !important; gap: 6px; margin-top: 5px; }
+        .price-box { padding: 8px 10px; border-radius: 10px; }
+        .price-box .plabel { font-size: 0.65rem; }
+        .price-box .price { font-size: clamp(1.4rem, 4vw, 1.8rem); }
+        .price-box .install { font-size: 0.7rem; margin: 1px 0 5px; }
+        .price-box ul li { font-size: 0.7rem; padding: 1px 0; }
+        .price-box ul li svg { width: 8px; height: 8px; }
+
+        .info-card { padding: 5px 8px; gap: 6px; }
+        .info-card svg { width: 14px; height: 14px; }
+        .info-card h3 { font-size: 0.78rem; }
+        .info-card p  { font-size: 0.7rem; }
+
+        .btn { font-size: 0.78rem; padding: 6px 14px; margin-top: 6px; }
+
+        .slide-final h1 { font-size: clamp(1.1rem, 4vw, 1.6rem) !important; }
+        .slide-final .site { font-size: 0.85rem; margin: 4px 0; }
+        .slide-final .info { font-size: 0.72rem; }
+        .hero-icon svg { width: 28px; height: 28px; margin-bottom: 5px; }
+
+        .swipe-hint { display: none; }
+      
+        /* Speaker slide (s8) landscape fix */
+        #s8 .sl-content {
+          display: flex !important;
+          flex-direction: row !important;
+          gap: 10px !important;
+          align-items: flex-start !important;
+          padding: 6px 12px 8px !important;
+          overflow-y: auto !important;
+        }
+        #s8 .speaker-photo-container {
+          width: 90px !important;
+          min-width: 90px !important;
+          max-width: 90px !important;
+          height: 110px !important;
+          flex-shrink: 0 !important;
+        }
+        #s8 .speaker-photo-container > div {
+          display: none !important;
+        }
+        #s8 .speaker-photo-container > img {
+          display: block !important;
+          width: 90px !important;
+          height: 110px !important;
+          object-fit: cover !important;
+          border-radius: 8px !important;
+          position: relative !important;
+          z-index: 1 !important;
+        }
+        #s8 .speaker-text-container {
+          flex: 1 !important;
+          min-width: 0 !important;
+        }
+        #s8 .speaker-text-container .logo {
+          font-size: 0.8rem !important;
+          margin-bottom: 2px !important;
+        }
+        #s8 .speaker-text-container h1 {
+          font-size: clamp(0.85rem, 3vw, 1.2rem) !important;
+          margin-bottom: 2px !important;
+        }
+        #s8 .speaker-text-container p {
+          font-size: 0.68rem !important;
+          line-height: 1.3 !important;
+          margin-bottom: 2px !important;
+        }
+        #s8 .speaker-text-container > div {
+          gap: 4px !important;
+        }
+        #s8 .speaker-text-container > div > div {
+          gap: 6px !important;
+        }
+        #s8 .speaker-text-container svg {
+          width: 10px !important;
+          height: 10px !important;
+        }
+
+      }
+
+      /* Extra compact for very short landscape (phones like iPhone SE landscape ~320px height) */
+      @media (max-height: 380px) {
+        .sl-content { padding: 6px 12px 10px; }
+        .logo { font-size: 0.82rem; margin-bottom: 3px; }
+        h1 { font-size: clamp(1rem, 3.5vw, 1.4rem) !important; }
+        h2 { font-size: clamp(0.88rem, 3vw, 1.15rem) !important; margin-bottom: 3px; }
+        h3 { font-size: 0.72rem; }
+        p  { font-size: 0.7rem; line-height: 1.35; }
+        #s1 .sl-content h1 { font-size: clamp(1.2rem, 5vw, 1.8rem) !important; }
+        .tag { font-size: 0.62rem; padding: 1px 5px; }
+
+        .card { padding: 5px 6px; }
+        .card h3 { font-size: 0.7rem; }
+        .card p  { font-size: 0.65rem; }
+        .myth-item { padding: 4px 6px; font-size: 0.68rem; }
+
+        .speaker-photo { width: 40px; height: 40px; }
+        .speaker-info h3 { font-size: 0.78rem; }
+        .badge { font-size: 0.6rem; }
+
+        .price-box .price { font-size: clamp(1.2rem, 3.5vw, 1.5rem); }
+        .price-box ul li { font-size: 0.65rem; }
+
+        table { font-size: 0.68rem; }
+        thead th { padding: 3px 5px; }
+        tbody td { padding: 3px 5px; }
+      }
+
+
+      /* ============================
+         DESKTOP (min-width: 641px AND height > 500px)
+         ============================ */
+      @media (min-width: 641px) and (min-height: 501px) {
+        :root { --nav-h: auto; }
+
         html, body { height: 100vh; overflow: hidden; }
-
         #pres { justify-content: center; }
 
         #slide-area {
-          flex: none;
-          height: auto;
+          flex: none; height: auto;
           overflow: visible;
+          display: flex; align-items: center; justify-content: center;
         }
+
+        .slide-track { display: flex; width: 100%; height: 100%; }
 
         .slide {
           width: min(960px, 95vw);
           height: calc(100vh - 70px);
           max-height: calc(100vh - 70px);
+          flex: 0 0 100%;
           overflow: hidden;
           border-radius: 18px;
           border: 1px solid var(--border);
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+          box-shadow: 0 20px 60px rgba(0,0,0,0.55);
         }
 
         .nav {
-          background: transparent;
-          border-top: none;
-          height: auto;
-          gap: 12px;
-          padding: 0;
-          margin-top: 10px;
-          position: static;
+          background: transparent; border-top: none;
+          height: auto; gap: 12px; padding: 0; margin-top: 10px;
         }
         .nav-btn, .fs-btn { width: 34px; height: 34px; }
 
         .sl-content {
           padding: clamp(20px, 3vh, 40px) clamp(24px, 4vw, 52px);
-          overflow: hidden;
-          flex: 1;
+          overflow: hidden; flex: 1;
         }
 
-        /* Split restaurado no desktop */
+        /* Split restored */
         .sl-split { flex-direction: row !important; }
-        .sl-split .sl-content { border-right: 1px solid var(--border); border-bottom: none; order: 0; }
+        .sl-split .sl-content { border-right: 1px solid var(--border); border-bottom: none; order: 0; flex: 1; }
         .sl-img-panel { flex: 1; max-height: none; min-height: auto; order: 0; }
 
-        /* Tipografia desktop */
+        /* Typography desktop */
+        .logo { font-size: clamp(1.17rem, 1.82vw, 1.56rem); margin-bottom: clamp(10px, 1.5vh, 18px); }
         h1 { font-size: clamp(2.34rem, 4.55vw, 3.9rem) !important; }
-        h2 { font-size: clamp(1.69rem, 3.25vw, 2.73rem); }
+        h2 { font-size: clamp(1.69rem, 3.25vw, 2.73rem); margin-bottom: clamp(8px, 1.2vh, 16px); }
         h3 { font-size: clamp(1.01rem, 1.23vw, 1.2rem); }
         p  { font-size: clamp(1.01rem, 1.17vw, 1.17rem); }
         #s1 .sl-content h1 { font-size: clamp(3rem, 7vw, 6rem) !important; }
         .tag { font-size: clamp(0.88rem, 1.04vw, 0.99rem); padding: 3px 10px; }
+        blockquote { font-size: clamp(0.98rem, 1.1vw, 1.12rem); }
 
-        /* Grids desktop restaurados */
+        /* Grids desktop */
         .grid-2 { grid-template-columns: 1fr 1fr !important; gap: clamp(8px, 1vh, 12px); }
         .grid-3 { grid-template-columns: repeat(3, 1fr) !important; gap: clamp(7px, 0.9vh, 11px); }
         .myth-grid { grid-template-columns: 1fr 1fr !important; gap: clamp(6px, 0.8vh, 9px); }
         .myth-item { font-size: clamp(0.94rem, 1.08vw, 1.08rem); }
 
-        .speaker { flex-direction: row; text-align: left; }
+        .card { padding: clamp(10px, 1.3vh, 15px) clamp(10px, 1.2vw, 14px); }
+        .card h3 { font-size: clamp(0.95rem, 1.1vw, 1.13rem); }
+        .card p  { font-size: clamp(0.88rem, 1.01vw, 1.01rem); }
+
+        .speaker { flex-direction: row; text-align: left; gap: clamp(16px, 2vw, 24px); }
         .speaker-photo { width: clamp(70px, 8vw, 100px); height: clamp(70px, 8vw, 100px); }
         .speaker-info h3 { font-size: clamp(1.3rem, 1.69vw, 1.49rem); }
 
-        .price-wrapper { grid-template-columns: 1fr 1fr !important; }
+        .price-wrapper { grid-template-columns: 1fr 1fr !important; gap: clamp(10px, 1.2vw, 16px); }
+        .price-box { padding: clamp(14px, 1.8vh, 20px) clamp(14px, 1.6vw, 22px); }
         .price-box .price { font-size: clamp(2.6rem, 3.9vw, 3.64rem); }
         .price-box ul li { font-size: clamp(0.91rem, 1.04vw, 1.01rem); }
+
+        .info-card { padding: clamp(7px, 0.9vh, 10px) 12px; }
+        .info-card h3 { font-size: clamp(0.99rem, 1.14vw, 1.07rem); }
 
         table { font-size: clamp(0.96rem, 1.1vw, 1.1rem); display: table; white-space: normal; overflow-x: visible; }
         thead th { padding: clamp(6px, 0.8vh, 9px) 11px; }
@@ -790,12 +622,12 @@
         .slide-final .site { font-size: clamp(1.23rem, 1.56vw, 1.43rem); }
         .slide-final .info { font-size: clamp(0.98rem, 1.1vw, 1.07rem); }
         .btn { font-size: clamp(1.07rem, 1.23vw, 1.17rem); padding: 10px 24px; }
-        blockquote { font-size: clamp(0.98rem, 1.1vw, 1.12rem); }
-        .card { padding: clamp(10px, 1.3vh, 15px) clamp(10px, 1.2vw, 14px); }
+
+        .swipe-hint { display: none; }
       }
 
-      /* TABLET intermediário (641px - 900px) */
-      @media (min-width: 641px) and (max-width: 900px) {
+      /* TABLET (641px - 900px, tall enough) */
+      @media (min-width: 641px) and (max-width: 900px) and (min-height: 501px) {
         .slide { width: 99vw; }
         .sl-split { flex-direction: column !important; }
         .sl-split .sl-content { border-right: none; border-bottom: 1px solid var(--border); order: 2; }
@@ -805,97 +637,39 @@
         .price-wrapper { grid-template-columns: 1fr !important; }
       }
 
-      /* Fix grids inline no mobile */
-      @media (max-width: 640px) {
-        .inline-grid-2 { grid-template-columns: 1fr !important; }
-        .inline-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
-        #s8.sl-split { flex-direction: column !important; }
-        #s8 .sl-img-panel { max-height: 160px; flex: none; order: 1; }
-        #s8 .sl-content { order: 2; border-right: none !important; border-bottom: 1px solid var(--border); }
+      /* ============================
+         FULLSCREEN
+         ============================ */
+      :fullscreen #pres,
+      :-webkit-full-screen #pres {
+        background: var(--bg); height: 100svh;
+        display: flex; flex-direction: column;
       }
-
-
-      /* ============================================
-         LANDSCAPE MOBILE (altura < 500px)
-         — ex: celular na horizontal
-         ============================================ */
-      @media (max-height: 500px) and (orientation: landscape) {
-        /* Nav mais compacta */
-        .nav {
-          height: 40px !important;
-          padding: 0 8px !important;
-          gap: 6px !important;
-        }
-        .nav-btn, .fs-btn {
-          width: 28px !important;
-          height: 28px !important;
-        }
-        .dots { gap: 3px; }
-        .dot { width: 4px; height: 4px; }
-        .dot.active { width: 10px; }
-
-        /* Slide ocupa o restante */
-        .slide {
-          height: calc(100dvh - 40px) !important;
-          max-height: calc(100dvh - 40px) !important;
-          overflow-y: auto;
-          overflow-x: hidden;
-        }
-
-        /* Tipografia menor */
-        h1 { font-size: clamp(1.2rem, 5vw, 1.8rem) !important; }
-        h2 { font-size: clamp(1rem, 4vw, 1.4rem) !important; margin-bottom: 6px; }
-        h3 { font-size: 0.85rem; }
-        p  { font-size: 0.82rem; line-height: 1.4; }
-        #s1 .sl-content h1 { font-size: clamp(1.6rem, 7vw, 2.4rem) !important; }
-
-        .sl-content { padding: 10px 14px 8px; }
-        .tag { font-size: 0.75rem; padding: 2px 7px; }
-
-        /* Split: lado a lado no landscape */
-        .sl-split {
-          flex-direction: row !important;
-          height: 100%;
-          overflow: hidden;
-        }
-        .sl-split .sl-content {
-          border-right: 1px solid var(--border) !important;
-          border-bottom: none !important;
-          order: 0 !important;
-          flex: 1;
-          overflow-y: auto;
-        }
-        .sl-img-panel {
-          flex: 0 0 35%;
-          max-height: none !important;
-          order: 0 !important;
-        }
-
-        /* Grids 2 col no landscape */
-        .grid-2 { grid-template-columns: 1fr 1fr !important; gap: 6px; }
-        .grid-3 { grid-template-columns: 1fr 1fr !important; gap: 6px; }
-        .myth-grid { grid-template-columns: 1fr 1fr !important; gap: 5px; }
-        .inline-grid-2 { grid-template-columns: 1fr 1fr !important; }
-        .inline-grid-4 { grid-template-columns: 1fr 1fr !important; gap: 5px !important; }
-
-        /* Speaker lado a lado no landscape */
-        .speaker { flex-direction: row; text-align: left; gap: 10px; }
-        .speaker-photo { width: 56px; height: 56px; }
-
-        .price-wrapper { grid-template-columns: 1fr 1fr !important; }
-        .price-box .price { font-size: 1.8rem; }
-
-        .btn { font-size: 0.85rem; padding: 8px 16px; margin-top: 8px; }
-        blockquote { font-size: 0.8rem; }
-        .card { padding: 8px; }
+      :fullscreen #slide-area,
+      :-webkit-full-screen #slide-area {
+        flex: 1; overflow: hidden;
+      }
+      :fullscreen .slide,
+      :-webkit-full-screen .slide {
+        border-radius: 0; border: none;
+        width: 100%; height: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+      }
+      :fullscreen .nav,
+      :-webkit-full-screen .nav {
+        flex-shrink: 0; position: static;
+        background: rgba(13,17,23,0.95);
+        border-top: 1px solid var(--border);
       }
     </style>
   </head>
   <body>
     <div id="pres">
       <div id="slide-area">
+      <div class="slide-track" id="slide-track">
       <!-- SLIDE 1: CAPA com imagem IA -->
-      <div class="slide active" id="s1">
+      <div class="slide" id="s1">
         <div
           class="sl-content"
           style="
@@ -2374,7 +2148,7 @@
       </div>
 
       <!-- SLIDE 8: BARBARA -->
-      <div class="slide" id="s8">
+      <div class="slide slide-speaker" id="s8">
         <div
           class="sl-content"
           style="
@@ -2385,6 +2159,7 @@
         >
           <!-- Foto à esquerda com borda verde e efeito de rede -->
           <div
+            class="speaker-photo-container"
             style="
               flex-shrink: 0;
               position: relative;
@@ -2443,7 +2218,7 @@
           </div>
 
           <!-- Conteúdo à direita -->
-          <div style="flex: 1; min-width: 0">
+          <div class="speaker-text-container" style="flex: 1; min-width: 0">
             <div class="logo" style="margin-bottom: 10px">
               brill<span>IA</span>nt
             </div>
@@ -3364,6 +3139,16 @@
         </div>
       </div>
 
+            </div><!-- /.slide-track -->
+
+      
+      <div class="swipe-hint" id="swipeHint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Arraste para navegar
+      </div>
+
       </div><!-- /#slide-area -->
 
       <!-- NAV -->
@@ -3415,86 +3200,181 @@
       </div>
     </div>
     <script>
-      let cur = 1;
-      const tot = 11;
-      const dotsEl = document.getElementById("dots");
-      for (let i = 1; i <= tot; i++) {
-        const d = document.createElement("div");
-        d.className = "dot" + (i === 1 ? " active" : "");
-        d.onclick = () => go(i);
-        dotsEl.appendChild(d);
-      }
-      function go(n) {
-        document.getElementById("s" + cur).classList.remove("active");
-        document.querySelectorAll(".dot")[cur - 1].classList.remove("active");
-        cur = Math.max(1, Math.min(tot, n));
-        document.getElementById("s" + cur).classList.add("active");
-        document.querySelectorAll(".dot")[cur - 1].classList.add("active");
-        document.getElementById("counter").textContent = cur + " / " + tot;
-        document.getElementById("prevBtn").disabled = cur === 1;
-        document.getElementById("nextBtn").disabled = cur === tot;
-      }
-      function changeSlide(d) {
-        go(cur + d);
-      }
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowRight" || e.key === "ArrowDown") changeSlide(1);
-        if (e.key === "ArrowLeft" || e.key === "ArrowUp") changeSlide(-1);
-        if (e.key === "f" || e.key === "F") toggleFS();
-      });
-      function toggleFS() {
-        const el = document.documentElement;
-        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-          (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
-        } else {
-          (document.exitFullscreen || document.webkitExitFullscreen).call(
-            document,
-          );
-        }
-      }
-      // ── Touch swipe para trocar slides ──
       (function() {
+        var tot = 11;
+        var cur = 0;
+        var track = document.getElementById('slide-track');
         var area = document.getElementById('slide-area');
-        if (!area) return;
-        var startX = 0, startY = 0, moved = false;
+        var dotsEl = document.getElementById('dots');
+        var counterEl = document.getElementById('counter');
+        var prevBtn = document.getElementById('prevBtn');
+        var nextBtn = document.getElementById('nextBtn');
+        var swipeHint = document.getElementById('swipeHint');
+
+        for (var i = 0; i < tot; i++) {
+          var d = document.createElement('div');
+          d.className = 'dot' + (i === 0 ? ' active' : '');
+          (function(idx) { d.onclick = function() { goTo(idx); }; })(i);
+          dotsEl.appendChild(d);
+        }
+
+        function updateUI() {
+          track.style.transform = 'translateX(' + (-cur * 100) + '%)';
+          var dots = dotsEl.querySelectorAll('.dot');
+          for (var j = 0; j < dots.length; j++) {
+            if (j === cur) dots[j].classList.add('active');
+            else dots[j].classList.remove('active');
+          }
+          counterEl.textContent = (cur + 1) + ' / ' + tot;
+          prevBtn.disabled = cur === 0;
+          nextBtn.disabled = cur === tot - 1;
+          var slides = document.querySelectorAll('.slide');
+          if (slides[cur]) slides[cur].scrollTop = 0;
+          fixMobileGrids();
+        }
+
+        function goTo(n) {
+          cur = Math.max(0, Math.min(tot - 1, n));
+          track.classList.remove('dragging');
+          updateUI();
+        }
+
+        function changeSlide(d) { goTo(cur + d); }
+
+        window.changeSlide = changeSlide;
+        window.goTo = function(n) { goTo(n - 1); };
+
+        // Touch swipe
+        var startX = 0, startY = 0, currentX = 0, isDragging = false, isScrolling = null;
+        var threshold = 40;
+        var trackWidth = 0;
+
         area.addEventListener('touchstart', function(e) {
+          if (e.touches.length > 1) return;
           startX = e.touches[0].clientX;
           startY = e.touches[0].clientY;
-          moved = false;
-        }, {passive: true});
-        area.addEventListener('touchmove', function(e) {
-          moved = true;
-        }, {passive: true});
-        area.addEventListener('touchend', function(e) {
-          if (!moved) return;
-          var dx = e.changedTouches[0].clientX - startX;
-          var dy = e.changedTouches[0].clientY - startY;
-          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-            changeSlide(dx < 0 ? 1 : -1);
-          }
-        }, {passive: true});
-      })();
+          currentX = startX;
+          isDragging = true;
+          isScrolling = null;
+          trackWidth = area.offsetWidth;
+          track.classList.add('dragging');
+          if (swipeHint) swipeHint.style.display = 'none';
+        }, { passive: true });
 
-      document.addEventListener("fullscreenchange", function() {
-        updateFSIcon();
-        // Após entrar/sair de fullscreen, fixMobileGrids e scroll reset
-        setTimeout(function() {
-          if (typeof fixMobileGrids === 'function') fixMobileGrids();
-          var activeSlide = document.querySelector('.slide.active');
-          if (activeSlide) activeSlide.scrollTop = 0;
-        }, 100);
-      });
-      document.addEventListener("webkitfullscreenchange", function() { updateFSIcon(); setTimeout(function(){ if(typeof fixMobileGrids==="function") fixMobileGrids(); }, 100); });
-      function updateFSIcon() {
-        const icon = document.getElementById("fsIcon");
-        if (document.fullscreenElement || document.webkitFullscreenElement) {
-          icon.innerHTML =
-            '<path d="M8 3v3a2 2 0 01-2 2H3M21 8h-3a2 2 0 01-2-2V3M3 16h3a2 2 0 012 2v3M16 21v-3a2 2 0 012-2h3"/>';
-        } else {
-          icon.innerHTML =
-            '<path d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M16 21h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>';
+        area.addEventListener('touchmove', function(e) {
+          if (!isDragging || e.touches.length > 1) return;
+          currentX = e.touches[0].clientX;
+          var dx = currentX - startX;
+          var dy = e.touches[0].clientY - startY;
+
+          if (isScrolling === null) {
+            if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
+              isScrolling = true;
+              isDragging = false;
+              track.classList.remove('dragging');
+              return;
+            }
+            if (Math.abs(dx) > 8) { isScrolling = false; }
+          }
+          if (isScrolling) return;
+          e.preventDefault();
+
+          var resistance = 1;
+          if ((cur === 0 && dx > 0) || (cur === tot - 1 && dx < 0)) resistance = 0.3;
+          var offset = (-cur * trackWidth) + (dx * resistance);
+          track.style.transform = 'translateX(' + ((offset / trackWidth) * 100) + '%)';
+        }, { passive: false });
+
+        area.addEventListener('touchend', function(e) {
+          if (!isDragging) return;
+          isDragging = false;
+          track.classList.remove('dragging');
+          var dx = currentX - startX;
+          if (Math.abs(dx) > threshold && isScrolling === false) {
+            if (dx < 0 && cur < tot - 1) goTo(cur + 1);
+            else if (dx > 0 && cur > 0) goTo(cur - 1);
+            else updateUI();
+          } else { updateUI(); }
+        }, { passive: true });
+
+        // Mouse drag
+        var mouseDown = false, mouseStartX = 0;
+        area.addEventListener('mousedown', function(e) {
+          if (e.button !== 0) return;
+          mouseDown = true; mouseStartX = e.clientX;
+          trackWidth = area.offsetWidth;
+          track.classList.add('dragging');
+          e.preventDefault();
+        });
+        area.addEventListener('mousemove', function(e) {
+          if (!mouseDown) return;
+          var dx = e.clientX - mouseStartX;
+          var resistance = 1;
+          if ((cur === 0 && dx > 0) || (cur === tot - 1 && dx < 0)) resistance = 0.3;
+          var offset = (-cur * trackWidth) + (dx * resistance);
+          track.style.transform = 'translateX(' + ((offset / trackWidth) * 100) + '%)';
+        });
+        document.addEventListener('mouseup', function(e) {
+          if (!mouseDown) return;
+          mouseDown = false;
+          track.classList.remove('dragging');
+          var dx = e.clientX - mouseStartX;
+          if (Math.abs(dx) > threshold) {
+            if (dx < 0 && cur < tot - 1) goTo(cur + 1);
+            else if (dx > 0 && cur > 0) goTo(cur - 1);
+            else updateUI();
+          } else { updateUI(); }
+        });
+
+        // Keyboard
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+          if (e.key === 'f' || e.key === 'F') toggleFS();
+        });
+
+        // Fullscreen
+        window.toggleFS = function() {
+          var el = document.documentElement;
+          if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+          } else {
+            (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+          }
+        };
+        function updateFSIcon() {
+          var icon = document.getElementById('fsIcon');
+          if (document.fullscreenElement || document.webkitFullscreenElement) {
+            icon.innerHTML = '<path d="M8 3v3a2 2 0 01-2 2H3M21 8h-3a2 2 0 01-2-2V3M3 16h3a2 2 0 012 2v3M16 21v-3a2 2 0 012-2h3"/>';
+          } else {
+            icon.innerHTML = '<path d="M8 3H5a2 2 0 00-2 2v3M21 8V5a2 2 0 00-2-2h-3M16 21h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>';
+          }
         }
-      }
+        document.addEventListener('fullscreenchange', function() { updateFSIcon(); setTimeout(updateUI, 100); });
+        document.addEventListener('webkitfullscreenchange', function() { updateFSIcon(); setTimeout(updateUI, 100); });
+
+        // Fix mobile grids
+        function fixMobileGrids() {
+          if (window.innerWidth > 640 && window.innerHeight > 500) return;
+          document.querySelectorAll('[style*="grid-template-columns"]').forEach(function(el) {
+            var s = el.style.gridTemplateColumns;
+            if (s && (s.indexOf('repeat(') !== -1 || s.split('1fr').length > 2)) {
+              if (window.innerHeight <= 500) {
+                // landscape: use 2 cols
+                el.style.gridTemplateColumns = '1fr 1fr';
+              } else {
+                el.style.gridTemplateColumns = '1fr';
+              }
+            }
+          });
+        }
+        window.addEventListener('resize', function() { fixMobileGrids(); updateUI(); });
+        window.addEventListener('orientationchange', function() {
+          setTimeout(function() { fixMobileGrids(); updateUI(); }, 200);
+        });
+
+        updateUI();
+      })();
     </script>
     <script
       defer
@@ -3504,35 +3384,5 @@
       crossorigin="anonymous"
     ></script>
   
-  <script>
-    // Corrige grids inline no mobile
-    function fixMobileGrids() {
-      if (window.innerWidth > 640) return;
-      document.querySelectorAll('[style*="grid-template-columns"]').forEach(function(el) {
-        var s = el.style.gridTemplateColumns;
-        // Normaliza: repeat(4,1fr) → 1fr, repeat(3,1fr) → 1fr, 1fr 1fr → 1fr
-        if (s && (s.includes('repeat(') || s.split('1fr').length > 2)) {
-          el.style.gridTemplateColumns = '1fr';
-        }
-      });
-      // Tabela: wrap thead th
-      document.querySelectorAll('thead th').forEach(function(th) {
-        th.style.whiteSpace = 'nowrap';
-        th.style.padding = '6px 10px';
-      });
-    }
-    document.addEventListener('DOMContentLoaded', fixMobileGrids);
-    window.addEventListener('resize', fixMobileGrids);
-    // Also run after each slide change
-    var origShowSlide = window.showSlide;
-    document.addEventListener('DOMContentLoaded', function() {
-      // Patch navigation buttons
-      document.querySelectorAll('.nav-btn, .dot').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          setTimeout(fixMobileGrids, 50);
-        });
-      });
-    });
-  </script>
 </body>
 </html>
