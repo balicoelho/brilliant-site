@@ -298,6 +298,81 @@
   .form-card input::placeholder { color: #555; }
   .form-card input:focus { border-color: var(--cyan); }
 
+  .form-card select {
+    width: 100%; padding: 14px 18px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; color: var(--text);
+    font-size: 0.92rem; font-family: 'Outfit', sans-serif;
+    margin-bottom: 14px;
+    transition: border-color 0.3s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23999' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    cursor: pointer;
+  }
+  .form-card select:focus { border-color: var(--cyan); }
+  .form-card select option { background: var(--bg); color: var(--text); }
+
+  .skills-section { margin-bottom: 56px; }
+  .skills-section h2 {
+    font-family: 'Bebas Neue', cursive;
+    text-align: center; font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+    letter-spacing: 2px; margin-bottom: 36px;
+  }
+  .skills-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .skills-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .skills-card:hover {
+    border-color: rgba(0,229,200,0.3);
+    transform: translateY(-2px);
+  }
+  .skills-card-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .skills-card-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; flex-shrink: 0;
+  }
+  .skills-card:nth-child(1) .skills-card-icon { background: rgba(0,229,200,0.1); }
+  .skills-card:nth-child(2) .skills-card-icon { background: rgba(139,92,246,0.1); }
+  .skills-card:nth-child(3) .skills-card-icon { background: rgba(245,158,11,0.1); }
+  .skills-card:nth-child(4) .skills-card-icon { background: rgba(59,130,246,0.1); }
+  .skills-card-title {
+    font-size: 1rem; font-weight: 600; color: var(--text);
+  }
+  .skills-card ul {
+    list-style: none; padding: 0; margin: 0;
+  }
+  .skills-card ul li {
+    font-size: 0.85rem; color: var(--muted); line-height: 1.6;
+    padding: 4px 0 4px 20px; position: relative;
+  }
+  .skills-card ul li::before {
+    content: '\2713'; position: absolute; left: 0;
+    color: var(--cyan); font-weight: 700;
+  }
+  .skills-highlight {
+    background: linear-gradient(135deg, rgba(0,229,200,0.08), rgba(139,92,246,0.08));
+    border: 1px solid rgba(0,229,200,0.2);
+    border-radius: 16px; padding: 24px 32px;
+    text-align: center; margin-top: 20px;
+    font-size: 0.95rem; color: var(--text); font-weight: 500;
+  }
+  @media (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+
   /* ✅ CORRIGIDO: botão submit usa background cyan sólido (sem gradiente inventado) */
   .btn-submit {
     width: 100%; padding: 16px;
@@ -407,15 +482,14 @@
   <div class="container">
     <div class="hero-badge fade-up">
       <span class="pulse"></span>
-      Turma 3 — 25 de Março de 2026
+      Vagas limitadas — Próxima turma em breve
     </div>
     <h1 class="fade-up">Domine a <span class="highlight">Inteligência Artificial</span><br>na prática, em 5 horas</h1>
     <p class="hero-sub fade-up">Workshop presencial e intensivo para quem quer usar IA de verdade no dia a dia — sem enrolação, com prática na hora.</p>
 
     <div class="info-pills fade-up">
-      <div class="pill"><span class="pill-icon">📍</span> Vicali Café — Recife</div>
-      <div class="pill"><span class="pill-icon">⏰</span> 9h às 14h</div>
-      <div class="pill"><span class="pill-icon">👥</span> Turmas reduzidas</div>
+      <div class="pill"><span class="pill-icon">⏰</span> Das 9h às 14h</div>
+      <div class="pill"><span class="pill-icon">👥</span> Turmas reduzidas (até 9 pessoas)</div>
     </div>
   </div>
 </section>
@@ -475,6 +549,62 @@
   </div>
 </section>
 
+<section class="skills-section">
+  <div class="container">
+    <h2 class="fade-up">O que você vai conseguir fazer com IA</h2>
+    <div class="skills-grid">
+      <div class="skills-card fade-up">
+        <div class="skills-card-header">
+          <div class="skills-card-icon">🚀</div>
+          <div class="skills-card-title">Criação e Desenvolvimento</div>
+        </div>
+        <ul>
+          <li>Criar apresentações profissionais em minutos (para reuniões, aulas ou vendas)</li>
+          <li>Construir sites completos sem precisar programar</li>
+          <li>Desenvolver aplicativos simples para resolver problemas do dia a dia</li>
+          <li>Analisar dados e números com clareza (mesmo sem saber Excel avançado)</li>
+        </ul>
+      </div>
+      <div class="skills-card fade-up">
+        <div class="skills-card-header">
+          <div class="skills-card-icon">🤖</div>
+          <div class="skills-card-title">Automação e Produtividade</div>
+        </div>
+        <ul>
+          <li>Criar assistentes personalizados que trabalham por você 24h</li>
+          <li>Automatizar tarefas repetitivas (respostas, relatórios, organização de dados)</li>
+          <li>Montar fluxos inteligentes que conectam ferramentas e economizam horas do seu dia</li>
+        </ul>
+      </div>
+      <div class="skills-card fade-up">
+        <div class="skills-card-header">
+          <div class="skills-card-icon">💼</div>
+          <div class="skills-card-title">Aplicações para Trabalho e Negócio</div>
+        </div>
+        <ul>
+          <li>Criar propostas comerciais e apresentações de alto nível</li>
+          <li>Gerar conteúdos (posts, e-mails, roteiros) com qualidade profissional</li>
+          <li>Organizar processos internos com ajuda de IA</li>
+        </ul>
+      </div>
+      <div class="skills-card fade-up">
+        <div class="skills-card-header">
+          <div class="skills-card-icon">🧠</div>
+          <div class="skills-card-title">Tomada de Decisão e Inteligência</div>
+        </div>
+        <ul>
+          <li>Transformar dados confusos em insights claros</li>
+          <li>Fazer análises rápidas para tomar decisões melhores</li>
+          <li>Simular cenários e testar ideias com IA</li>
+        </ul>
+      </div>
+    </div>
+    <div class="skills-highlight fade-up">
+      🎯 Usar IA de forma estratégica — não só pedir texto, mas <strong>resolver problemas reais</strong>
+    </div>
+  </div>
+</section>
+
 <section class="price-section fade-up">
   <div class="container">
     <div class="price-card">
@@ -516,6 +646,11 @@
         <input type="text" name="nome" placeholder="Seu nome completo" required>
         <input type="email" name="email" placeholder="Seu melhor e-mail" required>
         <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
+        <select name="turma" required>
+          <option value="" disabled selected>Qual turma você tem interesse?</option>
+          <option value="Turma 4 — Petrolina, 01/04/2026">Turma 4 — Petrolina, 01 de Abril de 2026</option>
+          <option value="Quero garantir minha vaga em outra turma">Quero garantir minha vaga em outra turma</option>
+        </select>
         <button type="submit" class="btn-submit" id="submitBtn">Entrar na lista de espera →</button>
       </form>
       <p class="form-note">Seus dados estão seguros. Sem spam, prometemos.</p>
@@ -546,7 +681,7 @@
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyednpxl737trUreMgdpb1a1U4Tgbrt28s_4bE2qEHZidXoQAwJh-GJKASOGFQW8geS/exec';
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDsmVCwMhrpJL8OkS8ujIopUfzg1LVg-mEyWvZ6rrewlQxP8Sw3O9-aszCWJuxMPP09A/exec';
 
   async function submitForm(e) {
     e.preventDefault();
@@ -556,8 +691,9 @@
     const nome = form.nome.value.trim();
     const email = form.email.value.trim();
     const telefone = form.telefone.value.trim();
+    const turma = form.turma.value;
 
-    if (!nome || !email || !telefone) return;
+    if (!nome || !email || !telefone || !turma) return;
 
     btn.disabled = true;
     btn.textContent = 'Enviando...';
@@ -568,7 +704,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, email, whatsapp: telefone })
+        body: JSON.stringify({ nome, email, whatsapp: telefone, turma })
       });
 
       msgEl.className = 'form-msg success';
