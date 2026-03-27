@@ -323,6 +323,75 @@
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.3px;
   }
 
+  /* ===== CARROSSEL TURMAS REALIZADAS ===== */
+  .turmas-realizadas-label {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem; letter-spacing: 1.5px;
+    color: var(--muted); text-align: center;
+    margin-bottom: 8px; margin-top: 40px;
+  }
+  .carousel-wrapper {
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 48px;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 24px;
+    overflow: hidden;
+    scroll-behavior: smooth;
+  }
+  .carousel-track .curso-card {
+    min-width: calc(50% - 12px);
+    max-width: calc(50% - 12px);
+    flex-shrink: 0;
+  }
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--dark3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+  .carousel-btn:hover {
+    background: var(--cyan); color: var(--dark);
+    border-color: var(--cyan);
+  }
+  .carousel-btn.prev { left: -22px; }
+  .carousel-btn.next { right: -22px; }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .carousel-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .carousel-dot.active {
+    background: var(--cyan);
+    transform: scale(1.2);
+  }
+  .turma-nova-label {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.3rem; letter-spacing: 1.5px;
+    color: var(--purple); text-align: center;
+    margin-bottom: 8px;
+  }
+
   @media (max-width: 768px) {
     .palestrante-grid { grid-template-columns: 1fr; gap: 40px; }
     .palestrante-foto-wrap { max-width: 260px; margin: 0 auto; }
@@ -333,6 +402,13 @@
     nav ul { display: none; }
     .curso-card { flex-direction: column; align-items: flex-start; }
     .turmas-grid { grid-template-columns: 1fr; }
+    .carousel-track .curso-card {
+      min-width: 100%;
+      max-width: 100%;
+    }
+    .carousel-btn.prev { left: -8px; }
+    .carousel-btn.next { right: -8px; }
+    .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
   }
 </style>
 </head>
@@ -554,87 +630,112 @@
   <div class="section-label">Agenda</div>
   <h2>Próximas Turmas</h2>
   <p class="section-sub">Vagas limitadas para garantir uma experiência personalizada para cada participante.</p>
-  <div class="turmas-grid">
-    <!-- TURMA 1 -->
-    <div class="curso-card fade-up">
-      <div class="curso-badge">✅ Turma 1 — Realizada</div>
-      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/tOuJQoAKjzjxNWpe.webp" alt="Foto da Turma 1 do Workshop IA na Prática" class="turma-photo">
-      <div class="curso-info">
-        <div class="curso-data">
-          <div class="curso-data-item">
-            <span class="curso-icon">📅</span>
-            <div><strong>02 de Março de 2026</strong><span>Segunda-feira</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">⏰</span>
-            <div><strong>9h às 13h</strong><span>4 horas de conteúdo prático</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">📍</span>
-            <div><strong>Vicali Café</strong><span>Presencial</span></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- TURMA 2 -->
-    <div class="curso-card fade-up">
-      <div class="curso-badge">✅ Turma 2 — Realizada</div>
-      <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/KVSBrZNCOBHOJdys.jpg" alt="Foto da Turma 2 do Workshop IA na Prática" class="turma-photo">
-      <div class="curso-info">
-        <div class="curso-data">
-          <div class="curso-data-item">
-            <span class="curso-icon">📅</span>
-            <div><strong>16 de Março de 2026</strong><span>Segunda-feira</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">⏰</span>
-            <div><strong>9h às 14h</strong><span>5 horas de conteúdo prático</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">📍</span>
-            <div><strong>Norlog Logística</strong><span>Presencial</span></div>
+  <!-- CARROSSEL: TURMAS REALIZADAS -->
+  <div class="turmas-realizadas-label">Turmas Realizadas</div>
+  <div class="carousel-wrapper">
+    <button class="carousel-btn prev" onclick="carouselMove(-1)" aria-label="Anterior">&larr;</button>
+    <div class="carousel-track" id="carouselTrack">
+      <!-- TURMA 1 -->
+      <div class="curso-card fade-up">
+        <div class="curso-badge">✅ Turma 1 — Realizada</div>
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/tOuJQoAKjzjxNWpe.webp" alt="Foto da Turma 1 do Workshop IA na Prática" class="turma-photo">
+        <div class="curso-info">
+          <div class="curso-data">
+            <div class="curso-data-item">
+              <span class="curso-icon">📅</span>
+              <div><strong>02 de Março de 2026</strong><span>Segunda-feira</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">⏰</span>
+              <div><strong>9h às 13h</strong><span>4 horas de conteúdo prático</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">📍</span>
+              <div><strong>Vicali Café</strong><span>Presencial</span></div>
+            </div>
           </div>
         </div>
       </div>
+      <!-- TURMA 2 -->
+      <div class="curso-card fade-up">
+        <div class="curso-badge">✅ Turma 2 — Realizada</div>
+        <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663029840483/KVSBrZNCOBHOJdys.jpg" alt="Foto da Turma 2 do Workshop IA na Prática" class="turma-photo">
+        <div class="curso-info">
+          <div class="curso-data">
+            <div class="curso-data-item">
+              <span class="curso-icon">📅</span>
+              <div><strong>16 de Março de 2026</strong><span>Segunda-feira</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">⏰</span>
+              <div><strong>9h às 14h</strong><span>5 horas de conteúdo prático</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">📍</span>
+              <div><strong>Norlog Logística</strong><span>Presencial</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TURMA 3 -->
+      <div class="curso-card fade-up">
+        <div class="curso-badge">✅ Turma 3 — Realizada</div>
+        <img src="turma3.jpg" alt="Foto da Turma 3 do Workshop IA na Prática" class="turma-photo">
+        <div class="curso-info">
+          <div class="curso-data">
+            <div class="curso-data-item">
+              <span class="curso-icon">📅</span>
+              <div><strong>25 de Março de 2026</strong><span>Quarta-feira</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">⏰</span>
+              <div><strong>9h às 14h</strong><span>5 horas de conteúdo prático</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">📍</span>
+              <div><strong>Vicali Café</strong><span>Presencial · Recife</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TURMA 4 -->
+      <div class="curso-card fade-up" style="opacity:0.85;">
+        <div class="curso-badge" style="background:rgba(239,68,68,0.10);color:#ef4444;border-color:rgba(239,68,68,0.25);">🔒 Turma 4 — Vagas esgotadas</div>
+        <div class="curso-info">
+          <div class="turma-title">Turma 4 — Abril 2026</div>
+          <div class="curso-data">
+            <div class="curso-data-item">
+              <span class="curso-icon">📅</span>
+              <div><strong>01 de Abril de 2026</strong><span>Quarta-feira</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">⏰</span>
+              <div><strong>9h às 14h</strong><span>5 horas de conteúdo prático</span></div>
+            </div>
+            <div class="curso-data-item">
+              <span class="curso-icon">📍</span>
+              <div><strong>Fundação Nilo Coelho</strong><span>Presencial · Petrolina</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <button class="carousel-btn next" onclick="carouselMove(1)" aria-label="Próximo">&rarr;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
   </div>
 
-  <!-- TURMA 3 -->
-  <div class="turmas-grid" style="margin-top:28px;">
-    <div class="curso-card fade-up">
-      <div class="curso-badge">✅ Turma 3 — Realizada</div>
-      <img src="turma3.jpg" alt="Foto da Turma 3 do Workshop IA na Prática" class="turma-photo">
-      <div class="curso-info">
-        <div class="curso-data">
-          <div class="curso-data-item">
-            <span class="curso-icon">📅</span>
-            <div><strong>25 de Março de 2026</strong><span>Quarta-feira</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">⏰</span>
-            <div><strong>9h às 14h</strong><span>5 horas de conteúdo prático</span></div>
-          </div>
-          <div class="curso-data-item">
-            <span class="curso-icon">📍</span>
-            <div><strong>Vicali Café</strong><span>Presencial · Recife</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TURMA 4 -->
-  <div class="turmas-grid" style="margin-top:28px;">
+  <!-- TURMA NOVA: DESTAQUE -->
+  <div class="turma-nova-label">Próxima Turma</div>
+  <div class="turmas-grid" style="margin-top:16px; grid-template-columns:1fr; max-width:600px; margin-left:auto; margin-right:auto;">
     <div class="curso-card purple-border fade-up">
-      <div class="curso-badge" style="background:rgba(139,92,246,0.12);color:var(--purple);border-color:rgba(139,92,246,0.25);">🔜 Turma 4 — Inscrições abertas</div>
+      <div class="curso-badge" style="background:rgba(139,92,246,0.12);color:var(--purple);border-color:rgba(139,92,246,0.25);">🔜 Turma 5 — Em breve</div>
       <div class="curso-info">
-        <div class="turma-title">Turma 4 — Abril 2026</div>
-        <p class="turma-subtitle">Nova turma do Workshop IA na Prática em Petrolina! Garanta sua vaga com prioridade na lista de espera.</p>
+        <div class="turma-title">Turma 5 — Abril 2026</div>
+        <p class="turma-subtitle">Nova turma do Workshop IA na Prática em Recife! Garanta sua vaga com prioridade na lista de espera.</p>
         <div class="curso-data">
           <div class="curso-data-item">
             <span class="curso-icon">📅</span>
-            <div><strong>01 de Abril de 2026</strong><span>Quarta-feira</span></div>
+            <div><strong>Data a definir</strong><span>Abril 2026</span></div>
           </div>
           <div class="curso-data-item">
             <span class="curso-icon">⏰</span>
@@ -642,17 +743,17 @@
           </div>
           <div class="curso-data-item">
             <span class="curso-icon">📍</span>
-            <div><strong>Fundação Nilo Coelho</strong><span>Presencial · Petrolina</span></div>
+            <div><strong>Recife</strong><span>Presencial · Local a definir</span></div>
           </div>
         </div>
       </div>
-      <form class="waitlist-form" id="waitlistFormT4" onsubmit="submitWaitlist(event, 'T4')">
+      <form class="waitlist-form" id="waitlistFormT5" onsubmit="submitWaitlist(event, 'T5')">
         <input type="text" name="nome" placeholder="Seu nome completo" required>
         <input type="email" name="email" placeholder="Seu melhor e-mail" required>
         <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
         <button type="submit" class="btn-purple">Entrar na lista de espera →</button>
       </form>
-      <div id="waitlistMsgT4" class="waitlist-msg" style="display:none;"></div>
+      <div id="waitlistMsgT5" class="waitlist-msg" style="display:none;"></div>
     </div>
   </div>
 </section>
@@ -782,6 +883,86 @@
       btn.disabled = false;
     });
   }
+</script>
+<script>
+// ===== CARROSSEL TURMAS REALIZADAS =====
+(function() {
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  if (!track || !dotsContainer) return;
+
+  const cards = track.querySelectorAll('.curso-card');
+  let currentIndex = 0;
+  let perView = window.innerWidth <= 768 ? 1 : 2;
+  const totalPages = Math.ceil(cards.length / perView);
+
+  // Criar dots
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const pages = Math.ceil(cards.length / perView);
+    for (let i = 0; i < pages; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === currentIndex ? ' active' : '');
+      dot.setAttribute('aria-label', 'Ir para p\u00e1gina ' + (i + 1));
+      dot.onclick = function() { goTo(i); };
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateCarousel() {
+    const gap = 24;
+    const cardWidth = track.querySelector('.curso-card').offsetWidth + gap;
+    track.style.transform = 'translateX(-' + (currentIndex * cardWidth * perView) + 'px)';
+    track.style.transition = 'transform 0.4s ease';
+    // Atualizar dots
+    dotsContainer.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function goTo(index) {
+    const pages = Math.ceil(cards.length / perView);
+    currentIndex = Math.max(0, Math.min(index, pages - 1));
+    updateCarousel();
+  }
+
+  window.carouselMove = function(dir) {
+    const pages = Math.ceil(cards.length / perView);
+    currentIndex = Math.max(0, Math.min(currentIndex + dir, pages - 1));
+    updateCarousel();
+  };
+
+  // Touch/swipe support
+  let startX = 0;
+  let isDragging = false;
+  track.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    if (!isDragging) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      carouselMove(diff > 0 ? 1 : -1);
+    }
+    isDragging = false;
+  }, { passive: true });
+
+  // Responsivo
+  window.addEventListener('resize', function() {
+    const newPerView = window.innerWidth <= 768 ? 1 : 2;
+    if (newPerView !== perView) {
+      perView = newPerView;
+      currentIndex = 0;
+      buildDots();
+      updateCarousel();
+    }
+  });
+
+  // Inicializar
+  buildDots();
+  updateCarousel();
+})();
 </script>
 </body>
 </html>
