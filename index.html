@@ -334,17 +334,21 @@
     position: relative;
     margin-top: 16px;
     margin-bottom: 48px;
+    overflow: hidden;
   }
   .carousel-track {
     display: flex;
     gap: 24px;
-    overflow: hidden;
     scroll-behavior: smooth;
   }
   .carousel-track .curso-card {
     min-width: calc(50% - 12px);
     max-width: calc(50% - 12px);
     flex-shrink: 0;
+  }
+  .carousel-track .curso-card.fade-up {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
   .carousel-btn {
     position: absolute;
@@ -699,7 +703,7 @@
         </div>
       </div>
       <!-- TURMA 4 -->
-      <div class="curso-card fade-up" style="opacity:0.85;">
+      <div class="curso-card fade-up">
         <div class="curso-badge" style="background:rgba(239,68,68,0.10);color:#ef4444;border-color:rgba(239,68,68,0.25);">🔒 Turma 4 — Vagas esgotadas</div>
         <div class="curso-info">
           <div class="turma-title">Turma 4 — Abril 2026</div>
