@@ -127,7 +127,7 @@
   .sobre-card-text span { font-size: 0.85rem; color: var(--muted); }
 
   #servicos { background: var(--dark); }
-  .servicos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 60px; }
+  .servicos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
   .servico-card {
     background: var(--dark2); border: 1px solid rgba(255,255,255,0.07);
     border-radius: 20px; padding: 44px 40px; position: relative; overflow: hidden; transition: all 0.3s;
@@ -135,10 +135,13 @@
   .servico-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
   .servico-card.cyan::before { background: linear-gradient(90deg, var(--cyan), transparent); }
   .servico-card.purple::before { background: linear-gradient(90deg, var(--purple), transparent); }
+  .servico-card.orange::before { background: linear-gradient(90deg, var(--orange), transparent); }
   .servico-card:hover { transform: translateY(-4px); border-color: rgba(0,229,200,0.2); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
   .servico-tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 28px; }
   .servico-tag.cyan { background: rgba(0,229,200,0.12); color: var(--cyan); }
   .servico-tag.purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+  .servico-tag.orange { background: rgba(245,158,11,0.12); color: var(--orange); }
+  .servico-card.orange .servico-list li::before { color: var(--orange); }
   .servico-card h3 { font-family: 'Bebas Neue', cursive; font-size: 1.8rem; font-weight: 400; letter-spacing: 1.5px; margin-bottom: 14px; }
   .servico-card p { color: var(--muted); line-height: 1.7; margin-bottom: 28px; font-size: 0.95rem; }
   .servico-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
@@ -334,7 +337,12 @@
     position: relative;
     margin-top: 16px;
     margin-bottom: 48px;
+    overflow: visible;
+    padding: 0 32px;
+  }
+  .carousel-overflow {
     overflow: hidden;
+    border-radius: 16px;
   }
   .carousel-track {
     display: flex;
@@ -369,8 +377,8 @@
     background: var(--cyan); color: var(--dark);
     border-color: var(--cyan);
   }
-  .carousel-btn.prev { left: -22px; }
-  .carousel-btn.next { right: -22px; }
+  .carousel-btn.prev { left: -16px; }
+  .carousel-btn.next { right: -16px; }
   .carousel-dots {
     display: flex;
     justify-content: center;
@@ -410,8 +418,8 @@
       min-width: 100%;
       max-width: 100%;
     }
-    .carousel-btn.prev { left: -8px; }
-    .carousel-btn.next { right: -8px; }
+    .carousel-btn.prev { left: -6px; }
+    .carousel-btn.next { right: -6px; }
     .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
   }
 </style>
@@ -483,8 +491,8 @@
 
 <section id="servicos">
   <div class="section-label">O que oferecemos</div>
-  <h2>Dois caminhos para<br>transformar sua rotina</h2>
-  <p class="section-sub">Seja você um profissional que quer aprender ou uma empresa que quer implementar: a BrillIAnt tem a solução certa.</p>
+  <h2>Três caminhos para<br>transformar sua rotina</h2>
+  <p class="section-sub">Seja você um profissional que quer aprender, implementar ou ter acompanhamento personalizado: a BrillIAnt tem a solução certa.</p>
   <div class="servicos-grid">
     <div class="servico-card cyan fade-up">
       <div class="servico-tag cyan">Workshop</div>
@@ -513,6 +521,20 @@
         <li>ROI claro desde o planejamento</li>
       </ul>
       <a href="#cta" class="btn-ghost" style="border-color:rgba(139,92,246,0.4); color:var(--purple);">Quero uma proposta →</a>
+    </div>
+    <div class="servico-card orange fade-up">
+      <div class="servico-tag orange">Mentoria</div>
+      <h3>Mentoria de IA<br>Personalizada</h3>
+      <p>Atendimento individual para quem quer começar a usar IA no dia a dia, mas precisa de orientação sob medida. As ferramentas de IA são configuradas de acordo com a sua realidade, com orientação prática e personalizada até que você esteja pronto para usá-las com autonomia.</p>
+      <ul class="servico-list">
+        <li>Diagnóstico das suas necessidades e rotina</li>
+        <li>Configuração das ferramentas de IA ideais para você</li>
+        <li>Treinamento prático e personalizado</li>
+        <li>Tudo pronto para usar ao final da mentoria</li>
+        <li>Suporte pós-mentoria para dúvidas</li>
+        <li>Sessões individuais</li>
+      </ul>
+      <a href="#cta" class="btn-ghost" style="border-color:rgba(245,158,11,0.4); color:var(--orange);">Quero minha mentoria →</a>
     </div>
   </div>
 </section>
@@ -638,6 +660,7 @@
   <div class="turmas-realizadas-label">Turmas Realizadas</div>
   <div class="carousel-wrapper">
     <button class="carousel-btn prev" onclick="carouselMove(-1)" aria-label="Anterior">&larr;</button>
+    <div class="carousel-overflow">
     <div class="carousel-track" id="carouselTrack">
       <!-- TURMA 1 -->
       <div class="curso-card fade-up">
@@ -723,6 +746,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
     <button class="carousel-btn next" onclick="carouselMove(1)" aria-label="Próximo">&rarr;</button>
     <div class="carousel-dots" id="carouselDots"></div>
