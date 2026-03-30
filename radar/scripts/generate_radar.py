@@ -273,10 +273,8 @@ class RadarGenerator:
     
     def fazer_commit_push(self, dados):
         """
-        Fazer commit e push para GitHub.
-        
-        Args:
-            dados: Dados da semana
+        Fazer commit dos arquivos gerados.
+        O push será feito pelo GitHub Actions.
         """
         try:
             os.chdir(self.project_root)
@@ -292,12 +290,9 @@ class RadarGenerator:
             mensagem = f"🚀 Radar da Semana - {dados['semana']}"
             subprocess.run(['git', 'commit', '-m', mensagem], check=True)
             
-            # Push
-            subprocess.run(['git', 'push', '-u', 'origin', 'main'], check=True)
-            
-            logger.info("✅ Commit e push realizados com sucesso")
+            logger.info("✅ Commit realizado com sucesso (push será feito pelo GitHub Actions)")
         except subprocess.CalledProcessError as e:
-            logger.error(f"❌ Erro ao fazer commit/push: {e}")
+            logger.error(f"❌ Erro ao fazer commit: {e}")
             raise
     
     def disparar_deploy_vercel(self):

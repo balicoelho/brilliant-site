@@ -37,10 +37,6 @@ jobs:
       
       - name: 🎙️ Gerar Radar
         run: |
-          git config --global user.email "radar@brilliant.ai"
-          git config --global user.name "Radar Bot"
-          git config --global credential.helper store
-          echo "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com" > ~/.git-credentials
           cd radar
           export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json
           python scripts/generate_radar.py
@@ -48,9 +44,11 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: /tmp/google-cloud-key.json
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       
-      - name: 📤 Commit e Push
+      - name: 📤 Push para GitHub
         run: |
-          echo "✅ Arquivos já foram commitados pelo script Python"
+          git config --local user.email "radar@brilliant.ai"
+          git config --local user.name "Radar Bot"
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
