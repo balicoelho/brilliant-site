@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/radar/:path*",
+      "destination": "/radar/:path*"
+    },
+    {
+      "source": "/style.css",
+      "destination": "/radar/style.css"
+    },
+    {
       "source": "/feedback",
       "destination": "/feedback/index.html"
     },
@@ -31,6 +39,10 @@
     {
       "source": "/cadastro/",
       "destination": "/formulario-cadastral/index.html"
+    },
+    {
+      "source": "/radar/radares/:path*/style.css",
+      "destination": "/radar/style.css"
     }
   ]
 }
