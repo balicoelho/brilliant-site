@@ -887,8 +887,12 @@ document.getElementById('main-form').addEventListener('submit', function(e) {
 function showSuccess() {
   document.getElementById('main-form').style.display = 'none';
   document.querySelector('.progress-bar').style.display = 'none';
-  document.getElementById('success').style.display = 'block';
-  window.scrollTo({top: 0, behavior:'smooth'});
+  const successEl = document.getElementById('success');
+  successEl.style.display = 'block';
+  // Scroll suave até a tela de sucesso, deixando o header fora da viewport
+  setTimeout(() => {
+    successEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
 }
 </script>
 </body>
