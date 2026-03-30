@@ -8,6 +8,9 @@ on:
   # Permite rodar manualmente
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   gerar-radar:
     runs-on: ubuntu-latest
@@ -47,10 +50,12 @@ jobs:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       
       - name: 📤 Push para GitHub
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GIT_TOKEN }}
-          branch: main
+        run: |
+          git config --local user.email "radar@brilliant.ai"
+          git config --local user.name "Radar Bot"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: ✅ Deploy na Vercel
         run: |
