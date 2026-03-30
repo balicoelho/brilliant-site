@@ -307,9 +307,18 @@ input::placeholder { color:var(--mut); }
 
   <form id="feedback-form">
 
+    <!-- 0. NOME -->
+    <div class="section" style="animation-delay:0.05s">
+      <div class="section-num">Pergunta 1 de 9</div>
+      <div class="section-title">Seu nome <span style="font-size:0.7em;font-weight:400;letter-spacing:0;font-family:'Outfit',sans-serif;color:var(--mut);">(opcional)</span></div>
+      <div class="field" style="margin-bottom:0">
+        <input type="text" name="name" placeholder="Como prefere ser chamada?" id="input-name">
+      </div>
+    </div>
+
     <!-- 1. NPS GERAL -->
     <div class="section" style="animation-delay:0.1s">
-      <div class="section-num">Pergunta 1 de 8</div>
+      <div class="section-num">Pergunta 2 de 9</div>
       <div class="section-title">De 0 a 10, quanto você recomendaria este workshop para uma amiga ou colega?</div>
       <div class="section-sub">Onde 0 = jamais recomendaria e 10 = recomendaria com muito entusiasmo</div>
       <div class="stars" id="nps-stars">
@@ -331,7 +340,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 2. AVALIACAO GERAL -->
     <div class="section accent-pur" style="animation-delay:0.15s">
-      <div class="section-num pur">Pergunta 2 de 8</div>
+      <div class="section-num pur">Pergunta 3 de 9</div>
       <div class="section-title">Como você avalia o workshop no geral?</div>
       <div class="section-sub">Sua impressão geral sobre a experiência do começo ao fim</div>
       <div class="emoji-scale" id="rating-scale">
@@ -346,7 +355,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 3. FERRAMENTA FAVORITA -->
     <div class="section accent-ora" style="animation-delay:0.2s">
-      <div class="section-num ora">Pergunta 3 de 8</div>
+      <div class="section-num ora">Pergunta 4 de 9</div>
       <div class="section-title">Quais ferramentas você vai usar PRIMEIRO? <span class="req">★</span></div>
       <div class="section-sub">Pode marcar mais de uma — quais te animaram mais?</div>
       <div class="choices" id="tool-choices">
@@ -395,13 +404,28 @@ input::placeholder { color:var(--mut); }
           <span class="cb-name">Claude Cowork</span>
           <span class="cb-desc">Agente no seu desktop + web</span>
         </button>
+        <button type="button" class="choice-btn sel-ora" data-val="claude">
+          <span class="cb-icon">💬</span>
+          <span class="cb-name">Claude</span>
+          <span class="cb-desc">Escrita, análise e raciocínio</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="gemini">
+          <span class="cb-icon">✦</span>
+          <span class="cb-name">Gemini</span>
+          <span class="cb-desc">IA do Google integrada ao Workspace</span>
+        </button>
+        <button type="button" class="choice-btn sel-ora" data-val="assistente-personalizado">
+          <span class="cb-icon">🧩</span>
+          <span class="cb-name">Assistente Personalizado</span>
+          <span class="cb-desc">GPT ou agente criado para você</span>
+        </button>
       </div>
       <input type="hidden" id="tool-val" name="first_tool">
     </div>
 
     <!-- 4. O QUE MAIS GOSTOU -->
     <div class="section" style="animation-delay:0.25s">
-      <div class="section-num">Pergunta 4 de 8</div>
+      <div class="section-num">Pergunta 5 de 9</div>
       <div class="section-title">O que você mais gostou no workshop?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção</div>
       <div class="tags" id="liked-tags">
@@ -418,7 +442,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 5. MELHORIAS -->
     <div class="section accent-blu" style="animation-delay:0.3s">
-      <div class="section-num blu">Pergunta 5 de 8</div>
+      <div class="section-num blu">Pergunta 6 de 9</div>
       <div class="section-title">O que poderia ter sido melhor?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção — Seja honesta, é aqui que crescemos!</div>
       <div class="choices cols1" id="improve-choices">
@@ -434,7 +458,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 6. TEXTO LIVRE -->
     <div class="section" style="animation-delay:0.35s">
-      <div class="section-num">Pergunta 6 de 8</div>
+      <div class="section-num">Pergunta 7 de 9</div>
       <div class="section-title">Tem algo que você queria que tivesse sido abordado e não foi?</div>
       <div class="section-sub">Ferramentas, temas, casos de uso específicos... conta pra gente!</div>
       <div class="textarea-wrap">
@@ -445,7 +469,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 7. DEPOIMENTO -->
     <div class="section accent-ora" style="animation-delay:0.4s">
-      <div class="section-num ora">Pergunta 7 de 8</div>
+      <div class="section-num ora">Pergunta 8 de 9</div>
       <div class="section-title">Escreva um depoimento sobre sua experiência 💛</div>
       <div class="section-sub">Como o workshop te impactou? O que você aprendeu? Pode usar como depoimento nas nossas redes — com sua autorização, claro.</div>
       <div class="textarea-wrap">
@@ -463,7 +487,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 8. PRÓXIMOS PASSOS -->
     <div class="section accent-pur" style="animation-delay:0.45s">
-      <div class="section-num pur">Pergunta 8 de 8</div>
+      <div class="section-num pur">Pergunta 9 de 9</div>
       <div class="section-title">O que mais te interessa como próximo passo?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção — nos ajuda a planejar os próximos produtos</div>
       <div class="choices" id="next-choices">
@@ -499,12 +523,6 @@ input::placeholder { color:var(--mut); }
         </button>
       </div>
 
-      <hr class="divider">
-
-      <div class="field">
-        <label>Seu nome (opcional)</label>
-        <input type="text" name="name" placeholder="Como prefere ser chamada?" id="input-name">
-      </div>
       <div class="field">
         <label>Seu e-mail (para receber novidades) <span style="font-size:11px;font-weight:normal;text-transform:none;letter-spacing:0;color:var(--mut)">— opcional</span></label>
         <input type="email" name="email" placeholder="seu@email.com" id="input-email">
