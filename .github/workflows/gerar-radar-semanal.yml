@@ -1,0 +1,75 @@
+name: 🚀 Gerar Radar da Semana
+
+on:
+  # Agendado: Segunda-feira às 7h da manhã (horário de Brasília = 10h UTC)
+  schedule:
+    - cron: '0 10 * * 1'
+  
+  # Permite rodar manualmente
+  workflow_dispatch:
+
+jobs:
+  gerar-radar:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout do repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: 🐍 Setup Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: 📦 Instalar dependências
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r radar/scripts/requirements.txt
+      
+      - name: 🔐 Configurar Google Cloud
+        run: |
+          echo "${{ secrets.GOOGLE_CLOUD_KEY }}" > /tmp/google-cloud-key.json
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json
+        env:
+          GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
+      
+      - name: 🎙️ Gerar Radar
+        run: |
+          cd radar
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json
+          python scripts/generate_radar.py
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: /tmp/google-cloud-key.json
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+      
+      - name: 📤 Commit e Push
+        run: |
+          git config --local user.email "radar@brilliant.ai"
+          git config --local user.name "Radar Bot"
+          git add .
+          git commit -m "🚀 Radar da Semana - $(date +%Y-%m-%d)" || echo "Nada para fazer commit"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+      
+      - name: ✅ Deploy na Vercel
+        run: |
+          if [ ! -z "${{ secrets.VERCEL_DEPLOY_HOOK }}" ]; then
+            curl -X POST "${{ secrets.VERCEL_DEPLOY_HOOK }}"
+            echo "✅ Deploy disparado na Vercel"
+          else
+            echo "⚠️ VERCEL_DEPLOY_HOOK não configurado"
+          fi
+
+  notificar-sucesso:
+    needs: gerar-radar
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: 📢 Notificar sucesso
+        run: |
+          echo "✅ Radar gerado com sucesso!"
+          echo "📍 Acesse: https://brilliant.com.br/radar"
