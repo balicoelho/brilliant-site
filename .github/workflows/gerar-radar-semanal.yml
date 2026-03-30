@@ -50,9 +50,9 @@ jobs:
           git config --local user.name "Radar Bot"
           git add .
           git commit -m "🚀 Radar da Semana - $(date +%Y-%m-%d)" || echo "Nada para fazer commit"
-          git push
+          git push origin main
         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
       - name: ✅ Deploy na Vercel
         run: |
