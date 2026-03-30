@@ -335,7 +335,7 @@ textarea::placeholder { color:var(--mut); }
     <!-- BLOCO: DADOS PESSOAIS -->
     <div class="section-header" style="animation-delay:0.05s">
       <h2>Inscrição — Workshop IA na Prática</h2>
-      <p><strong>Investimento:</strong> R$ 849,90 (Pix à vista) ou cartão (em breve).</p>
+      <p><strong>Investimento:</strong> R$ 849,90 (à vista) ou parcelado no pix em até 10x.</p>
       <p style="margin-top:8px"><strong>Pagamento via Pix:</strong> após enviar o formulário, faça o Pix usando a chave CNPJ abaixo. Sua vaga é confirmada por ordem de pagamento.</p>
       <p style="margin-top:8px"><strong>Chave Pix (CNPJ):</strong> <span style="color:var(--teal);font-weight:700">53620572000130</span></p>
       <p style="margin-top:8px"><strong>Reembolso/Política:</strong> até 7 dias antes: reembolso integral. Até 48h antes: crédito para próxima turma. Menos de 48h: sem reembolso (pode transferir a vaga).</p>
@@ -347,11 +347,12 @@ textarea::placeholder { color:var(--mut); }
       <div class="section-title">Qual turma/data você quer participar? <span class="req">★</span></div>
       <div class="section-sub">Selecione a turma desejada.</div>
       <div class="choices cols1" id="turma-choices">
-        <button type="button" class="choice-btn sel-single" data-val="T3-2026-03-25-REC-VICALI">
-          📅 <strong>Turma 3 — 25/03/2026</strong> — Vicali Café (Recife) · 9h às 14h
-        </button>
+      
         <button type="button" class="choice-btn sel-single" data-val="T4-2026-04-01-PET-NILO">
           📅 <strong>Turma 4 — 01/04/2026</strong> — Fundação Nilo Coelho (Petrolina) · 9h às 14h
+        </button>
+          <button type="button" class="choice-btn sel-single" data-val="T3-2026-03-25-REC-VICALI">
+          📅 <strong>Turma 5 — Data à definir</strong> — Vicali Café (Recife) · 9h às 14h
         </button>
       </div>
       <input type="hidden" id="turma-val" name="turma_id" required>
@@ -454,55 +455,41 @@ textarea::placeholder { color:var(--mut); }
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_notebooklm" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Criação de Imagens (Canva, Ideogram, Leonardo AI)</td>
+              <td>Criação de Imagens</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_imagens" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Edição e Geração de Vídeos (CapCut, HeyGen, Synthesia)</td>
+              <td>Edição e Geração de Vídeos</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_videos" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Análise de Dados (Julius AI, Claude)</td>
+              <td>Análise de Dados</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_dados" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Criação de Apresentações (Gamma)</td>
+              <td>Criação de Apresentações</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_gamma" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Escrita e Criação de Conteúdo (ChatGPT, Claude, Gemini)</td>
+              <td>Escrita e Criação de Conteúdo</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_escrita" value="domino"></td>
             </tr>
-            <tr class="matrix-row">
-              <td>Automação e Workflows (n8n, Zapier, Make.com)</td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="nao_conheco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="conheco_pouco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="conheco_bem"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_automacao" value="domino"></td>
-            </tr>
-            <tr class="matrix-row">
-              <td>Edição de Áudio (ElevenLabs)</td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="nao_conheco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="conheco_pouco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="conheco_bem"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_audio" value="domino"></td>
-            </tr>
-            <tr class="matrix-row">
+           <tr class="matrix-row">
               <td>Transcrição de Reunião (Fireflies, Tactiq)</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="conheco_pouco"></td>
@@ -510,7 +497,7 @@ textarea::placeholder { color:var(--mut); }
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_transcricao" value="domino"></td>
             </tr>
             <tr class="matrix-row">
-              <td>Assistente de IA (Gems, GPT, Claude Projects)</td>
+              <td>Assistente de IA</td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="nao_conheco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="conheco_pouco"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_assistente" value="conheco_bem"></td>
@@ -537,13 +524,6 @@ textarea::placeholder { color:var(--mut); }
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="conheco_bem"></td>
               <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_claude" value="domino"></td>
             </tr>
-            <tr class="matrix-row">
-              <td>Genspark AI</td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="nao_conheco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="conheco_pouco"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="conheco_bem"></td>
-              <td class="radio-cell"><input type="radio" class="matrix-radio" name="f_genspark" value="domino"></td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -563,7 +543,6 @@ textarea::placeholder { color:var(--mut); }
         <button type="button" class="tag-btn" data-val="transcricao">🎙️ Geração de resumo e transcrição de reunião</button>
         <button type="button" class="tag-btn" data-val="agentes">🤖 Agentes de IA</button>
         <button type="button" class="tag-btn" data-val="assistentes">💬 Assistentes de IA</button>
-        <button type="button" class="tag-btn" data-val="avatar">🎭 Criação de Avatar para produção de Vídeo/Imagem</button>
         <button type="button" class="tag-btn" data-val="apresentacoes">🖥️ Criação de Apresentação e Treinamentos</button>
       </div>
       <div class="other-input-wrap" id="interesse-other-wrap">
