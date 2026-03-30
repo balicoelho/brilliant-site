@@ -47,13 +47,10 @@ jobs:
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       
       - name: 📤 Push para GitHub
-        run: |
-          git config --local user.email "radar@brilliant.ai"
-          git config --local user.name "Radar Bot"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GIT_TOKEN }}
+          branch: main
       
       - name: ✅ Deploy na Vercel
         run: |
