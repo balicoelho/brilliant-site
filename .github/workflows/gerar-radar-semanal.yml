@@ -13,10 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout do repositório
+      - name: 📊 Checkout do repositório
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: true
       
       - name: 🐍 Setup Python 3.11
         uses: actions/setup-python@v4
@@ -48,6 +50,7 @@ jobs:
         run: |
           git config --local user.email "radar@brilliant.ai"
           git config --local user.name "Radar Bot"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
