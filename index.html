@@ -266,6 +266,147 @@
     .monte-grupo-cards { grid-template-columns: 1fr; }
   }
 
+  /* ===== SEÇÃO VALOR / PREÇO ===== */
+  #valor { background: var(--dark2); }
+  .valor-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 56px;
+  }
+  /* Card principal de preço */
+  .preco-card {
+    background: var(--dark3);
+    border: 1px solid rgba(0,229,200,0.25);
+    border-radius: 24px;
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .preco-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--purple));
+  }
+  .preco-promo-badge {
+    display: inline-block;
+    background: rgba(245,158,11,0.12);
+    color: var(--orange);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 100px;
+    padding: 5px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .preco-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .preco-valor {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 5rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--cyan);
+    margin-bottom: 6px;
+  }
+  .preco-valor small {
+    font-size: 2rem;
+    vertical-align: super;
+    letter-spacing: 0;
+  }
+  .preco-valor .centavos {
+    font-size: 2.4rem;
+  }
+  .preco-parcelamento {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .preco-parcelamento strong { color: var(--text); }
+  .preco-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin: 28px 0;
+  }
+  .preco-garantia {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(0,229,200,0.06);
+    border: 1px solid rgba(0,229,200,0.15);
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+  .preco-garantia-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .preco-garantia-text strong { display: block; font-size: 0.88rem; color: var(--text); margin-bottom: 2px; }
+  .preco-garantia-text span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+  /* Lista de itens incluídos */
+  .inclui-card {
+    background: var(--dark3);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 24px;
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .inclui-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--orange));
+  }
+  .inclui-titulo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .inclui-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .inclui-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .inclui-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .inclui-lista li .inclui-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .inclui-lista li strong { display: block; font-weight: 600; }
+  .inclui-lista li span { font-size: 0.8rem; color: var(--muted); }
+  @media (max-width: 768px) {
+    .valor-grid { grid-template-columns: 1fr; }
+    .preco-valor { font-size: 4rem; }
+  }
+
   footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.07); padding: 50px 5% 30px; }
   .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
   .footer-brand .logo { font-size: 1.4rem; margin-bottom: 12px; display: block; }
@@ -783,6 +924,69 @@
       </form>
       <div id="waitlistMsgT5" class="waitlist-msg" style="display:none;"></div>
     </div>
+  </div>
+</section>
+
+<section id="valor">
+  <div class="section-label">Investimento</div>
+  <h2>Quanto custa<br><span style="color:var(--cyan)">transformar sua rotina?</span></h2>
+  <p class="section-sub">Um workshop de 5 horas que muda a forma como você trabalha. Para sempre.</p>
+
+  <div class="valor-grid">
+
+    <!-- CARD DE PREÇO -->
+    <div class="preco-card fade-up">
+      <div class="preco-promo-badge">✨ Valor promocional — Primeiras turmas</div>
+      <div class="preco-label">Investimento por pessoa</div>
+      <div class="preco-valor"><small>R$</small> 849<span class="centavos">,90</span></div>
+      <div class="preco-parcelamento">à vista ou em até <strong>10x de R$ 89,24</strong></div>
+
+      <hr class="preco-divider">
+
+      <div class="preco-garantia">
+        <span class="preco-garantia-icon">🛡️</span>
+        <div class="preco-garantia-text">
+          <strong>Política de reembolso flexível</strong>
+          <span>Até 7 dias antes: reembolso integral. Até 48h antes: crédito para a próxima turma. Menos de 48h: pode transferir a vaga.</span>
+        </div>
+      </div>
+
+      <a href="lista-de-espera/" class="btn-primary" style="width:100%;text-align:center;box-sizing:border-box;">Garantir minha vaga →</a>
+      <p style="font-size:0.8rem;color:var(--muted);margin-top:12px;">Vagas limitadas. Turmas fecham rápido.</p>
+    </div>
+
+    <!-- CARD O QUE ESTÁ INCLUÍDO -->
+    <div class="inclui-card fade-up">
+      <div class="inclui-titulo">O que está incluído</div>
+      <div class="inclui-sub">Tudo o que você precisa para sair usando IA no mesmo dia.</div>
+      <ul class="inclui-lista">
+        <li>
+          <span class="inclui-icon">⏱️</span>
+          <div><strong>5 horas de imersão prática</strong><span>Workshop presencial, dinâmico e mãos na massa do início ao fim</span></div>
+        </li>
+        <li>
+          <span class="inclui-icon">🧠</span>
+          <div><strong>10+ usabilidades de IA demonstradas</strong><span>ChatGPT, Gemini, Claude, Manus AI, Claude Cowork, Comet, Gems, Claude Project e mais</span></div>
+        </li>
+        <li>
+          <span class="inclui-icon">✍️</span>
+          <div><strong>10+ Casos de Uso para o seu dia a dia profissional e pessoal</strong></div>
+        </li>
+        <li>
+          <span class="inclui-icon">📖</span>
+          <div><strong>Material de apoio completo</strong><span>Apostila com todos os conteúdos, ferramentas e links para continuar aprendendo</span></div>
+        </li>
+        <li>
+          <span class="inclui-icon">🎯</span>
+          <div><strong>Aplicação ao seu contexto real</strong><span>Exemplos e exercícios adaptados ao seu setor e rotina de trabalho</span></div>
+        </li>
+        <li>
+          <span class="inclui-icon">👥</span>
+          <div><strong>Turmas reduzidas</strong><span>Máximo de participantes para garantir atenção individualizada</span></div>
+        </li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
