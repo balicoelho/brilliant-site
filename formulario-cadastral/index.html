@@ -688,6 +688,12 @@ textarea::placeholder { color:var(--mut); }
     <div style="margin-top:30px;font-size:14px;color:var(--mut)">
       Prepare-se para colocar a IA para trabalhar por você. 🚀
     </div>
+    <div style="margin-top:36px;padding:24px 28px;background:linear-gradient(135deg,var(--s1),var(--s2));border:1px solid var(--bdr);border-radius:16px;display:inline-block;max-width:400px;">
+      <div style="font-size:13px;color:var(--mut);margin-bottom:10px;letter-spacing:0.5px;">Siga a BrillIAnt no Instagram para dicas de IA e novidades:</div>
+      <a href="https://www.instagram.com/brilliant.ia.br" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);border-radius:30px;color:#fff;font-weight:700;font-size:14px;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 20px rgba(131,58,180,0.3);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(131,58,180,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 20px rgba(131,58,180,0.3)'">
+        📸 @brilliant.ia.br
+      </a>
+    </div>
   </div>
 
 </div>
@@ -762,7 +768,7 @@ function updateProgress() {
   if(document.getElementById('nivel-val').value) filled++;
 
   // matrix ferramentas: TODAS as linhas respondidas
-  const ferramentasTotal = ['f_manus','f_comet','f_notebooklm','f_imagens','f_videos','f_dados','f_gamma','f_escrita','f_automacao','f_audio','f_transcricao','f_assistente','f_chatgpt','f_gemini','f_claude','f_genspark'];
+  const ferramentasTotal = ['f_manus','f_comet','f_notebooklm','f_imagens','f_videos','f_dados','f_gamma','f_escrita','f_transcricao','f_assistente','f_chatgpt','f_gemini','f_claude'];
   const ferramentasOk = ferramentasTotal.every(n => document.querySelector(`input[name="${n}"]:checked`));
   if(ferramentasOk) filled++;
 
@@ -794,7 +800,7 @@ document.getElementById('main-form').addEventListener('submit', function(e) {
   e.preventDefault();
 
   // Coletar dados da matrix ferramentas
-  const ferramentaNames = ['manus','comet','notebooklm','imagens','videos','dados','gamma','escrita','automacao','audio','transcricao','assistente','chatgpt','gemini','claude','genspark'];
+  const ferramentaNames = ['manus','comet','notebooklm','imagens','videos','dados','gamma','escrita','transcricao','assistente','chatgpt','gemini','claude'];
   const ferramentasData = {};
   ferramentaNames.forEach(name => {
     const checked = document.querySelector(`input[name="f_${name}"]:checked`);
@@ -849,7 +855,7 @@ document.getElementById('main-form').addEventListener('submit', function(e) {
 
   // ferramentas: todas as linhas
   const ferramentasCampos = [
-    'ferramenta_manus','ferramenta_comet','ferramenta_notebooklm','ferramenta_imagens','ferramenta_videos','ferramenta_dados','ferramenta_gamma','ferramenta_escrita','ferramenta_automacao','ferramenta_audio','ferramenta_transcricao','ferramenta_assistente','ferramenta_chatgpt','ferramenta_gemini','ferramenta_claude','ferramenta_genspark'
+    'ferramenta_manus','ferramenta_comet','ferramenta_notebooklm','ferramenta_imagens','ferramenta_videos','ferramenta_dados','ferramenta_gamma','ferramenta_escrita','ferramenta_transcricao','ferramenta_assistente','ferramenta_chatgpt','ferramenta_gemini','ferramenta_claude'
   ];
   const ferramentasOk = ferramentasCampos.every(k => (data[k] || '').trim());
   if(!ferramentasOk) erros.push('• Nível de conhecimento em cada ferramenta (todas as linhas)');
