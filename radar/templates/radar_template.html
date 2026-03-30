@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrillIAnt | Radar da Semana</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">brill<span class="highlight">IA</span>nt</h1>
+                <p class="subtitle">RADAR DA SEMANA</p>
+                <p class="date">📅 {{ data_inicio }} a {{ data_fim }}</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Greeting -->
+            <div class="greeting-box">
+                <p>🚀 Aqui estão as novidades mais quentes do mundo da IA da última semana para nossa comunidade BrillIAnt.</p>
+            </div>
+
+            <!-- Podcast Section -->
+            <div class="podcast-section">
+                <div class="podcast-header">
+                    <div class="podcast-icon">🎙️</div>
+                    <div class="podcast-info">
+                        <h3>PODCAST BRILLIANT</h3>
+                        <p>Ouça o resumo narrado por IA (6 min)</p>
+                    </div>
+                </div>
+                <audio controls class="audio-player">
+                    <source src="podcast.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o player de áudio.
+                </audio>
+            </div>
+
+            <!-- News Section -->
+            <div class="news-section">
+                <h2 class="section-title">{{ noticias|length }} Novidades da Semana</h2>
+                
+                <div class="news-grid">
+                    {% for noticia in noticias %}
+                    <article class="news-card">
+                        <div class="card-number">{{ noticia.numero }}</div>
+                        <div class="card-content">
+                            <div class="card-badge">{{ noticia.ferramenta }} · {{ noticia.empresa }}</div>
+                            <h3 class="card-title">{{ noticia.titulo }}</h3>
+                            <p class="card-summary">{{ noticia.resumo }}</p>
+                            <div class="card-highlight">
+                                <p class="highlight-label">💡 O QUE ISSO MUDA NA SUA ROTINA?</p>
+                                <p class="highlight-text">{{ noticia.highlight }}</p>
+                            </div>
+                            <a href="materia_{{ noticia.numero }}.html" class="card-link">
+                                Ler matéria completa →
+                            </a>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <h4 class="footer-logo">brill<span class="highlight">IA</span>nt</h4>
+                    <p class="footer-tagline">BrillIAnt: O seu primeiro passo no mundo da IA.</p>
+                    <p class="footer-cta">Coloque a IA para trabalhar por você.</p>
+                    <a href="https://wa.me/?text=Confira%20as%20novidades%20de%20IA%20da%20semana%20no%20Radar%20BrillIAnt!%20%F0%9F%9A%80" 
+                       class="whatsapp-btn" target="_blank">
+                        📱 Compartilhar no WhatsApp
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

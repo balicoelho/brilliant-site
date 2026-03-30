@@ -1,0 +1,56 @@
+# Configuração do Radar da Semana BrillIAnt
+# Este arquivo centraliza todas as configurações do projeto
+
+podcast:
+  # Voz feminina do Google Cloud Text-to-Speech (pt-BR)
+  voz: "pt-BR-Neural2-C"
+  
+  # Velocidade de fala (0.95 = 95% da velocidade normal)
+  # Mantém o tom natural e conversacional
+  velocidade: 0.95
+  
+  # Pitch (0 = sem variação de tom)
+  pitch: 0
+  
+  # Qualidade de áudio
+  audio_encoding: "MP3"
+  sample_rate_hertz: 24000
+
+github:
+  # Configurações do repositório
+  usuario: "balicoelho"
+  repositorio: "brilliant-site"
+  branch: "main"
+  
+  # Caminho onde os dados semanais são salvos
+  pasta_dados: "dados_semanais"
+  pasta_radares: "radares"
+
+vercel:
+  # Configurações de deploy
+  projeto: "brilliant-site"
+  dominio: "brilliant.com.br/radar"
+
+estrutura:
+  # Templates HTML
+  template_radar: "templates/radar_template.html"
+  template_materia: "templates/materia_template.html"
+  template_index: "templates/index_template.html"
+  
+  # Pasta de saída para cada semana
+  pasta_saida: "radares/{data}"
+
+agendamento:
+  # Cron expression: 0 7 * * 1 = Segunda-feira às 7h UTC
+  # Para Brasília (UTC-3), isso é 4h da manhã
+  # AJUSTE conforme seu fuso horário!
+  cron: "0 10 * * 1"  # Segunda-feira às 10h UTC (7h Brasília)
+  
+  # Timezone
+  timezone: "America/Recife"
+
+# Variáveis de ambiente necessárias
+# Adicione estas como secrets no GitHub Actions:
+# - GOOGLE_CLOUD_KEY (credenciais Google Cloud)
+# - GITHUB_TOKEN (token de acesso ao GitHub)
+# - VERCEL_TOKEN (token de acesso à Vercel)

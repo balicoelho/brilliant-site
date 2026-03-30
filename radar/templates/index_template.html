@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrillIAnt | Todos os Radares</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="dark-theme">
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">brill<span class="highlight">IA</span>nt</h1>
+                <p class="subtitle">RADAR DA SEMANA</p>
+                <p class="tagline">Acompanhe as novidades de IA toda semana</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Featured Radar -->
+            <section class="featured-radar">
+                <h2>📍 Última Semana em Destaque</h2>
+                <div class="featured-card">
+                    <p class="featured-date">{{ data_destaque_inicio }} a {{ data_destaque_fim }}</p>
+                    <a href="radares/{{ semana_destaque }}/" class="featured-link">
+                        Acessar Radar Completo →
+                    </a>
+                </div>
+            </section>
+
+            <!-- All Radars -->
+            <section class="all-radars">
+                <h2>📚 Histórico de Radares</h2>
+                <div class="radars-grid">
+                    {% for semana in semanas %}
+                    <a href="radares/{{ semana }}/" class="radar-card">
+                        <span class="radar-date">{{ semana }}</span>
+                        <span class="radar-arrow">→</span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- About -->
+            <section class="about">
+                <h2>Sobre o Radar BrillIAnt</h2>
+                <p>
+                    O Radar da Semana BrillIAnt é uma curadoria semanal das novidades mais relevantes 
+                    do mundo da Inteligência Artificial. Cada semana, selecionamos as 5 atualizações 
+                    mais impactantes de ferramentas como ChatGPT, Claude, Gemini, NotebookLM, Suno e muito mais.
+                </p>
+                <p>
+                    Nosso objetivo é trazer informações práticas e acessíveis, focadas no que realmente 
+                    muda na rotina de profissionais como você: advogados, médicos, gestores, empreendedores 
+                    e qualquer pessoa que quer colocar a IA para trabalhar por ela.
+                </p>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <h4 class="footer-logo">brill<span class="highlight">IA</span>nt</h4>
+                    <p class="footer-tagline">BrillIAnt: O seu primeiro passo no mundo da IA.</p>
+                    <p class="footer-cta">Coloque a IA para trabalhar por você.</p>
+                    <a href="https://wa.me/?text=Confira%20o%20Radar%20da%20Semana%20BrillIAnt!%20%F0%9F%9A%80" 
+                       class="whatsapp-btn" target="_blank">
+                        📱 Compartilhar no WhatsApp
+                    </a>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "semana": "2026-03-24",
+  "data_inicio": "24 de março",
+  "data_fim": "30 de março",
+  "noticias": [
+    {
+      "numero": 1,
+      "ferramenta": "ChatGPT",
+      "empresa": "OpenAI",
+      "titulo": "O ChatGPT agora tem uma gaveta só sua",
+      "resumo": "A OpenAI lançou a Library: um espaço seguro onde todos os seus arquivos ficam salvos automaticamente.",
+      "highlight": "Use o ChatGPT como seu assistente pessoal de arquivos. Precisa daquela planilha do mês passado? Está lá, pronta em um clique.",
+      "conteudo_completo": "<p>A OpenAI lançou a <strong>Library (Biblioteca)</strong> no ChatGPT: um espaço seguro onde todos os seus arquivos ficam salvos automaticamente. Chega de perder documentos importantes no meio de conversas antigas!</p>\n\n<h2>O que é a Library do ChatGPT?</h2>\n<p>Sabe quando você manda uma planilha, um PDF ou uma imagem para o ChatGPT analisar e, semanas depois, precisa usar aquele mesmo arquivo novamente? Antes, você teria que procurar no histórico de conversas ou fazer o upload de novo. Agora, não mais.</p>\n\n<p>A <strong>Library</strong> é uma seção dedicada dentro do ChatGPT onde todos os arquivos que você envia ou que a IA gera ficam salvos automaticamente. É como uma nuvem pessoal dentro do próprio ChatGPT.</p>"
+    },
+    {
+      "numero": 2,
+      "ferramenta": "Gemini",
+      "empresa": "Google",
+      "titulo": "Mudando de IA sem perder a memória",
+      "resumo": "O Google Gemini agora permite importar histórico de conversas e preferências de outras IAs, como o ChatGPT.",
+      "highlight": "Quer testar o Gemini? Agora você traz sua bagagem em segundos e continua trabalhando de onde parou.",
+      "conteudo_completo": "<p>O Google Gemini agora permite importar todo o seu histórico de conversas e preferências de outras IAs, como o ChatGPT. Você não precisa mais começar do zero ao trocar de assistente!</p>\n\n<h2>O problema que o Gemini resolveu</h2>\n<p>Você passou meses usando o ChatGPT, ensinou ele sobre o seu trabalho, suas preferências, o nome dos seus clientes, o jeito que você gosta de receber respostas. Aí alguém te fala: \"Experimenta o Gemini, é muito bom!\" Mas a ideia de ter que ensinar tudo de novo para uma IA nova dá preguiça, né?</p>"
+    },
+    {
+      "numero": 3,
+      "ferramenta": "Claude",
+      "empresa": "Anthropic",
+      "titulo": "O Claude agora mexe no seu mouse e teclado",
+      "resumo": "A Anthropic liberou o Computer Use: o Claude pode controlar diretamente seu Mac para executar tarefas.",
+      "highlight": "Aquela tarefa repetitiva de copiar dados? Peça para o Claude fazer enquanto você foca no que importa.",
+      "conteudo_completo": "<p>A Anthropic liberou o <strong>Computer Use</strong>: uma função onde o Claude pode controlar diretamente o seu Mac para executar tarefas por você. É como ter um estagiário digital que nunca cansa e nunca reclama!</p>\n\n<h2>O que é o Computer Use?</h2>\n<p>Imagine poder dizer para o Claude: <em>\"Abra minha planilha de vendas, copie os dados do mês de março e cole em um novo documento formatado\"</em> — e ele simplesmente fazer isso, clicando, digitando e navegando no seu computador como um ser humano faria.</p>"
+    },
+    {
+      "numero": 4,
+      "ferramenta": "NotebookLM",
+      "empresa": "Google",
+      "titulo": "Seus resumos chatos viraram vídeos de cinema",
+      "resumo": "NotebookLM transforma documentos, PDFs e anotações em vídeos cinemáticos, infográficos e slides editáveis.",
+      "highlight": "Precisa apresentar um relatório? Transforme tudo em um vídeo rápido e dinâmico em minutos.",
+      "conteudo_completo": "<p>O NotebookLM do Google acaba de ganhar superpoderes: agora ele transforma seus documentos, PDFs e anotações em <strong>vídeos cinemáticos narrados</strong>, infográficos personalizados e slides editáveis. Tudo em minutos!</p>\n\n<h2>O que é o NotebookLM?</h2>\n<p>Se você ainda não conhece, o NotebookLM é uma ferramenta gratuita do Google que funciona como um assistente de pesquisa super inteligente. Você joga documentos, PDFs, links de sites ou anotações nele, e ele analisa tudo e responde suas perguntas com base nesse material.</p>"
+    },
+    {
+      "numero": 5,
+      "ferramenta": "Suno",
+      "empresa": "v5.5",
+      "titulo": "Crie músicas incríveis usando a sua voz",
+      "resumo": "Suno 5.5 com Voices: grave um áudio simples e a IA cria uma música profissional cantada por você.",
+      "highlight": "Quer criar um jingle para seu negócio? A IA afina e produz tudo com sua identidade vocal.",
+      "conteudo_completo": "<p>O Suno lançou a versão 5.5 com a função <strong>\"Voices\"</strong>: agora você grava um áudio simples com a sua voz e a IA cria uma música profissional cantada por você. Sem estúdio, sem precisar saber cantar!</p>\n\n<h2>O que é o Suno?</h2>\n<p>O Suno é uma das ferramentas de criação de música por Inteligência Artificial mais populares do mundo. Você digita um texto descrevendo o estilo e o tema da música que quer criar — por exemplo, \"uma música pop animada sobre segunda-feira de manhã\" — e em segundos o Suno gera uma música completa, com letra, melodia e produção profissional.</p>"
+    }
+  ]
+}
