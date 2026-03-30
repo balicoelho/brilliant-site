@@ -51,7 +51,7 @@ jobs:
           git commit -m "🚀 Radar da Semana - $(date +%Y-%m-%d)" || echo "Nada para fazer commit"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       
       - name: ✅ Deploy na Vercel
         run: |
@@ -71,4 +71,4 @@ jobs:
       - name: 📢 Notificar sucesso
         run: |
           echo "✅ Radar gerado com sucesso!"
-          echo "📍 Acesse: https://brilliant-radar.vercel.app"
+          echo "📍 Acesse: https://brilliant.com.br/radar"
