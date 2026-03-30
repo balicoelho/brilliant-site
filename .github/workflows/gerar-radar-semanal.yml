@@ -30,8 +30,8 @@ jobs:
       
       - name: 🔐 Configurar Google Cloud
         run: |
-          echo "${{ secrets.GOOGLE_CLOUD_KEY }}" > /tmp/google-cloud-key.json
-          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-cloud-key.json
+          echo '${{ secrets.GOOGLE_CLOUD_KEY }}' > /tmp/google-cloud-key.json
+          cat /tmp/google-cloud-key.json
         env:
           GOOGLE_CLOUD_KEY: ${{ secrets.GOOGLE_CLOUD_KEY }}
       
