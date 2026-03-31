@@ -309,7 +309,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 0. NOME -->
     <div class="section" style="animation-delay:0.05s">
-      <div class="section-num">Pergunta 1 de 9</div>
+      <div class="section-num">Pergunta 1 de 10</div>
       <div class="section-title">Seu nome <span style="font-size:0.7em;font-weight:400;letter-spacing:0;font-family:'Outfit',sans-serif;color:var(--mut);">(opcional)</span></div>
       <div class="field" style="margin-bottom:0">
         <input type="text" name="name" placeholder="Como prefere ser chamada?" id="input-name">
@@ -318,7 +318,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 1. NPS GERAL -->
     <div class="section" style="animation-delay:0.1s">
-      <div class="section-num">Pergunta 2 de 9</div>
+      <div class="section-num">Pergunta 2 de 10</div>
       <div class="section-title">De 0 a 10, quanto você recomendaria este workshop para uma amiga ou colega?</div>
       <div class="section-sub">Onde 0 = jamais recomendaria e 10 = recomendaria com muito entusiasmo</div>
       <div class="stars" id="nps-stars">
@@ -340,7 +340,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 2. AVALIACAO GERAL -->
     <div class="section accent-pur" style="animation-delay:0.15s">
-      <div class="section-num pur">Pergunta 3 de 9</div>
+      <div class="section-num pur">Pergunta 3 de 10</div>
       <div class="section-title">Como você avalia o workshop no geral?</div>
       <div class="section-sub">Sua impressão geral sobre a experiência do começo ao fim</div>
       <div class="emoji-scale" id="rating-scale">
@@ -355,7 +355,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 3. FERRAMENTA FAVORITA -->
     <div class="section accent-ora" style="animation-delay:0.2s">
-      <div class="section-num ora">Pergunta 4 de 9</div>
+      <div class="section-num ora">Pergunta 4 de 10</div>
       <div class="section-title">Quais ferramentas você vai usar PRIMEIRO? <span class="req">★</span></div>
       <div class="section-sub">Pode marcar mais de uma — quais te animaram mais?</div>
       <div class="choices" id="tool-choices">
@@ -425,7 +425,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 4. O QUE MAIS GOSTOU -->
     <div class="section" style="animation-delay:0.25s">
-      <div class="section-num">Pergunta 5 de 9</div>
+      <div class="section-num">Pergunta 5 de 10</div>
       <div class="section-title">O que você mais gostou no workshop?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção</div>
       <div class="tags" id="liked-tags">
@@ -442,7 +442,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 5. MELHORIAS -->
     <div class="section accent-blu" style="animation-delay:0.3s">
-      <div class="section-num blu">Pergunta 6 de 9</div>
+      <div class="section-num blu">Pergunta 6 de 10</div>
       <div class="section-title">O que poderia ter sido melhor?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção — Seja honesta, é aqui que crescemos!</div>
       <div class="choices cols1" id="improve-choices">
@@ -458,7 +458,7 @@ input::placeholder { color:var(--mut); }
 
     <!-- 6. TEXTO LIVRE -->
     <div class="section" style="animation-delay:0.35s">
-      <div class="section-num">Pergunta 7 de 9</div>
+      <div class="section-num">Pergunta 7 de 10</div>
       <div class="section-title">Tem algo que você queria que tivesse sido abordado e não foi?</div>
       <div class="section-sub">Ferramentas, temas, casos de uso específicos... conta pra gente!</div>
       <div class="textarea-wrap">
@@ -467,9 +467,20 @@ input::placeholder { color:var(--mut); }
       </div>
     </div>
 
-    <!-- 7. DEPOIMENTO -->
+    <!-- 7. O QUE MARCOU MAIS -->
+    <div class="section accent-blu" style="animation-delay:0.375s">
+      <div class="section-num blu">Pergunta 8 de 10</div>
+      <div class="section-title">O que te marcou mais no workshop?</div>
+      <div class="section-sub">Uma ferramenta, um exemplo, um momento... o que ficou na memória?</div>
+      <div class="textarea-wrap">
+        <textarea id="highlight-text" name="highlight" placeholder="Ex: Quando vi o Manus resolver uma tarefa inteira sozinho, ou quando a Barbara mostrou como criar um assistente personalizado em 5 minutos..." maxlength="500"></textarea>
+        <div class="char-count"><span id="highlight-count">0</span>/500</div>
+      </div>
+    </div>
+
+    <!-- 8. DEPOIMENTO -->
     <div class="section accent-ora" style="animation-delay:0.4s">
-      <div class="section-num ora">Pergunta 8 de 9</div>
+      <div class="section-num ora">Pergunta 9 de 10</div>
       <div class="section-title">Escreva um depoimento sobre sua experiência 💛</div>
       <div class="section-sub">Como o workshop te impactou? O que você aprendeu? Pode usar como depoimento nas nossas redes — com sua autorização, claro.</div>
       <div class="textarea-wrap">
@@ -485,9 +496,9 @@ input::placeholder { color:var(--mut); }
       <input type="hidden" id="consent-val" name="consent" value="nao">
     </div>
 
-    <!-- 8. PRÓXIMOS PASSOS -->
+    <!-- 9. PRÓXIMOS PASSOS -->
     <div class="section accent-pur" style="animation-delay:0.45s">
-      <div class="section-num pur">Pergunta 9 de 9</div>
+      <div class="section-num pur">Pergunta 10 de 10</div>
       <div class="section-title">O que mais te interessa como próximo passo?</div>
       <div class="section-sub multi-note">Pode marcar mais de uma opção — nos ajuda a planejar os próximos produtos</div>
       <div class="choices" id="next-choices">
@@ -615,6 +626,7 @@ function setupCharCount(textareaId, countId) {
 }
 setupCharCount('missing-text', 'missing-count');
 setupCharCount('testimonial-text', 'testimonial-count');
+setupCharCount('highlight-text', 'highlight-count');
 
 function toggleConsent() {
   const box = document.getElementById('consent-box');
@@ -635,13 +647,14 @@ function toggleConsent() {
 
 function updateProgress() {
   let filled = 0;
-  const total = 8;
+  const total = 9;
   if(document.getElementById('nps-val').value) filled++;
   if(document.getElementById('rating-val').value) filled++;
   if(document.querySelectorAll('#tool-choices .choice-btn.selected').length > 0) filled++;
   if(document.querySelectorAll('#liked-tags .tag-btn.selected').length > 0) filled++;
   if(document.querySelectorAll('#improve-choices .choice-btn.selected').length > 0) filled++;
   if(document.getElementById('missing-text').value.trim()) filled++;
+  if(document.getElementById('highlight-text').value.trim()) filled++;
   if(document.getElementById('testimonial-text').value.trim()) filled++;
   if(document.querySelectorAll('#next-choices .choice-btn.selected').length > 0) filled++;
   const pct = Math.round((filled / total) * 100);
@@ -658,6 +671,7 @@ document.getElementById('feedback-form').addEventListener('submit', function(e) 
     liked: Array.from(document.querySelectorAll('#liked-tags .tag-btn.selected')).map(b => b.dataset.val),
     improvement: Array.from(document.querySelectorAll('#improve-choices .choice-btn.selected')).map(b => b.dataset.val),
     missing: document.getElementById('missing-text').value,
+    highlight: document.getElementById('highlight-text').value,
     testimonial: document.getElementById('testimonial-text').value,
     consent: document.getElementById('consent-val').value,
     next_steps: Array.from(document.querySelectorAll('#next-choices .choice-btn.selected')).map(b => b.dataset.val),
