@@ -478,6 +478,28 @@
   </div>
 </header>
 
+<section class="form-section" id="formulario">
+  <div class="container">
+    <h2 class="fade-up">Garanta sua vaga com prioridade</h2>
+    <p class="form-sub fade-up">Inscreva-se na lista de espera e seja avisado(a) assim que a próxima turma abrir.</p>
+
+    <div class="form-card fade-up">
+      <form id="waitlistForm" onsubmit="submitForm(event)">
+        <input type="text" name="nome" placeholder="Seu nome completo" required>
+        <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+        <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
+        <select name="turma" required>
+          <option value="" disabled selected>Qual turma você tem interesse?</option>
+          <option value="Quero garantir minha vaga na proxima turma">Quero garantir minha vaga na próxima turma</option>
+        </select>
+        <button type="submit" class="btn-submit" id="submitBtn">Entrar na lista de espera →</button>
+      </form>
+      <p class="form-note">Seus dados estão seguros. Sem spam, prometemos.</p>
+      <div id="formMsg" class="form-msg" style="display:none;"></div>
+    </div>
+  </div>
+</section>
+
 <section class="hero">
   <div class="container">
     <div class="hero-badge fade-up">
@@ -632,28 +654,6 @@
           <span class="speaker-tag">Fundadora da BrillIAnt</span>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="form-section" id="formulario">
-  <div class="container">
-    <h2 class="fade-up">Garanta sua vaga com prioridade</h2>
-    <p class="form-sub fade-up">Inscreva-se na lista de espera e seja avisado(a) assim que a próxima turma abrir.</p>
-
-    <div class="form-card fade-up">
-      <form id="waitlistForm" onsubmit="submitForm(event)">
-        <input type="text" name="nome" placeholder="Seu nome completo" required>
-        <input type="email" name="email" placeholder="Seu melhor e-mail" required>
-        <input type="tel" name="telefone" placeholder="DDD + número (ex: 11999999999)" required>
-        <select name="turma" required>
-          <option value="" disabled selected>Qual turma você tem interesse?</option>
-          <option value="Quero garantir minha vaga na proxima turma">Quero garantir minha vaga na próxima turma</option>
-        </select>
-        <button type="submit" class="btn-submit" id="submitBtn">Entrar na lista de espera →</button>
-      </form>
-      <p class="form-note">Seus dados estão seguros. Sem spam, prometemos.</p>
-      <div id="formMsg" class="form-msg" style="display:none;"></div>
     </div>
   </div>
 </section>
