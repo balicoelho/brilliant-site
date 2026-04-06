@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/radares/:path*",
+      "destination": "/radar/radares/:path*"
+    },
+    {
       "source": "/radar/:path*",
       "destination": "/radar/:path*"
     },
