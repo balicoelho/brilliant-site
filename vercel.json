@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/radares/:path*",
-      "destination": "/radar/radares/:path*"
+      "source": "/radares/:semana/",
+      "destination": "/radar/radares/:semana/index.html"
+    },
+    {
+      "source": "/radares/:semana",
+      "destination": "/radar/radares/:semana/index.html"
     },
     {
       "source": "/radar/:path*",
