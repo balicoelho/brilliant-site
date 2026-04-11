@@ -288,9 +288,16 @@ class RadarGenerator:
             
             # Commit
             mensagem = f"🚀 Radar da Semana - {dados['semana']}"
-            subprocess.run(['git', 'commit', '-m', mensagem], check=True)
-            
-            logger.info("✅ Commit realizado com sucesso (push será feito pelo GitHub Actions)")
+            result = subprocess.run(['git', 'commit', '-m', mensagem], capture_output=True, text=True)
+            if result.returncode == 0:
+                logger.info("✅ Commit realizado com sucesso (push será feito pelo GitHub Actions)")
+            else:
+                # Verificar se é apenas "nothing to commit"
+                if 'nothing to commit' in result.stdout or 'nothing to commit' in result.stderr:
+                    logger.info("ℹ️ Nada para commitar — arquivos já estão atualizados no repositório")
+                else:
+                    logger.error(f"❌ Erro ao fazer commit: {result.stderr}")
+                    raise subprocess.CalledProcessError(result.returncode, result.args)
         except subprocess.CalledProcessError as e:
             logger.error(f"❌ Erro ao fazer commit: {e}")
             raise
