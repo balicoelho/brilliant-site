@@ -43,13 +43,14 @@ jobs:
           GOOGLE_APPLICATION_CREDENTIALS: /tmp/google-cloud-key.json
           VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       
-      - name: 📤 Commit e Push
+      - name: 📤 Push para GitHub
         run: |
           git config --local user.email "radar@brilliant.ai"
           git config --local user.name "Radar Bot"
           git add .
           git commit -m "🚀 Radar da Semana - $(date +%Y-%m-%d)" || echo "Nada para fazer commit"
-          git push
+          git pull --rebase origin main
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
       
